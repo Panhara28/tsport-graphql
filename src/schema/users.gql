@@ -1,0 +1,24 @@
+extend type Query{
+  userList: userList
+  user: User
+}
+
+extend type Mutation{
+
+}
+
+type UserList{
+  data: [User]
+}
+
+type User {
+  id: Int
+  username: String
+  fullname: String
+}
+
+input UserInput{
+  username: String
+  password: String
+  fullname: String
+}
