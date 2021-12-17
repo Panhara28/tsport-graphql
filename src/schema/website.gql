@@ -1,0 +1,23 @@
+extend type Query {
+  websiteList: WebsiteList
+  website(id: Int): Website
+}
+
+extend type Mutation {
+  createWebsite(input: WebsiteInput): Int
+  updateWebsite(id: Int, input: WebsiteInput): Boolean
+}
+
+type WebsiteList {
+  data: [Website]
+}
+
+type Website {
+  name: String
+  description: String
+}
+
+input WebsiteInput {
+  name: String
+  description: String
+}

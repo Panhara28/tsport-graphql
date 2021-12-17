@@ -1,0 +1,23 @@
+extend type Query {
+  pluginList: PluginList
+  plugin(id: Int): Plugin
+}
+
+extend type Mutation {
+  createPlugin(input: PluginInput): Int
+  updatePlugin(id: Int, input: PluginInput): Boolean
+}
+
+type PluginList {
+  data: [Plugin]
+}
+
+type Plugin {
+  name: String
+  website_id: Int
+}
+
+input PluginInput {
+  name: String
+  website_id: Int
+}
