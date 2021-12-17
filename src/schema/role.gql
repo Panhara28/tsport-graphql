@@ -6,7 +6,6 @@ extend type Query {
 extend type Mutation {
   createRole(input: RoleInput, permission: RolePermissionInput): Int
   updateRole(id: Int, input: RoleInput): Boolean
-  updateRolePermission(id: Int, input: RolePermissionInput): Boolean
 }
 
 type RoleList {

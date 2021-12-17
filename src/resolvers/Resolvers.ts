@@ -3,6 +3,7 @@ import { UpdatePluginMutation } from './Plugin/Mutation/UpdatePluginMutation';
 import { PluginListQuery } from './Plugin/Query/PluginListQuery';
 import { PluginQuery } from './Plugin/Query/PluginQuery';
 import { CreateRoleMutation } from './Role/Mutation/CreateRoleMutation';
+import { UpdateRoleMutation } from './Role/Mutation/UpdateRoleMutation';
 import { RoleListQuery } from './Role/Query/RoleListQuery';
 import { CreateUserMutation } from './User/Mutation/CreateUserMutation';
 import { UpdateUserMutation } from './User/Mutation/UpdateUserMutation';
@@ -39,6 +40,7 @@ const AppResolver = [
       createPlugin: CreatePluginMutation,
       updatePlugin: UpdatePluginMutation,
       createRole: CreateRoleMutation,
+      updateRole: UpdateRoleMutation,
     },
   },
 ];
