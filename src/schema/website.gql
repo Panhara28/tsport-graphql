@@ -6,6 +6,8 @@ extend type Query {
 extend type Mutation {
   createWebsite(input: WebsiteInput): Int
   updateWebsite(id: Int, input: WebsiteInput): Boolean
+  addPeopleToWebsite(websiteId: Int!, input: [UserInputId]): Boolean
+  addPluginToWebsite(websiteId: Int!, input: [PluginInputId]): Boolean
 }
 
 type WebsiteList {
@@ -20,4 +22,12 @@ type Website {
 input WebsiteInput {
   name: String
   description: String
+}
+
+input UserInputId {
+  userId: Int
+}
+
+input PluginInputId {
+  pluginId: Int
 }

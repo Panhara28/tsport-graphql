@@ -9,6 +9,8 @@ import { CreateUserMutation } from './User/Mutation/CreateUserMutation';
 import { UpdateUserMutation } from './User/Mutation/UpdateUserMutation';
 import { UserListQuery } from './User/Query/UserListQuery';
 import { UserQuery } from './User/Query/UserQuery';
+import { AddPeopleToWebsiteMutation } from './Website/Mutation/AddPeopleToWebsiteMutation';
+import { AddPluginToWebsiteMutation } from './Website/Mutation/AddPluginToWebsiteMutation';
 import { CreateWebsiteMutation } from './Website/Mutation/CreateWebsiteMutation';
 import { UpdateWebsiteMutation } from './Website/Mutation/UpdateWebsiteMutation';
 import { WebsiteListQuery } from './Website/Query/WebsiteListQuery';
@@ -41,6 +43,8 @@ const AppResolver = [
       updatePlugin: UpdatePluginMutation,
       createRole: CreateRoleMutation,
       updateRole: UpdateRoleMutation,
+      addPeopleToWebsite: AddPeopleToWebsiteMutation,
+      addPluginToWebsite: AddPluginToWebsiteMutation,
     },
   },
 ];
