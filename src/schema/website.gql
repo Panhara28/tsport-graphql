@@ -1,13 +1,15 @@
 extend type Query {
   websiteList: WebsiteList
   website(id: Int): Website
+  installedPluginList(websiteId: Int!): [InstalledPluginProps]
 }
 
 extend type Mutation {
   createWebsite(input: WebsiteInput): Int
   updateWebsite(id: Int!, input: WebsiteInput): Boolean
   addPeopleToWebsite(websiteId: Int!, input: [UserInputId]): Boolean
-  addPluginToWebsite(websiteId: Int!, input: [PluginInputId]): Boolean
+  addPluginToWebsite(websiteId: Int!, input: PluginInputId): Boolean
+  uninstallPlugin(websiteId: Int!, pluginId: Int!): Boolean
 }
 
 type WebsiteList {
@@ -31,4 +33,9 @@ input UserInputId {
 
 input PluginInputId {
   pluginId: Int
+}
+
+type InstalledPluginProps {
+  pluginId: Int
+  pluginName: String
 }

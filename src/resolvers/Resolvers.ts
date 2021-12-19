@@ -12,7 +12,9 @@ import { UserQuery } from './User/Query/UserQuery';
 import { AddPeopleToWebsiteMutation } from './Website/Mutation/AddPeopleToWebsiteMutation';
 import { AddPluginToWebsiteMutation } from './Website/Mutation/AddPluginToWebsiteMutation';
 import { CreateWebsiteMutation } from './Website/Mutation/CreateWebsiteMutation';
+import { UninstallPluginToWebsiteMutation } from './Website/Mutation/UninstallPluginToWebsiteMutation';
 import { UpdateWebsiteMutation } from './Website/Mutation/UpdateWebsiteMutation';
+import { InstalledPluginQuery } from './Website/Query/InstalledPluginQuery';
 import { WebsiteListQuery } from './Website/Query/WebsiteListQuery';
 import { WebsiteQuery } from './Website/Query/WebsiteQuery';
 
@@ -29,6 +31,7 @@ const AppResolver = [
       pluginList: PluginListQuery,
       plugin: PluginQuery,
       roleList: RoleListQuery,
+      installedPluginList: InstalledPluginQuery,
     },
 
     Mutation: {
@@ -45,6 +48,7 @@ const AppResolver = [
       updateRole: UpdateRoleMutation,
       addPeopleToWebsite: AddPeopleToWebsiteMutation,
       addPluginToWebsite: AddPluginToWebsiteMutation,
+      uninstallPlugin: UninstallPluginToWebsiteMutation,
     },
   },
 ];
