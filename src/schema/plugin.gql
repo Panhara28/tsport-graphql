@@ -13,6 +13,7 @@ type PluginList {
 }
 
 type Plugin {
+  id: Int
   name: String
   website_id: Int
 }

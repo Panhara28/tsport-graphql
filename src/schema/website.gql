@@ -15,6 +15,7 @@ type WebsiteList {
 }
 
 type Website {
+  id: Int
   name: String
   description: String
 }
