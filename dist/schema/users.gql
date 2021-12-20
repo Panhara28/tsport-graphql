@@ -1,0 +1,27 @@
+extend type Query {
+  userList: UserList
+  user(id: Int): User
+}
+
+extend type Mutation {
+  createUser(input: UserInput): Int
+  updateUser(id: Int, input: UserInput): Boolean
+}
+
+type UserList {
+  data: [User]
+}
+
+type User {
+  id: Int
+  username: String
+  fullname: String
+  website_id: Int
+}
+
+input UserInput {
+  username: String
+  password: String
+  fullname: String
+  website_id: Int
+}

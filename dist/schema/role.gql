@@ -1,0 +1,40 @@
+extend type Query {
+  roleList: [RoleList]
+  role(id: Int): Role
+}
+
+extend type Mutation {
+  createRole(input: RoleInput, permission: RolePermissionInput): Int
+  updateRole(id: Int, input: RoleInput): Boolean
+}
+
+type RoleList {
+  data: Role
+  permission: RolePermission
+}
+
+type Role {
+  name: String
+  website_id: Int
+}
+
+input RoleInput {
+  name: String
+  website_id: Int
+}
+
+type RolePermission {
+  isCreated: Boolean
+  isModified: Boolean
+  isRemove: Boolean
+  isList: Boolean
+  isDetail: Boolean
+}
+
+input RolePermissionInput {
+  isCreated: Boolean
+  isModified: Boolean
+  isRemove: Boolean
+  isList: Boolean
+  isDetail: Boolean
+}

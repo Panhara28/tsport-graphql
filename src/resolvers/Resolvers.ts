@@ -14,6 +14,7 @@ import { AddPluginToWebsiteMutation } from './Website/Mutation/AddPluginToWebsit
 import { CreateWebsiteMutation } from './Website/Mutation/CreateWebsiteMutation';
 import { UninstallPluginToWebsiteMutation } from './Website/Mutation/UninstallPluginToWebsiteMutation';
 import { UpdateWebsiteMutation } from './Website/Mutation/UpdateWebsiteMutation';
+import { AddedPeopleListQuery } from './Website/Query/AddedPeopleQuery';
 import { InstalledPluginQuery } from './Website/Query/InstalledPluginQuery';
 import { WebsiteListQuery } from './Website/Query/WebsiteListQuery';
 import { WebsiteQuery } from './Website/Query/WebsiteQuery';
@@ -32,6 +33,7 @@ const AppResolver = [
       plugin: PluginQuery,
       roleList: RoleListQuery,
       installedPluginList: InstalledPluginQuery,
+      addedPeopleList: AddedPeopleListQuery,
     },
 
     Mutation: {
