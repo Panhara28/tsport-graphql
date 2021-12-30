@@ -1,0 +1,1 @@
+/* eslint-disable */export interface table_users {  id?: number;  username?: string | null;  password?: string | null;  fullname?: string | null;  created_by?: number | null;  website_id?: number | null;  created_at?: number;  updated_at?: number;}

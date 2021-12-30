@@ -1,5 +1,5 @@
 extend type Query {
-  roleList: [RoleList]
+  roleList: RoleList
   role(id: Int): Role
 }
 
@@ -9,11 +9,12 @@ extend type Mutation {
 }
 
 type RoleList {
-  data: Role
+  data: [Role]
   permission: RolePermission
 }
 
 type Role {
+  id: Int
   name: String
   website_id: Int
 }

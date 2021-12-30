@@ -1,3 +1,6 @@
+import { SignInMutation } from './Authentication/Mutation/SignInMutation';
+import { SignOutMutation } from './Authentication/Mutation/SignOutMutation';
+import { MeQuery } from './Authentication/Query/MeQuery';
 import { CreatePluginMutation } from './Plugin/Mutation/CreatePluginMutation';
 import { UpdatePluginMutation } from './Plugin/Mutation/UpdatePluginMutation';
 import { PluginListQuery } from './Plugin/Query/PluginListQuery';
@@ -25,6 +28,7 @@ const AppResolver = [
       testing: () => {
         return 'Hello World';
       },
+      me: MeQuery,
       userList: UserListQuery,
       user: UserQuery,
       websiteList: WebsiteListQuery,
@@ -51,6 +55,8 @@ const AppResolver = [
       addPeopleToWebsite: AddPeopleToWebsiteMutation,
       addPluginToWebsite: AddPluginToWebsiteMutation,
       uninstallPlugin: UninstallPluginToWebsiteMutation,
+      signIn: SignInMutation,
+      signOut: SignOutMutation,
     },
   },
 ];

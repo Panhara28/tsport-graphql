@@ -1,0 +1,24 @@
+extend type Query {
+  me: Me
+}
+
+extend type Mutation {
+  signIn(input: SignInInput): Token
+  signOut(token: String!): Boolean
+  changePassword(password: String!): Boolean
+}
+
+input SignInInput {
+  username: String!
+  password: String!
+}
+
+type Token {
+  token: String
+}
+
+type Me {
+  id: Int
+  username: String
+  fullname: String
+}
