@@ -7,11 +7,6 @@ export async function up(knex: Knex): Promise<void> {
       table.integer('user_id');
       table.integer('role_id');
       table.integer('website_id');
-      table.boolean('isCreated').defaultTo(false);
-      table.boolean('isModified').defaultTo(false);
-      table.boolean('isRemove').defaultTo(false);
-      table.boolean('isList').defaultTo(false);
-      table.boolean('isDetail').defaultTo(false);
       table.timestamps(true, true);
     });
   }
