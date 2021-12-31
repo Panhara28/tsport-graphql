@@ -3,6 +3,7 @@ import ContextType from 'src/graphql/ContextType';
 
 export const CreatePluginMutation = async (_, { input }: { input: Graph.PluginInput }, ctx: ContextType) => {
   const knex = await ctx.knex.default;
+  await ctx.auth.requireLogin();
 
   const createPlugin = await knex.table('plugins').insert({
     name: input.name,

@@ -8,7 +8,6 @@ export async function up(knex: Knex): Promise<void> {
       table.string('password');
       table.string('fullname');
       table.integer('created_by');
-      table.integer('website_id');
       table.timestamps(true, true);
     });
   }

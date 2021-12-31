@@ -8,11 +8,15 @@ export const AddPeopleToWebsiteMutation = async (
   ctx: ContextType,
 ) => {
   const knex = ctx.knex.default;
+  await ctx.auth.requireLogin();
 
-  const checkIfThePeopleExisted = await knex.table('website_user_details').whereIn(
-    'user_id',
-    input.map(item => item.userId),
-  );
+  const checkIfThePeopleExisted = await knex
+    .table('website_user_details')
+    .whereIn(
+      'user_id',
+      input.map(item => item.userId),
+    )
+    .andWhere({ website_id: websiteId });
 
   if (checkIfThePeopleExisted.length > 0) {
     throw new AuthenticationError('User Already Existed');

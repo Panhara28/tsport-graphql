@@ -8,6 +8,7 @@ export const AddPluginToWebsiteMutation = async (
   ctx: ContextType,
 ) => {
   const knex = ctx.knex.default;
+  await ctx.auth.requireLogin();
 
   const checkIfThePluginExisted = await knex
     .table('website_plugins')

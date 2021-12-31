@@ -2,6 +2,7 @@ import ContextType from 'src/graphql/ContextType';
 
 export const UserListQuery = async (_, {}, ctx: ContextType) => {
   const knex = await ctx.knex.default;
+  await ctx.auth.requireLogin();
 
   const users = await knex.table('users');
 

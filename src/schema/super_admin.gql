@@ -1,29 +1,46 @@
 extend type Query {
   superAdminList: SuperAdminList
+<<<<<<< HEAD
   superAdmin(id: Int): SuperAdmin
+=======
+  superAdmin(id: Int): SuperAdminList
+>>>>>>> 8db3400dddd77a4b634b2f76fa7217d8413aaa9c
 }
 
 extend type Mutation {
   createSuperAdmin(input: SuperAdminInput): Int
   updateSuperAdmin(id: Int, input: SuperAdminInput): Boolean
+<<<<<<< HEAD
   signInSuperAdmin(input: SignInInput): Token
   signOutSuperAdmin(token: String!): Boolean
 }
 
 type SuperAdminList {
   data: [User]
+=======
+}
+
+type SuperAdminList {
+  data: [SuperAdmin]
+>>>>>>> 8db3400dddd77a4b634b2f76fa7217d8413aaa9c
 }
 
 type SuperAdmin {
   id: Int
   username: String
   fullname: String
+<<<<<<< HEAD
   website_id: Int
+=======
+>>>>>>> 8db3400dddd77a4b634b2f76fa7217d8413aaa9c
 }
 
 input SuperAdminInput {
   username: String
   password: String
   fullname: String
+<<<<<<< HEAD
   website_id: Int
+=======
+>>>>>>> 8db3400dddd77a4b634b2f76fa7217d8413aaa9c
 }

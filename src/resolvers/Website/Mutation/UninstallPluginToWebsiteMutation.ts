@@ -6,6 +6,8 @@ export const UninstallPluginToWebsiteMutation = async (
   ctx: ContextType,
 ) => {
   const knex = ctx.knex.default;
+  await ctx.auth.requireLogin();
+
   await knex
     .table('website_plugins')
     .del()

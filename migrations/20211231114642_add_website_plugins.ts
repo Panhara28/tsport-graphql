@@ -1,12 +1,11 @@
 import * as Knex from 'knex';
 
 export async function up(knex: Knex): Promise<void> {
-  if (!(await knex.schema.hasTable('role_permissions'))) {
-    return await knex.schema.createTable('role_permissions', function(table) {
+  if (!(await knex.schema.hasTable('website_plugins'))) {
+    return await knex.schema.createTable('website_plugins', function(table) {
       table.increments();
-      table.integer('user_id');
-      table.integer('role_id');
       table.integer('website_id');
+      table.integer('plugin_id');
       table.timestamps(true, true);
     });
   }

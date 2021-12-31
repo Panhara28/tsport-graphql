@@ -10,7 +10,10 @@ export const CreateSuperAdminMutation = async (_, { input }: { input: Graph.Supe
     username: input.username,
     password: hash,
     fullname: input.fullname,
+<<<<<<< HEAD
     website_id: input.website_id,
+=======
+>>>>>>> 8db3400dddd77a4b634b2f76fa7217d8413aaa9c
   });
 
   return createUser[0];

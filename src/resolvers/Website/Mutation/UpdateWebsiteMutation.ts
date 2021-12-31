@@ -7,6 +7,7 @@ export const UpdateWebsiteMutation = async (
   ctx: ContextType,
 ) => {
   const knex = await ctx.knex.default;
+  await ctx.auth.requireLogin();
 
   const updateWebsite = await knex
     .table('websites')
