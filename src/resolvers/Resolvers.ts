@@ -1,5 +1,5 @@
-import { SignInMutation } from './Authentication/Mutation/SignInMutation';
-import { SignOutMutation } from './Authentication/Mutation/SignOutMutation';
+import { SignInSuperAdminMutation } from './Authentication/Mutation/SignInSuperAdminMutation';
+import { SignOutSuperAdminMutation } from './Authentication/Mutation/SignOutSuperAdminMutation';
 import { MeQuery } from './Authentication/Query/MeQuery';
 import { CreatePluginMutation } from './Plugin/Mutation/CreatePluginMutation';
 import { UpdatePluginMutation } from './Plugin/Mutation/UpdatePluginMutation';
@@ -8,8 +8,8 @@ import { PluginQuery } from './Plugin/Query/PluginQuery';
 import { CreateRoleMutation } from './Role/Mutation/CreateRoleMutation';
 import { UpdateRoleMutation } from './Role/Mutation/UpdateRoleMutation';
 import { RoleListQuery } from './Role/Query/RoleListQuery';
-import { CreateUserMutation } from './User/Mutation/CreateUserMutation';
-import { UpdateUserMutation } from './User/Mutation/UpdateUserMutation';
+import { CreateSuperAdminMutation } from './SuperAdmin/Mutation/CreateSuperAdminMutation';
+import { UpdateSuperAdminMutation } from './SuperAdmin/Mutation/UpdateSuperAdminMutation';
 import { UserListQuery } from './User/Query/UserListQuery';
 import { UserQuery } from './User/Query/UserQuery';
 import { AddPeopleToWebsiteMutation } from './Website/Mutation/AddPeopleToWebsiteMutation';
@@ -29,8 +29,8 @@ const AppResolver = [
         return 'Hello World';
       },
       me: MeQuery,
-      userList: UserListQuery,
-      user: UserQuery,
+      superAdminList: UserListQuery,
+      superAdmin: UserQuery,
       websiteList: WebsiteListQuery,
       website: WebsiteQuery,
       pluginList: PluginListQuery,
@@ -38,14 +38,16 @@ const AppResolver = [
       roleList: RoleListQuery,
       installedPluginList: InstalledPluginQuery,
       addedPeopleList: AddedPeopleListQuery,
+      userList: UserListQuery,
+      userDetail: UserQuery,
     },
 
     Mutation: {
       testing: () => {
         return true;
       },
-      createUser: CreateUserMutation,
-      updateUser: UpdateUserMutation,
+      createSuperAdmin: CreateSuperAdminMutation,
+      updateSuperAdmin: UpdateSuperAdminMutation,
       createWebsite: CreateWebsiteMutation,
       updateWebsite: UpdateWebsiteMutation,
       createPlugin: CreatePluginMutation,
@@ -55,8 +57,8 @@ const AppResolver = [
       addPeopleToWebsite: AddPeopleToWebsiteMutation,
       addPluginToWebsite: AddPluginToWebsiteMutation,
       uninstallPlugin: UninstallPluginToWebsiteMutation,
-      signIn: SignInMutation,
-      signOut: SignOutMutation,
+      signIn: SignInSuperAdminMutation,
+      signOut: SignOutSuperAdminMutation,
     },
   },
 ];

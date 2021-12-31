@@ -7,8 +7,9 @@ export const CreateRoleMutation = async (
   ctx: ContextType,
 ) => {
   const knex = await ctx.knex.default;
+  await ctx.auth.requireLogin();
 
-  const admin_id = await ctx.users.admin.id;
+  const admin_id = await ctx.auth.admin.id;
 
   const createRole = await knex.table('roles').insert({
     name: input.name,

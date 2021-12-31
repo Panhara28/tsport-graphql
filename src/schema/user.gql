@@ -1,0 +1,14 @@
+extend type Query {
+  userList: UserList
+  userDetail: User
+}
+
+type User {
+  id: Int
+  fullname: String
+  username: String
+}
+
+type UserList {
+  data: [User]
+}

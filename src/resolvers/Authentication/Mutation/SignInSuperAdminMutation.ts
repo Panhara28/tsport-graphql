@@ -6,10 +6,10 @@ import crypto from 'crypto';
 import { GraphQLError } from 'graphql';
 import moment from 'moment';
 
-export const SignInMutation = async (_, { input }: { input: Graph.SignInInput }, ctx: ContextType) => {
+export const SignInSuperAdminMutation = async (_, { input }: { input: Graph.SignInInput }, ctx: ContextType) => {
   const knex = ctx.knex.default;
   const getUser: table_users = await knex
-    .table('users')
+    .table('super_admin')
     .where({
       username: input.username,
     })
@@ -42,7 +42,7 @@ export const SignInMutation = async (_, { input }: { input: Graph.SignInInput },
   const randomToken = crypto.randomBytes(64).toString('hex');
 
   await knex.table('user_token').insert({
-    user_id: getUser.id,
+    super_admin_id: getUser.id,
     token: randomToken,
   });
 
