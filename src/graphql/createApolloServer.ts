@@ -1,6 +1,6 @@
 import { ApolloServer, AuthenticationError } from 'apollo-server';
 import { GraphQLError } from 'graphql';
-import ContextType, { AuthUser } from './ContextType';
+import ContextType, { AuthUser, SuperAdminAuth } from './ContextType';
 import createKnexContex from './createKnexContext';
 import extractRequestToken from './extractRequestToken';
 import loadMergeSchema from './loadMergedSchema';
@@ -29,6 +29,23 @@ async function RequirePermission(permission: string[], knex: Knex, token: string
   }
 }
 
+const requireLogin = async (knex: Knex, token: string) => {
+  if (!token) {
+    throw new AuthenticationError('No token!');
+  } else {
+    const res = await knex
+      .table('super_admin')
+      .innerJoin('user_token', 'super_admin.id', 'user_token.super_id')
+      .select('super_admin.username')
+      .where({ token: token })
+      .first();
+
+    if (res) {
+      return true;
+    }
+  }
+};
+
 export default function createApolloServer() {
   const knexConnectionList = createKnexContex();
 
@@ -47,39 +64,31 @@ export default function createApolloServer() {
         requirePermission: async (permission: string[]) => RequirePermission(permission, knex, token),
       };
 
-      if (token) {
-        // query admin token
-        const res = await knex
-          .table('user_token')
-          .where({ token: token })
-          .first();
-        const permission = await knex
-          .table('role_permissions')
-          .where({ user_id: res.user_id })
-          .first();
-        const role = await knex
-          .table('roles')
-          .where({ id: permission.role_id })
-          .first();
+      const superAdmin: SuperAdminAuth = {
+        requireLogin: async () => requireLogin(knex, token),
+      };
 
-        if (res) {
-          auth.admin = {
-            id: res.user_id,
-            token: token,
-            isCreated: role.isCreated,
-            isModified: role.isModified,
-            isList: role.isList,
-            isDetail: role.isDetail,
-          };
+      if (token) {
+        if (token.substr(0, 2) === 'sp') {
+          const res = await knex
+            .table('user_token')
+            .where({ token: token })
+            .first();
+          if (res) {
+            superAdmin.super_admin = {
+              id: res.super_id,
+              token: token,
+            };
+          }
         } else {
-          throw new AuthenticationError('Your token is not correct!');
+          throw new AuthenticationError('Incorrect Token!');
         }
       }
-
       return {
         knex: knexConnectionList,
         auth,
         token,
+        superAdmin,
       };
     },
   });

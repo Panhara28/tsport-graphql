@@ -8,6 +8,9 @@ import { PluginQuery } from './Plugin/Query/PluginQuery';
 import { CreateRoleMutation } from './Role/Mutation/CreateRoleMutation';
 import { UpdateRoleMutation } from './Role/Mutation/UpdateRoleMutation';
 import { RoleListQuery } from './Role/Query/RoleListQuery';
+import { CreateSuperAdminMutation } from './SuperAdmin/Mutation/CreateSuperAdminMutation';
+import { SignInSuperAdminMutation } from './SuperAdmin/Mutation/SignInMutation';
+import { SignOutSuperAdminMutation } from './SuperAdmin/Mutation/SignOutMutation';
 import { CreateUserMutation } from './User/Mutation/CreateUserMutation';
 import { UpdateUserMutation } from './User/Mutation/UpdateUserMutation';
 import { UserListQuery } from './User/Query/UserListQuery';
@@ -57,6 +60,9 @@ const AppResolver = [
       uninstallPlugin: UninstallPluginToWebsiteMutation,
       signIn: SignInMutation,
       signOut: SignOutMutation,
+      createSuperAdmin: CreateSuperAdminMutation,
+      signInSuperAdmin: SignInSuperAdminMutation,
+      signOutSuperAdmin: SignOutSuperAdminMutation,
     },
   },
 ];

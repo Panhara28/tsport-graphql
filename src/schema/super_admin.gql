@@ -1,0 +1,29 @@
+extend type Query {
+  superAdminList: SuperAdminList
+  superAdmin(id: Int): SuperAdmin
+}
+
+extend type Mutation {
+  createSuperAdmin(input: SuperAdminInput): Int
+  updateSuperAdmin(id: Int, input: SuperAdminInput): Boolean
+  signInSuperAdmin(input: SignInInput): Token
+  signOutSuperAdmin(token: String!): Boolean
+}
+
+type SuperAdminList {
+  data: [User]
+}
+
+type SuperAdmin {
+  id: Int
+  username: String
+  fullname: String
+  website_id: Int
+}
+
+input SuperAdminInput {
+  username: String
+  password: String
+  fullname: String
+  website_id: Int
+}
