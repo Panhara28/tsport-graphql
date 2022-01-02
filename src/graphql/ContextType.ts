@@ -12,12 +12,12 @@ export interface AuthAdmin {
 
 export interface AuthUser {
   user?: AuthAdmin;
-  requireLogin: () => Promise<boolean>;
+  requireLogin: (type: string) => Promise<boolean>;
 }
 
 export interface SuperAdminAuth {
   super_admin?: AuthSuperAdmin;
-  requireLogin: () => Promise<boolean>;
+  requireLogin: (type: string) => Promise<boolean>;
 }
 
 export default interface ContextType {

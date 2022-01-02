@@ -1,4 +1,5 @@
 import { ApplicationByUserList } from './Admin/Application/Query/ApplicationByUserList';
+import { AdminRoleListQuery } from './Admin/Role/Query/AdminRoleListQuery';
 import { UserListQuery } from './Admin/User/Query/UserListQuery';
 import { UserQuery } from './Admin/User/Query/UserQuery';
 import { SignInMutation } from './Authentication/Mutation/SignInMutation';
@@ -44,6 +45,7 @@ const AppResolver = [
       userList: UserListQuery,
       userDetail: UserQuery,
       applicationByUserList: ApplicationByUserList,
+      adminRoleList: AdminRoleListQuery,
     },
 
     Mutation: {

@@ -17,8 +17,6 @@ async function RequireLogin(type: string, knex: Knex, token: string): Promise<bo
       .select('super_admin.id', 'super_admin.username')
       .where({ token: token })
       .first();
-    console.log(res);
-
     if (res) {
       return true;
     } else {
@@ -31,7 +29,6 @@ async function RequireLogin(type: string, knex: Knex, token: string): Promise<bo
       .select('users.id', 'users.username')
       .where({ token: token })
       .first();
-    console.log(res);
 
     if (res) {
       return true;
@@ -56,11 +53,11 @@ export default function createApolloServer() {
       const token = extractRequestToken(req);
 
       const authUser: AuthUser = {
-        requireLogin: async () => RequireLogin('SUPER_ADMIN', knex, token),
+        requireLogin: async (type: string) => RequireLogin(type, knex, token),
       };
 
       const authSuperAdmin: SuperAdminAuth = {
-        requireLogin: async () => RequireLogin('USER', knex, token),
+        requireLogin: async (type: string) => RequireLogin(type, knex, token),
       };
 
       if (token) {

@@ -3,6 +3,7 @@ extend type Query {
 }
 
 type Application {
+  id: Int
   name: String
 }
 

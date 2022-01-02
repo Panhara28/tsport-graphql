@@ -7,7 +7,7 @@ export const CreateRoleMutation = async (
   ctx: ContextType,
 ) => {
   const knex = await ctx.knex.default;
-  await ctx.authSuperAdmin.requireLogin();
+  await ctx.authSuperAdmin.requireLogin('SUPER_ADMIN');
 
   const admin_id = await ctx.authSuperAdmin.super_admin.id;
 

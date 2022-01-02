@@ -6,7 +6,7 @@ export const UninstallPluginToWebsiteMutation = async (
   ctx: ContextType,
 ) => {
   const knex = ctx.knex.default;
-  await ctx.authSuperAdmin.requireLogin();
+  await ctx.authSuperAdmin.requireLogin('SUPER_ADMIN');
 
   await knex
     .table('website_plugins')

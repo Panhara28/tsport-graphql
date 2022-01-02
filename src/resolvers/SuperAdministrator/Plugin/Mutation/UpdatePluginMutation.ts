@@ -7,7 +7,7 @@ export const UpdatePluginMutation = async (
   ctx: ContextType,
 ) => {
   const knex = await ctx.knex.default;
-  await ctx.authSuperAdmin.requireLogin();
+  await ctx.authSuperAdmin.requireLogin('SUPER_ADMIN');
 
   const updatePlugin = await knex
     .table('plugins')
