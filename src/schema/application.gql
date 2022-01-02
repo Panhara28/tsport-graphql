@@ -1,0 +1,11 @@
+extend type Query {
+  applicationByUserList: ApplicationList
+}
+
+type Application {
+  name: String
+}
+
+type ApplicationList {
+  data: [Application]
+}

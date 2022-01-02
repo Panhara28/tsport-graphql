@@ -11,7 +11,7 @@ export interface AuthAdmin {
 }
 
 export interface AuthUser {
-  admin?: AuthAdmin;
+  user?: AuthAdmin;
   requireLogin: () => Promise<boolean>;
 }
 
@@ -24,6 +24,7 @@ export default interface ContextType {
   knex: {
     default: Knex;
   };
-  auth: AuthUser;
+  authUser: AuthUser;
   token: string;
+  authSuperAdmin: SuperAdminAuth;
 }

@@ -42,11 +42,11 @@ export const SignInSuperAdminMutation = async (_, { input }: { input: Graph.Sign
   const randomToken = crypto.randomBytes(64).toString('hex');
 
   await knex.table('super_admin_token').insert({
-    super_admin_id: getUser.id,
-    token: randomToken,
+    super_id: getUser.id,
+    token: 'sp' + randomToken,
   });
 
   return {
-    token: randomToken,
+    token: 'sp' + randomToken,
   };
 };

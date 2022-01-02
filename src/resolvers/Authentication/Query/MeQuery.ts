@@ -6,8 +6,8 @@ export const MeQuery = async (_, {}, ctx: ContextType) => {
 
   if (token) {
     const user = await knex
-      .table('user_token')
-      .innerJoin('super_admin', 'super_admin.id', 'user_token.super_admin_id')
+      .table('super_admin_token')
+      .innerJoin('super_admin', 'super_admin.id', 'super_admin_token.super_admin_id')
       .select('super_admin.id', 'super_admin.fullname')
       .where({ token })
       .first();

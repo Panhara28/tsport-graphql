@@ -5,6 +5,8 @@ extend type Query {
 extend type Mutation {
   signIn(input: SignInInput): Token
   signOut(token: String!): Boolean
+  signInSuperAdmin(input: SignInInput): Token
+  signOutSuperAdmin(token: String!): Boolean
   changePassword(password: String!): Boolean
 }
 

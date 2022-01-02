@@ -1,33 +1,29 @@
+import { ApplicationByUserList } from './Admin/Application/Query/ApplicationByUserList';
+import { UserListQuery } from './Admin/User/Query/UserListQuery';
+import { UserQuery } from './Admin/User/Query/UserQuery';
+import { SignInMutation } from './Authentication/Mutation/SignInMutation';
 import { SignInSuperAdminMutation } from './Authentication/Mutation/SignInSuperAdminMutation';
+import { SignOutMutation } from './Authentication/Mutation/SignOutMutation';
 import { SignOutSuperAdminMutation } from './Authentication/Mutation/SignOutSuperAdminMutation';
 import { MeQuery } from './Authentication/Query/MeQuery';
-import { CreatePluginMutation } from './Plugin/Mutation/CreatePluginMutation';
-import { UpdatePluginMutation } from './Plugin/Mutation/UpdatePluginMutation';
-import { PluginListQuery } from './Plugin/Query/PluginListQuery';
-import { PluginQuery } from './Plugin/Query/PluginQuery';
-import { CreateRoleMutation } from './Role/Mutation/CreateRoleMutation';
-import { UpdateRoleMutation } from './Role/Mutation/UpdateRoleMutation';
-import { RoleListQuery } from './Role/Query/RoleListQuery';
-import { CreateSuperAdminMutation } from './SuperAdmin/Mutation/CreateSuperAdminMutation';
-<<<<<<< HEAD
-import { SignInSuperAdminMutation } from './SuperAdmin/Mutation/SignInMutation';
-import { SignOutSuperAdminMutation } from './SuperAdmin/Mutation/SignOutMutation';
-import { CreateUserMutation } from './User/Mutation/CreateUserMutation';
-import { UpdateUserMutation } from './User/Mutation/UpdateUserMutation';
-=======
-import { UpdateSuperAdminMutation } from './SuperAdmin/Mutation/UpdateSuperAdminMutation';
->>>>>>> 8db3400dddd77a4b634b2f76fa7217d8413aaa9c
-import { UserListQuery } from './User/Query/UserListQuery';
-import { UserQuery } from './User/Query/UserQuery';
-import { AddPeopleToWebsiteMutation } from './Website/Mutation/AddPeopleToWebsiteMutation';
-import { AddPluginToWebsiteMutation } from './Website/Mutation/AddPluginToWebsiteMutation';
-import { CreateWebsiteMutation } from './Website/Mutation/CreateWebsiteMutation';
-import { UninstallPluginToWebsiteMutation } from './Website/Mutation/UninstallPluginToWebsiteMutation';
-import { UpdateWebsiteMutation } from './Website/Mutation/UpdateWebsiteMutation';
-import { AddedPeopleListQuery } from './Website/Query/AddedPeopleQuery';
-import { InstalledPluginQuery } from './Website/Query/InstalledPluginQuery';
-import { WebsiteListQuery } from './Website/Query/WebsiteListQuery';
-import { WebsiteQuery } from './Website/Query/WebsiteQuery';
+import { CreatePluginMutation } from './SuperAdministrator/Plugin/Mutation/CreatePluginMutation';
+import { UpdatePluginMutation } from './SuperAdministrator/Plugin/Mutation/UpdatePluginMutation';
+import { PluginListQuery } from './SuperAdministrator/Plugin/Query/PluginListQuery';
+import { PluginQuery } from './SuperAdministrator/Plugin/Query/PluginQuery';
+import { CreateRoleMutation } from './SuperAdministrator/Role/Mutation/CreateRoleMutation';
+import { UpdateRoleMutation } from './SuperAdministrator/Role/Mutation/UpdateRoleMutation';
+import { RoleListQuery } from './SuperAdministrator/Role/Query/RoleListQuery';
+import { CreateSuperAdminMutation } from './SuperAdministrator/SuperAdmin/Mutation/CreateSuperAdminMutation';
+import { UpdateSuperAdminMutation } from './SuperAdministrator/SuperAdmin/Mutation/UpdateSuperAdminMutation';
+import { AddPeopleToWebsiteMutation } from './SuperAdministrator/Website/Mutation/AddPeopleToWebsiteMutation';
+import { AddPluginToWebsiteMutation } from './SuperAdministrator/Website/Mutation/AddPluginToWebsiteMutation';
+import { CreateWebsiteMutation } from './SuperAdministrator/Website/Mutation/CreateWebsiteMutation';
+import { UninstallPluginToWebsiteMutation } from './SuperAdministrator/Website/Mutation/UninstallPluginToWebsiteMutation';
+import { UpdateWebsiteMutation } from './SuperAdministrator/Website/Mutation/UpdateWebsiteMutation';
+import { AddedPeopleListQuery } from './SuperAdministrator/Website/Query/AddedPeopleQuery';
+import { InstalledPluginQuery } from './SuperAdministrator/Website/Query/InstalledPluginQuery';
+import { WebsiteListQuery } from './SuperAdministrator/Website/Query/WebsiteListQuery';
+import { WebsiteQuery } from './SuperAdministrator/Website/Query/WebsiteQuery';
 
 const AppResolver = [
   {
@@ -47,6 +43,7 @@ const AppResolver = [
       addedPeopleList: AddedPeopleListQuery,
       userList: UserListQuery,
       userDetail: UserQuery,
+      applicationByUserList: ApplicationByUserList,
     },
 
     Mutation: {
@@ -64,16 +61,10 @@ const AppResolver = [
       addPeopleToWebsite: AddPeopleToWebsiteMutation,
       addPluginToWebsite: AddPluginToWebsiteMutation,
       uninstallPlugin: UninstallPluginToWebsiteMutation,
-<<<<<<< HEAD
-      signIn: SignInMutation,
-      signOut: SignOutMutation,
-      createSuperAdmin: CreateSuperAdminMutation,
       signInSuperAdmin: SignInSuperAdminMutation,
       signOutSuperAdmin: SignOutSuperAdminMutation,
-=======
-      signIn: SignInSuperAdminMutation,
-      signOut: SignOutSuperAdminMutation,
->>>>>>> 8db3400dddd77a4b634b2f76fa7217d8413aaa9c
+      signIn: SignInMutation,
+      signOut: SignOutMutation,
     },
   },
 ];

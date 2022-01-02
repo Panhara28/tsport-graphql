@@ -4,12 +4,11 @@ import { Graph } from '../../../generated/graph';
 import bcrypt from 'bcryptjs';
 import crypto from 'crypto';
 import { GraphQLError } from 'graphql';
-import moment from 'moment';
 
-export const SignInSuperAdminMutation = async (_, { input }: { input: Graph.SignInInput }, ctx: ContextType) => {
+export const SignInMutation = async (_, { input }: { input: Graph.SignInInput }, ctx: ContextType) => {
   const knex = ctx.knex.default;
   const getUser: table_users = await knex
-    .table('super_admin')
+    .table('users')
     .where({
       username: input.username,
     })
@@ -41,8 +40,8 @@ export const SignInSuperAdminMutation = async (_, { input }: { input: Graph.Sign
 
   const randomToken = crypto.randomBytes(64).toString('hex');
 
-  await knex.table('super_admin_token').insert({
-    super_admin_id: getUser.id,
+  await knex.table('user_token').insert({
+    user_id: getUser.id,
     token: randomToken,
   });
 
