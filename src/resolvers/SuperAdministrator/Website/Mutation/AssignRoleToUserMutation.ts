@@ -7,7 +7,16 @@ export const AssignRoleToUserMutation = async (
 ) => {
   const knex = ctx.knex.default;
   await ctx.authSuperAdmin.requireLogin('SUPER_ADMIN');
-
+  const roleUserPermission = await knex
+    .table('role_permissions')
+    .where('user_id', '=', userId)
+    .first();
+  if (roleUserPermission) {
+    await knex
+      .table('role_permissions')
+      .del()
+      .where({ id: roleUserPermission.id });
+  }
   const [assignRoleToUser] = await knex.table('role_permissions').insert({
     website_id: websiteId,
     user_id: userId,
