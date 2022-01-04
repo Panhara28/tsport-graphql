@@ -68,6 +68,9 @@ export default function createApolloServer() {
           .first();
         const user = await knex
           .table('user_token')
+          .innerJoin('role_permissions', 'role_permissions.user_id', 'user_token.user_id')
+          .innerJoin('roles', 'roles.id', 'role_permissions.role_id')
+          .select('user_token.user_id as user_id', ' roles.isList as isList', 'roles.isDetail as isDetail')
           .where({ token: token })
           .first();
 
@@ -81,6 +84,8 @@ export default function createApolloServer() {
             authUser.user = {
               id: user.user_id,
               token: token,
+              isList: user.isList,
+              isDetail: user.isDetail,
             };
           } else {
             throw new AuthenticationError('Incorrect Token!!');
