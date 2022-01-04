@@ -13,6 +13,7 @@ export const AddPluginToWebsiteMutation = async (
   const checkIfThePluginExisted = await knex
     .table('website_plugins')
     .where('plugin_id', '=', input.pluginId)
+    .andWhere('website_id', '=', websiteId)
     .first();
 
   if (checkIfThePluginExisted) {

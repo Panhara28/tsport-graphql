@@ -13,12 +13,15 @@ import { PluginListQuery } from './SuperAdministrator/Plugin/Query/PluginListQue
 import { PluginQuery } from './SuperAdministrator/Plugin/Query/PluginQuery';
 import { CreateRoleMutation } from './SuperAdministrator/Role/Mutation/CreateRoleMutation';
 import { UpdateRoleMutation } from './SuperAdministrator/Role/Mutation/UpdateRoleMutation';
+import { HasRoleQuery } from './SuperAdministrator/Role/Query/HasRoleQuery';
 import { RoleListQuery } from './SuperAdministrator/Role/Query/RoleListQuery';
 import { CreateSuperAdminMutation } from './SuperAdministrator/SuperAdmin/Mutation/CreateSuperAdminMutation';
 import { UpdateSuperAdminMutation } from './SuperAdministrator/SuperAdmin/Mutation/UpdateSuperAdminMutation';
 import { AddPeopleToWebsiteMutation } from './SuperAdministrator/Website/Mutation/AddPeopleToWebsiteMutation';
 import { AddPluginToWebsiteMutation } from './SuperAdministrator/Website/Mutation/AddPluginToWebsiteMutation';
+import { AssignRoleToUserMutation } from './SuperAdministrator/Website/Mutation/AssignRoleToUserMutation';
 import { CreateWebsiteMutation } from './SuperAdministrator/Website/Mutation/CreateWebsiteMutation';
+import { RemovePeopleFromWebsiteMutation } from './SuperAdministrator/Website/Mutation/RemovePeopleFromWebsiteMutation';
 import { UninstallPluginToWebsiteMutation } from './SuperAdministrator/Website/Mutation/UninstallPluginToWebsiteMutation';
 import { UpdateWebsiteMutation } from './SuperAdministrator/Website/Mutation/UpdateWebsiteMutation';
 import { AddedPeopleListQuery } from './SuperAdministrator/Website/Query/AddedPeopleQuery';
@@ -46,6 +49,7 @@ const AppResolver = [
       userDetail: UserQuery,
       applicationByUserList: ApplicationByUserList,
       adminRoleList: AdminRoleListQuery,
+      hasRole: HasRoleQuery,
     },
 
     Mutation: {
@@ -67,6 +71,8 @@ const AppResolver = [
       signOutSuperAdmin: SignOutSuperAdminMutation,
       signIn: SignInMutation,
       signOut: SignOutMutation,
+      removePeopleFromWebsite: RemovePeopleFromWebsiteMutation,
+      assignRoleToUser: AssignRoleToUserMutation,
     },
   },
 ];
