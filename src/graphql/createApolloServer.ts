@@ -70,7 +70,7 @@ export default function createApolloServer() {
           .table('user_token')
           .innerJoin('role_permissions', 'role_permissions.user_id', 'user_token.user_id')
           .innerJoin('roles', 'roles.id', 'role_permissions.role_id')
-          .select('user_token.user_id as user_id', ' roles.isList as isList', 'roles.isDetail as isDetail')
+          .select('user_token.user_id as user_id', ' roles.write as write', 'roles.read as read')
           .where({ token: token })
           .first();
 
@@ -84,8 +84,9 @@ export default function createApolloServer() {
             authUser.user = {
               id: user.user_id,
               token: token,
-              isList: user.isList,
-              isDetail: user.isDetail,
+              read: true,
+              write: true,
+              modified: true,
             };
           } else {
             throw new AuthenticationError('Incorrect Token!!');

@@ -1,5 +1,6 @@
 extend type Query {
   me: Me
+  adminMe: Me
 }
 
 extend type Mutation {
@@ -23,4 +24,7 @@ type Me {
   id: Int
   username: String
   fullname: String
+  roleName: String
+  roleId: Int
+  plugins: [Plugin]
 }

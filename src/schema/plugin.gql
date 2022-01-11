@@ -16,6 +16,14 @@ type Plugin {
   id: Int
   name: String
   website_id: Int
+  access: Access
+}
+
+type Access {
+  view: Boolean
+  create: Boolean
+  edit: Boolean
+  remove: Boolean
 }
 
 input PluginInput {

@@ -13,6 +13,7 @@ extend type Mutation {
   uninstallPlugin(websiteId: Int!, pluginId: Int!): Boolean
   removePeopleFromWebsite(userId: Int!, websiteId: Int!): Boolean
   assignRoleToUser(userId: Int!, websiteId: Int!, roleId: Int!): Int!
+  adminAssignRoleToUser(userId: Int!, websiteId: Int!, roleId: Int!): Int!
 }
 
 type WebsiteList {

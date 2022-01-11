@@ -8,8 +8,9 @@ export interface AuthSuperAdminInterface {
 export interface AuthUserInterface {
   id: number;
   token: string;
-  isList: boolean | null;
-  isDetail: boolean | null;
+  read: boolean | null;
+  write: boolean | null;
+  modified: boolean | null;
 }
 
 export interface AuthUser {

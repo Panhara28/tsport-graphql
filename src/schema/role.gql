@@ -3,6 +3,7 @@ extend type Query {
   role(id: Int): Role
   adminRoleList(websiteId: Int!): RoleList
   hasRole(userId: Int!, websiteId: Int!): Role
+  adminHasRole(userId: Int!, websiteId: Int!): Role
 }
 
 extend type Mutation {

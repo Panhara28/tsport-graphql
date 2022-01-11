@@ -1,7 +1,7 @@
 #!/bin/bash
 file=src/generated/graph.ts
 bucket="learning-space"
-resource="/${bucket}/graph-nano.ts"
+resource="/${bucket}/graph-moc.ts"
 contentType="text/plain"
 dateValue=`TZ=GMT date +"%a, %d %b %Y %H:%M:%S GMT"`
 stringToSign="PUT\\n\\n${contentType}\\n${dateValue}\\nx-amz-acl:public-read\\n${resource}"
@@ -18,4 +18,4 @@ curl -v -X PUT -T "${file}" \
   -H "Date: ${dateValue}" \
   -H "Content-Type: ${contentType}" \
   -H "Authorization: AWS ${s3Key}:${signature}" \
-  https://${bucket}.sgp1.digitaloceanspaces.com/graph-nano.ts
+  https://${bucket}.sgp1.digitaloceanspaces.com/graph-moc.ts

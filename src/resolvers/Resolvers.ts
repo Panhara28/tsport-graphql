@@ -1,4 +1,6 @@
 import { ApplicationByUserList } from './Admin/Application/Query/ApplicationByUserList';
+import { AdminAssignRoleToUserMutation } from './Admin/Role/Mutation/AdminAssignRoleToUserMutation';
+import { AdminHasRoleQuery } from './Admin/Role/Query/AdminHasRoleQuery';
 import { AdminRoleListQuery } from './Admin/Role/Query/AdminRoleListQuery';
 import { UserListQuery } from './Admin/User/Query/UserListQuery';
 import { UserQuery } from './Admin/User/Query/UserQuery';
@@ -6,6 +8,7 @@ import { SignInMutation } from './Authentication/Mutation/SignInMutation';
 import { SignInSuperAdminMutation } from './Authentication/Mutation/SignInSuperAdminMutation';
 import { SignOutMutation } from './Authentication/Mutation/SignOutMutation';
 import { SignOutSuperAdminMutation } from './Authentication/Mutation/SignOutSuperAdminMutation';
+import { AdminMeQuery } from './Authentication/Query/AdminMeQuery';
 import { MeQuery } from './Authentication/Query/MeQuery';
 import { CreatePluginMutation } from './SuperAdministrator/Plugin/Mutation/CreatePluginMutation';
 import { UpdatePluginMutation } from './SuperAdministrator/Plugin/Mutation/UpdatePluginMutation';
@@ -36,6 +39,7 @@ const AppResolver = [
         return 'Hello World';
       },
       me: MeQuery,
+      adminMe: AdminMeQuery,
       superAdminList: UserListQuery,
       superAdmin: UserQuery,
       websiteList: WebsiteListQuery,
@@ -50,6 +54,7 @@ const AppResolver = [
       applicationByUserList: ApplicationByUserList,
       adminRoleList: AdminRoleListQuery,
       hasRole: HasRoleQuery,
+      adminHasRole: AdminHasRoleQuery,
     },
 
     Mutation: {
@@ -73,6 +78,7 @@ const AppResolver = [
       signOut: SignOutMutation,
       removePeopleFromWebsite: RemovePeopleFromWebsiteMutation,
       assignRoleToUser: AssignRoleToUserMutation,
+      adminAssignRoleToUser: AdminAssignRoleToUserMutation,
     },
   },
 ];
