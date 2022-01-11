@@ -6,6 +6,7 @@ export async function up(knex: Knex): Promise<void> {
       table.increments();
       table.integer('website_id');
       table.integer('plugin_id');
+      table.integer('user_id');
       table.boolean('read').defaultTo(false);
       table.boolean('display').defaultTo(false);
       table.boolean('write').defaultTo(false);

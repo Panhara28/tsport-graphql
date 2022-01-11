@@ -22,6 +22,7 @@ import { CreateSuperAdminMutation } from './SuperAdministrator/SuperAdmin/Mutati
 import { UpdateSuperAdminMutation } from './SuperAdministrator/SuperAdmin/Mutation/UpdateSuperAdminMutation';
 import { AddPeopleToWebsiteMutation } from './SuperAdministrator/Website/Mutation/AddPeopleToWebsiteMutation';
 import { AddPluginToWebsiteMutation } from './SuperAdministrator/Website/Mutation/AddPluginToWebsiteMutation';
+import { InstallPluginToUserMutation } from './SuperAdministrator/Website/Mutation/InstallPluginToUserMutation';
 import { AssignRoleToUserMutation } from './SuperAdministrator/Website/Mutation/AssignRoleToUserMutation';
 import { CreateWebsiteMutation } from './SuperAdministrator/Website/Mutation/CreateWebsiteMutation';
 import { RemovePeopleFromWebsiteMutation } from './SuperAdministrator/Website/Mutation/RemovePeopleFromWebsiteMutation';
@@ -79,6 +80,7 @@ const AppResolver = [
       removePeopleFromWebsite: RemovePeopleFromWebsiteMutation,
       assignRoleToUser: AssignRoleToUserMutation,
       adminAssignRoleToUser: AdminAssignRoleToUserMutation,
+      installPluginToUser: InstallPluginToUserMutation,
     },
   },
 ];

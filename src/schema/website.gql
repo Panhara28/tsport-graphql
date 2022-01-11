@@ -14,6 +14,7 @@ extend type Mutation {
   removePeopleFromWebsite(userId: Int!, websiteId: Int!): Boolean
   assignRoleToUser(userId: Int!, websiteId: Int!, roleId: Int!): Int!
   adminAssignRoleToUser(userId: Int!, websiteId: Int!, roleId: Int!): Int!
+  installPluginToUser(websiteId: Int!, pluginId: Int!, userId: Int!): Boolean
 }
 
 type WebsiteList {
