@@ -20,7 +20,7 @@ type Plugin {
 }
 
 type Access {
-  view: Boolean
+  read: Boolean
   create: Boolean
   edit: Boolean
   remove: Boolean
