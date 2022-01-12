@@ -4,8 +4,8 @@ import ContextType from 'src/graphql/ContextType';
 export const ApplicationByUserList = async (_, {}, ctx: ContextType) => {
   const knex = ctx.knex.default;
   const user_id = ctx.authUser.user.id;
-  const isList = ctx.authUser.user.isList;
-  if (isList) {
+  const read = ctx.authUser.user.read;
+  if (read) {
     const applications = await knex
       .table('users')
       .innerJoin('website_user_details', 'website_user_details.user_id', 'users.id')
