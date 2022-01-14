@@ -26,7 +26,14 @@ export const AdminMeQuery = async (_, {}, ctx: ContextType) => {
     const plugins = await knex
       .table('user_plugins')
       .innerJoin('plugins', 'plugins.id', 'user_plugins.plugin_id')
-      .select('plugins.name', 'user_plugins.read', 'user_plugins.create', 'user_plugins.remove', 'user_plugins.edit')
+      .select(
+        'plugins.name',
+        'plugins.slug',
+        'user_plugins.read',
+        'user_plugins.create',
+        'user_plugins.remove',
+        'user_plugins.edit',
+      )
       .where('user_plugins.website_id', '=', user.websiteId);
 
     return {
