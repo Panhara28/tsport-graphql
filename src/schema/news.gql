@@ -1,0 +1,61 @@
+extend type Query {
+  newsList(filter: FilterNews, pagination: PaginationInput!, websiteId: Int!): NewsList
+  newsDetail(id: Int!, websiteId: Int!): News
+  publicNewsList(filter: FilterNews, pagination: PaginationInput, websiteId: Int!): [News]
+  publicNewsDetail(id: Int!, websiteId: Int!): News
+}
+
+extend type Mutation {
+  createNews(input: NewsInput, websiteId: Int!): Int!
+  updateNews(id: Int!, input: NewsInput, websiteId: Int!): Boolean
+  updateNewsStatus(id: Int!, status: NewsEnum, websiteId: Int!): Boolean
+}
+
+type NewsList {
+  data: [News]
+  pagination: Pagination
+}
+
+type News {
+  id: Int
+  title: String
+  summary: String
+  description: JSON
+  thumbnail: String
+  status: NewsEnum
+  new_category_id: Int
+  created_at: String
+  category: NewsCategory
+}
+
+input NewsInput {
+  title: String
+  summary: String
+  description: JSON
+  thumbnail: String
+  new_category_id: Int
+}
+
+enum NewsEnum {
+  PENDING
+  INREVIEW
+  PUBLISHED
+  REVERSION
+}
+
+input FilterNews {
+  status: NewsEnum
+  id: Int
+  name: String
+}
+
+input PaginationInput {
+  page: Int
+  size: Int
+}
+
+type Pagination {
+  total: Int
+  size: Int
+  current: Int
+}

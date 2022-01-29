@@ -1,3 +1,6 @@
+scalar JSON
+scalar JSONObject
+
 type Query {
   testing: String
 }

@@ -32,6 +32,17 @@ import { AddedPeopleListQuery } from './SuperAdministrator/Website/Query/AddedPe
 import { InstalledPluginQuery } from './SuperAdministrator/Website/Query/InstalledPluginQuery';
 import { WebsiteListQuery } from './SuperAdministrator/Website/Query/WebsiteListQuery';
 import { WebsiteQuery } from './SuperAdministrator/Website/Query/WebsiteQuery';
+import { NewsListQuery } from './Admin/Plugins/News/Query/NewsListQuery';
+import { NewsDetailQuery } from './Admin/Plugins/News/Query/NewsDetailQuery';
+import { NewsCategoryListQuery } from './Admin/Plugins/NewsCategory/Query/NewsCategoryListQuery';
+import { NewsCateogryDetailQuery } from './Admin/Plugins/NewsCategory/Query/NewsCategoryDetailQuery';
+import { PublicNewsListQuery } from './Admin/Plugins/News/Query/PublicNewsListQuery';
+import { PublicNewsDetailQuery } from './Admin/Plugins/News/Query/PublicNewsDetailQuery';
+import { CreateNewsMutation } from './Admin/Plugins/News/Mutation/CreateNewsMutation';
+import { UpdateNewsMuation } from './Admin/Plugins/News/Mutation/UpdateNewsMutation';
+import { UpdateNewsStatusMutation } from './Admin/Plugins/News/Mutation/UpdateNewsStatusMutation';
+import { CreateNewsCategoryMutation } from './Admin/Plugins/NewsCategory/Mutation/CreateNewsCategoryMutation';
+import { UpdateNewsCategoryMutation } from './Admin/Plugins/NewsCategory/Mutation/UpdateNewsCategoryMutation';
 
 const AppResolver = [
   {
@@ -56,6 +67,12 @@ const AppResolver = [
       adminRoleList: AdminRoleListQuery,
       hasRole: HasRoleQuery,
       adminHasRole: AdminHasRoleQuery,
+      newsList: NewsListQuery,
+      newsDetail: NewsDetailQuery,
+      newsCategoryList: NewsCategoryListQuery,
+      newsCategoryDetail: NewsCateogryDetailQuery,
+      publicNewsList: PublicNewsListQuery,
+      publicNewsDetail: PublicNewsDetailQuery,
     },
 
     Mutation: {
@@ -81,6 +98,11 @@ const AppResolver = [
       assignRoleToUser: AssignRoleToUserMutation,
       adminAssignRoleToUser: AdminAssignRoleToUserMutation,
       installPluginToUser: InstallPluginToUserMutation,
+      createNews: CreateNewsMutation,
+      updateNews: UpdateNewsMuation,
+      updateNewsStatus: UpdateNewsStatusMutation,
+      createNewsCategory: CreateNewsCategoryMutation,
+      updateNewsCategory: UpdateNewsCategoryMutation,
     },
   },
 ];
