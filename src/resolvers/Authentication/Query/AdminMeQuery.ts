@@ -1,8 +1,9 @@
 import ContextType from '../../../graphql/ContextType';
 
-export const AdminMeQuery = async (_, {}, ctx: ContextType) => {
+export const AdminMeQuery = async (_, { websiteId }: { websiteId: number }, ctx: ContextType) => {
   const knex = ctx.knex.default;
   const token = ctx.authUser.user.token;
+  console.log(websiteId);
 
   if (token) {
     const user = await knex
@@ -22,30 +23,33 @@ export const AdminMeQuery = async (_, {}, ctx: ContextType) => {
       )
       .where({ token })
       .first();
+    console.log(user);
 
-    const plugins = await knex
-      .table('user_plugins')
-      .innerJoin('plugins', 'plugins.id', 'user_plugins.plugin_id')
-      .select(
-        'plugins.name',
-        'plugins.slug',
-        'user_plugins.read',
-        'user_plugins.create',
-        'user_plugins.remove',
-        'user_plugins.edit',
-      )
-      .where('user_plugins.website_id', '=', user.websiteId);
+    // const plugins = await knex
+    //   .table('user_plugins')
+    //   .innerJoin('plugins', 'plugins.id', 'user_plugins.plugin_id')
+    //   .select(
+    //     'plugins.name',
+    //     'plugins.slug',
+    //     'user_plugins.read',
+    //     'user_plugins.create',
+    //     'user_plugins.remove',
+    //     'user_plugins.edit',
+    //   )
+    //   .where('user_plugins.website_id', '=', user.websiteId)
+    //   .andWhere('user_plugins.user_id', '=', user.id);
 
     return {
       ...user,
-      plugins: plugins.map(item => {
-        return {
-          ...item,
-          access: {
-            ...item,
-          },
-        };
-      }),
+      plugins: [],
+      // plugins: plugins.map(item => {
+      //   return {
+      //     ...item,
+      //     access: {
+      //       ...item,
+      //     },
+      //   };
+      // }),
     };
   }
 
