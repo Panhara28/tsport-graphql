@@ -3,10 +3,9 @@ import ContextType from '../../../graphql/ContextType';
 export const AdminMeQuery = async (_, { websiteId }: { websiteId: number }, ctx: ContextType) => {
   const knex = ctx.knex.default;
   const token = ctx.authUser.user.token;
-  console.log(websiteId);
 
   if (token) {
-    const user = await knex
+    const queryUser = knex
       .table('user_token')
       .innerJoin('users', 'users.id', 'user_token.user_id')
       .innerJoin('website_user_details', 'website_user_details.user_id', 'users.id')
@@ -23,33 +22,37 @@ export const AdminMeQuery = async (_, { websiteId }: { websiteId: number }, ctx:
       )
       .where({ token })
       .first();
-    console.log(user);
 
-    // const plugins = await knex
-    //   .table('user_plugins')
-    //   .innerJoin('plugins', 'plugins.id', 'user_plugins.plugin_id')
-    //   .select(
-    //     'plugins.name',
-    //     'plugins.slug',
-    //     'user_plugins.read',
-    //     'user_plugins.create',
-    //     'user_plugins.remove',
-    //     'user_plugins.edit',
-    //   )
-    //   .where('user_plugins.website_id', '=', user.websiteId)
-    //   .andWhere('user_plugins.user_id', '=', user.id);
+    if (websiteId) {
+      queryUser.andWhere('website_user_details.website_id', '=', websiteId);
+    }
+
+    const user = await queryUser;
+
+    const plugins = await knex
+      .table('user_plugins')
+      .innerJoin('plugins', 'plugins.id', 'user_plugins.plugin_id')
+      .select(
+        'plugins.name',
+        'plugins.slug',
+        'user_plugins.read',
+        'user_plugins.create',
+        'user_plugins.remove',
+        'user_plugins.edit',
+      )
+      .where('user_plugins.website_id', '=', user.websiteId)
+      .andWhere('user_plugins.user_id', '=', user.id);
 
     return {
       ...user,
-      plugins: [],
-      // plugins: plugins.map(item => {
-      //   return {
-      //     ...item,
-      //     access: {
-      //       ...item,
-      //     },
-      //   };
-      // }),
+      plugins: plugins.map(item => {
+        return {
+          ...item,
+          access: {
+            ...item,
+          },
+        };
+      }),
     };
   }
 
