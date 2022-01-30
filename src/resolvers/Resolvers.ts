@@ -43,6 +43,8 @@ import { UpdateNewsMuation } from './Admin/Plugins/News/Mutation/UpdateNewsMutat
 import { UpdateNewsStatusMutation } from './Admin/Plugins/News/Mutation/UpdateNewsStatusMutation';
 import { CreateNewsCategoryMutation } from './Admin/Plugins/NewsCategory/Mutation/CreateNewsCategoryMutation';
 import { UpdateNewsCategoryMutation } from './Admin/Plugins/NewsCategory/Mutation/UpdateNewsCategoryMutation';
+import { UploadResolver } from './Upload/Mutation/UploadResolver';
+import { PublicNewsCategoryListQuery } from './Admin/Plugins/NewsCategory/Query/PublicNewsCategoryListQuery';
 
 const AppResolver = [
   {
@@ -73,12 +75,14 @@ const AppResolver = [
       newsCategoryDetail: NewsCateogryDetailQuery,
       publicNewsList: PublicNewsListQuery,
       publicNewsDetail: PublicNewsDetailQuery,
+      publicNewsCategoryList: PublicNewsCategoryListQuery,
     },
 
     Mutation: {
       testing: () => {
         return true;
       },
+      singleUpload: UploadResolver,
       createSuperAdmin: CreateSuperAdminMutation,
       updateSuperAdmin: UpdateSuperAdminMutation,
       createWebsite: CreateWebsiteMutation,

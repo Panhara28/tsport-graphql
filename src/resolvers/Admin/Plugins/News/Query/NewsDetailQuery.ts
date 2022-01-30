@@ -6,7 +6,7 @@ export const NewsDetailQuery = async (_, { id, websiteId }: { id: number; websit
   const newsDetail = await knex
     .table('news')
     .where({ id })
-    .andWhere('websiteId', '=', websiteId)
+    .andWhere('website_id', '=', websiteId)
     .first();
 
   return {
