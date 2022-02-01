@@ -7,10 +7,12 @@ export const PluginListQuery = async (_, {}, ctx: ContextType) => {
   const pluginList = await knex.table('plugins');
 
   return {
-    data: pluginList.map(x => {
-      return {
-        ...x,
-      };
-    }),
+    data: pluginList
+      .filter(p => p.slug !== 'default')
+      .map(x => {
+        return {
+          ...x,
+        };
+      }),
   };
 };
