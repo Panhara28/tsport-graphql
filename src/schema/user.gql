@@ -1,6 +1,11 @@
 extend type Query {
   userList: UserList
-  userDetail: User
+  userDetail(id: Int!): User
+}
+
+extend type Mutation {
+  createUser(input: UserInput): Int!
+  updateUser(id: Int!, input: UserInput): Boolean
 }
 
 type User {
@@ -11,4 +16,10 @@ type User {
 
 type UserList {
   data: [User]
+}
+
+input UserInput {
+  fullname: String
+  username: String
+  password: String
 }

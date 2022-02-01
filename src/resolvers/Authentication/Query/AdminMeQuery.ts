@@ -1,3 +1,4 @@
+import { AuthenticationError } from 'apollo-server';
 import ContextType from '../../../graphql/ContextType';
 
 export const AdminMeQuery = async (_, { websiteId }: { websiteId: number }, ctx: ContextType) => {

@@ -45,6 +45,8 @@ import { CreateNewsCategoryMutation } from './Admin/Plugins/NewsCategory/Mutatio
 import { UpdateNewsCategoryMutation } from './Admin/Plugins/NewsCategory/Mutation/UpdateNewsCategoryMutation';
 import { UploadResolver } from './Upload/Mutation/UploadResolver';
 import { PublicNewsCategoryListQuery } from './Admin/Plugins/NewsCategory/Query/PublicNewsCategoryListQuery';
+import { CreateUserMutation } from './Admin/User/Mutation/CreateUserMutation';
+import { UpdateUserMutation } from './Admin/User/Mutation/UpdateUserMutation';
 
 const AppResolver = [
   {
@@ -107,6 +109,8 @@ const AppResolver = [
       updateNewsStatus: UpdateNewsStatusMutation,
       createNewsCategory: CreateNewsCategoryMutation,
       updateNewsCategory: UpdateNewsCategoryMutation,
+      createUser: CreateUserMutation,
+      updateUser: UpdateUserMutation,
     },
   },
 ];

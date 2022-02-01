@@ -1,3 +1,4 @@
+import { AuthenticationError } from 'apollo-server';
 import { Graph } from 'src/generated/graph';
 import ContextType from 'src/graphql/ContextType';
 
@@ -7,14 +8,19 @@ export const UpdateNewsStatusMutation = async (
   ctx: ContextType,
 ) => {
   const knex = ctx.knex.default;
+  const isUserCanUpdate = ctx.authUser.user.modified;
 
-  await knex
-    .table('news')
-    .update({
-      status,
-    })
-    .where({ id })
-    .andWhere('website_id', '=', websiteId);
+  if (isUserCanUpdate) {
+    await knex
+      .table('news')
+      .update({
+        status,
+      })
+      .where({ id })
+      .andWhere('website_id', '=', websiteId);
 
-  return true;
+    return true;
+  } else {
+    throw new AuthenticationError(`You don't have permission!`);
+  }
 };
