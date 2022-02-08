@@ -47,6 +47,10 @@ import { UploadResolver } from './Upload/Mutation/UploadResolver';
 import { PublicNewsCategoryListQuery } from './Admin/Plugins/NewsCategory/Query/PublicNewsCategoryListQuery';
 import { CreateUserMutation } from './Admin/User/Mutation/CreateUserMutation';
 import { UpdateUserMutation } from './Admin/User/Mutation/UpdateUserMutation';
+import { PluginManageAccessForUser } from './SuperAdministrator/Plugin/Mutation/PluginManageAccessForUser';
+import { PluginManageAccessForUserQuery } from './SuperAdministrator/Plugin/Query/PluginManageAccessForUserQuery';
+import { RoleDetailQuery } from './SuperAdministrator/Role/Query/RoleDetailQuery';
+import { RoleManageAccessMutation } from './SuperAdministrator/Role/Mutation/RoleManageAccessMutation';
 
 const AppResolver = [
   {
@@ -78,6 +82,8 @@ const AppResolver = [
       publicNewsList: PublicNewsListQuery,
       publicNewsDetail: PublicNewsDetailQuery,
       publicNewsCategoryList: PublicNewsCategoryListQuery,
+      pluginManageAccessForUserDetail: PluginManageAccessForUserQuery,
+      roleDetail: RoleDetailQuery,
     },
 
     Mutation: {
@@ -111,6 +117,8 @@ const AppResolver = [
       updateNewsCategory: UpdateNewsCategoryMutation,
       createUser: CreateUserMutation,
       updateUser: UpdateUserMutation,
+      pluginManageAccessForUser: PluginManageAccessForUser,
+      roleManageAccess: RoleManageAccessMutation,
     },
   },
 ];

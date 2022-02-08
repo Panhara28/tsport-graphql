@@ -1,11 +1,21 @@
 extend type Query {
   pluginList: PluginList
   plugin(id: Int): Plugin
+  pluginManageAccessForUserDetail(websiteId: Int!, pluginId: Int!, userId: Int!): Access
 }
 
 extend type Mutation {
   createPlugin(input: PluginInput): Int
   updatePlugin(id: Int, input: PluginInput): Boolean
+  pluginManageAccessForUser(
+    websiteId: Int!
+    pluginId: Int!
+    userId: Int!
+    read: Boolean
+    write: Boolean
+    modified: Boolean
+    remove: Boolean
+  ): Boolean
 }
 
 type PluginList {
