@@ -2,8 +2,6 @@ import { ApplicationByUserList } from './Admin/Application/Query/ApplicationByUs
 import { AdminAssignRoleToUserMutation } from './Admin/Role/Mutation/AdminAssignRoleToUserMutation';
 import { AdminHasRoleQuery } from './Admin/Role/Query/AdminHasRoleQuery';
 import { AdminRoleListQuery } from './Admin/Role/Query/AdminRoleListQuery';
-import { UserListQuery } from './Admin/User/Query/UserListQuery';
-import { UserQuery } from './Admin/User/Query/UserQuery';
 import { SignInMutation } from './Authentication/Mutation/SignInMutation';
 import { SignInSuperAdminMutation } from './Authentication/Mutation/SignInSuperAdminMutation';
 import { SignOutMutation } from './Authentication/Mutation/SignOutMutation';
@@ -45,12 +43,14 @@ import { CreateNewsCategoryMutation } from './Admin/Plugins/NewsCategory/Mutatio
 import { UpdateNewsCategoryMutation } from './Admin/Plugins/NewsCategory/Mutation/UpdateNewsCategoryMutation';
 import { UploadResolver } from './Upload/Mutation/UploadResolver';
 import { PublicNewsCategoryListQuery } from './Admin/Plugins/NewsCategory/Query/PublicNewsCategoryListQuery';
-import { CreateUserMutation } from './Admin/User/Mutation/CreateUserMutation';
-import { UpdateUserMutation } from './Admin/User/Mutation/UpdateUserMutation';
 import { PluginManageAccessForUser } from './SuperAdministrator/Plugin/Mutation/PluginManageAccessForUser';
 import { PluginManageAccessForUserQuery } from './SuperAdministrator/Plugin/Query/PluginManageAccessForUserQuery';
 import { RoleDetailQuery } from './SuperAdministrator/Role/Query/RoleDetailQuery';
 import { RoleManageAccessMutation } from './SuperAdministrator/Role/Mutation/RoleManageAccessMutation';
+import { UserListQuery } from './SuperAdministrator/User/Query/UserListQuery';
+import { UserQuery } from './SuperAdministrator/User/Query/UserQuery';
+import { CreateUserMutation } from './SuperAdministrator/User/Mutation/CreateUserMutation';
+import { UpdateUserMutation } from './SuperAdministrator/User/Mutation/UpdateUserMutation';
 
 const AppResolver = [
   {
