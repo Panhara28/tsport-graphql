@@ -30,6 +30,10 @@ export const AdminMeQuery = async (_, { websiteId }: { websiteId: number }, ctx:
 
     const user = await queryUser;
 
+    if (!user) {
+      throw new AuthenticationError(`Please contact your admin to add you a plugin`);
+    }
+
     const plugins = await knex
       .table('user_plugins')
       .innerJoin('plugins', 'plugins.id', 'user_plugins.plugin_id')
