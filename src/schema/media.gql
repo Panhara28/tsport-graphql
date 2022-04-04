@@ -1,0 +1,22 @@
+extend type Query {
+  mediaList: MediaList
+}
+
+extend type Mutation {
+  createMedia(input: MediaInput): Int!
+}
+
+type Media {
+  image_url: String
+  website_id: Int
+}
+
+type MediaList {
+  data: Media
+  pagination: Pagination
+}
+
+input MediaInput {
+  image_url: String
+  website_id: Int!
+}
