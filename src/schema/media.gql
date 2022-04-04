@@ -3,12 +3,11 @@ extend type Query {
 }
 
 extend type Mutation {
-  createMedia(input: MediaInput): Int!
+  createMedia(websiteId: Int!, input: MediaInput): Int!
 }
 
 type Media {
   image_url: String
-  website_id: Int
 }
 
 type MediaList {
@@ -18,5 +17,4 @@ type MediaList {
 
 input MediaInput {
   image_url: String
-  website_id: Int!
 }
