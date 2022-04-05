@@ -1,5 +1,5 @@
 extend type Query {
-  mediaList: MediaList
+  mediaList(websiteId: Int!, pagination: PaginationInput): MediaList
 }
 
 extend type Mutation {
@@ -7,11 +7,12 @@ extend type Mutation {
 }
 
 type Media {
+  id: Int
   image_url: String
 }
 
 type MediaList {
-  data: Media
+  data: [Media]
   pagination: Pagination
 }
 

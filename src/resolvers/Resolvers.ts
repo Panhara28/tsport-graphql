@@ -52,6 +52,7 @@ import { UserQuery } from './SuperAdministrator/User/Query/UserQuery';
 import { CreateUserMutation } from './SuperAdministrator/User/Mutation/CreateUserMutation';
 import { UpdateUserMutation } from './SuperAdministrator/User/Mutation/UpdateUserMutation';
 import { CreateMediaMutation } from './Admin/Plugins/Media/Mutation/CreateMediaMutation';
+import { MediaListQuery } from './Admin/Plugins/Media/Query/MediaListQuery';
 
 const AppResolver = [
   {
@@ -85,6 +86,7 @@ const AppResolver = [
       publicNewsCategoryList: PublicNewsCategoryListQuery,
       pluginManageAccessForUserDetail: PluginManageAccessForUserQuery,
       roleDetail: RoleDetailQuery,
+      mediaList: MediaListQuery,
     },
 
     Mutation: {

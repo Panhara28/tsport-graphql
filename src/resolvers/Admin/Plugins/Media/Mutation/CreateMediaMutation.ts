@@ -8,7 +8,6 @@ export const CreateMediaMutation = async (
 ) => {
   const knex = ctx.knex.default;
   // await ctx.authSuperAdmin.requireLogin('USER');
-  console.log(websiteId);
 
   const [createMedia] = await knex.table('media').insert({
     image_url: input.image_url,
