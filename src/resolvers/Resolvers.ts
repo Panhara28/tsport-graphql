@@ -53,6 +53,7 @@ import { CreateUserMutation } from './SuperAdministrator/User/Mutation/CreateUse
 import { UpdateUserMutation } from './SuperAdministrator/User/Mutation/UpdateUserMutation';
 import { CreateMediaMutation } from './Admin/Plugins/Media/Mutation/CreateMediaMutation';
 import { MediaListQuery } from './Admin/Plugins/Media/Query/MediaListQuery';
+import { RemoveMediaMutation } from './Admin/Plugins/Media/Mutation/RemoveMediaMutation';
 
 const AppResolver = [
   {
@@ -123,6 +124,7 @@ const AppResolver = [
       pluginManageAccessForUser: PluginManageAccessForUser,
       roleManageAccess: RoleManageAccessMutation,
       createMedia: CreateMediaMutation,
+      removeMedia: RemoveMediaMutation,
     },
   },
 ];
