@@ -4,7 +4,7 @@ extend type Query {
 
 extend type Mutation {
   createMedia(websiteId: Int!, input: MediaInput): Int!
-  removeMedia(websiteId: Int!, mediaId: Int!): Boolean
+  removeMedia(websiteId: Int!, mediaId: Int!, thumbnail: String!): Boolean
 }
 
 type Media {

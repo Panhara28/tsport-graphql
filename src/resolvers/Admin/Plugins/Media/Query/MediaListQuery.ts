@@ -12,7 +12,6 @@ export const MediaListQuery = async (
     .table('media')
     .where('website_id', '=', websiteId)
     .orderBy('id', 'desc');
-  console.log(mediaList);
 
   return {
     data: mediaList.map(item => {
