@@ -9,47 +9,52 @@ export const NewsListQuery = async (
   ctx: ContextType,
 ) => {
   const knex = ctx.knex.default;
+  await ctx.authUser.requireLogin('USER');
+  const isRead = await ctx.authUser.user.read;
+  if (isRead) {
+    const query = knex
+      .table('news')
+      .orderBy('id', 'desc')
+      .where('website_id', '=', websiteId);
+    const totalQuery = knex.table('news');
 
-  const query = knex
-    .table('news')
-    .orderBy('id', 'desc')
-    .where('website_id', '=', websiteId);
-  const totalQuery = knex.table('news');
+    if (filter?.status != undefined) {
+      query.andWhere({ status: filter.status });
+      totalQuery.andWhere({ status: filter.status });
+    }
 
-  if (filter?.status != undefined) {
-    query.andWhere({ status: filter.status });
-    totalQuery.andWhere({ status: filter.status });
-  }
+    if (filter?.name) {
+      query.andWhere('title', 'like', `%${filter?.name}%`);
+    }
 
-  if (filter?.name) {
-    query.andWhere('title', 'like', `%${filter?.name}%`);
-  }
+    if (pagination.size != undefined && pagination.page != undefined) {
+      query.limit(pagination.size).offset((pagination.page - 1) * pagination.size);
+    }
 
-  if (pagination.size != undefined && pagination.page != undefined) {
-    query.limit(pagination.size).offset((pagination.page - 1) * pagination.size);
-  }
+    const data: table_news[] = await query;
+    const total: {} = await totalQuery.count('id as CNT');
+    let newData: table_news[];
 
-  const data: table_news[] = await query;
-  const total: {} = await totalQuery.count('id as CNT');
-  let newData: table_news[];
+    if (filter?.id !== undefined) {
+      const regex = new RegExp(`^${filter.id + ''}`, 'i');
+      newData = data.sort().filter(val => regex.test(val.id + ''));
+    } else {
+      newData = data;
+    }
 
-  if (filter?.id !== undefined) {
-    const regex = new RegExp(`^${filter.id + ''}`, 'i');
-    newData = data.sort().filter(val => regex.test(val.id + ''));
+    return {
+      data: newData.map(item => {
+        return {
+          ...item,
+        };
+      }),
+      pagination: {
+        total: Number(total[0].CNT),
+        size: data.length,
+        current: pagination.page,
+      },
+    };
   } else {
-    newData = data;
+    throw new AuthenticationError(`You don't have permission!`);
   }
-
-  return {
-    data: newData.map(item => {
-      return {
-        ...item,
-      };
-    }),
-    pagination: {
-      total: Number(total[0].CNT),
-      size: data.length,
-      current: pagination.page,
-    },
-  };
 };
