@@ -16,14 +16,16 @@ export const RemoveMediaMutation = async (
     const removeNewsFeatureImage = await knex
       .table('news')
       .where('thumbnail', '=', thumbnail)
-      .andWhere('website_id', '=', websiteId)
-      .first();
+      .andWhere('website_id', '=', websiteId);
 
     if (removeNewsFeatureImage) {
       await knex
         .table('news')
         .update({ thumbnail: null })
-        .where('id', '=', removeNewsFeatureImage.id);
+        .whereIn(
+          'id',
+          removeNewsFeatureImage.map(item => item.id),
+        );
     }
   }
 
