@@ -5,6 +5,10 @@ export async function up(knex: Knex): Promise<void> {
     return await knex.schema.createTable('media', function(table) {
       table.increments();
       table.string('image_url');
+      table.decimal('upload_storage');
+      table.string('mimetype');
+      table.string('width');
+      table.string('height');
       table.integer('website_id');
       table.integer('created_by');
       table.integer('updated_by');

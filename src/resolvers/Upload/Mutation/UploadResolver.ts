@@ -2,6 +2,7 @@ import ContextType from '../../../graphql/ContextType';
 import request from 'request-promise';
 import { streamToBuffer } from '../../../function/streamToBuffer';
 import { AuthenticationError } from 'apollo-server';
+import sizeOf from 'image-size';
 
 export const UploadResolver = async (_, { file }, ctx: ContextType) => {
   await ctx.authUser.requireLogin('USER');
@@ -15,10 +16,12 @@ export const UploadResolver = async (_, { file }, ctx: ContextType) => {
     stream.on('end', function() {
       fileSize = stream.bytesRead / (1024 * 1024); //Convert to MB
       fileSize = Number(fileSize.toFixed(4));
+
       if (fileSize > 100) {
         throw new AuthenticationError('You file is too large!');
       }
     });
+
     const json = await request.post({
       url: 'https://s1.moc.gov.kh/upload',
       formData: {
@@ -33,9 +36,15 @@ export const UploadResolver = async (_, { file }, ctx: ContextType) => {
       json: true,
     });
 
+    const dimensions = sizeOf(stream.path);
+
     return {
       filename,
       url: json.filename,
+      fileSize,
+      mimetype,
+      width: dimensions.width,
+      height: dimensions.height,
     };
   } else {
     throw new AuthenticationError(`You don't have permission!`);

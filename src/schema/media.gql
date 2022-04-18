@@ -10,6 +10,12 @@ extend type Mutation {
 type Media {
   id: Int
   image_url: String
+  upload_storage: Float
+  mimetype: String
+  width: String
+  height: String
+  created_at: String
+  user: User
 }
 
 type MediaList {
@@ -19,4 +25,8 @@ type MediaList {
 
 input MediaInput {
   image_url: String
+  upload_storage: Float
+  mimetype: String
+  width: String
+  height: String
 }
