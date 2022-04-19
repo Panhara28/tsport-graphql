@@ -35,16 +35,22 @@ export const UploadResolver = async (_, { file }, ctx: ContextType) => {
       },
       json: true,
     });
+    let dimensions;
+    const extention = json.filename.split('/')[4].split('.')[1];
 
-    const dimensions = sizeOf(stream.path);
+    if (extention === 'pdf' || extention === 'docx' || extention === 'csv') {
+      console.log('file');
+    } else {
+      dimensions = sizeOf(stream.path);
+    }
 
     return {
       filename,
       url: json.filename,
       fileSize,
       mimetype,
-      width: dimensions.width,
-      height: dimensions.height,
+      width: dimensions?.width ? dimensions?.width : 0,
+      height: dimensions?.height ? dimensions?.height : 0,
     };
   } else {
     throw new AuthenticationError(`You don't have permission!`);
