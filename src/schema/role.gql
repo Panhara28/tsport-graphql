@@ -4,11 +4,13 @@ extend type Query {
   adminRoleList(websiteId: Int!): RoleList
   hasRole(userId: Int!, websiteId: Int!): Role
   adminHasRole(userId: Int!, websiteId: Int!): Role
+  roleDetail(websiteId: Int!, roleId: Int!): Role
 }
 
 extend type Mutation {
   createRole(input: RoleInput, permission: RolePermissionInput): Int
   updateRole(id: Int, input: RoleInput): Boolean
+  roleManageAccess(websiteId: Int!, roleId: Int!, read: Boolean, write: Boolean, modified: Boolean): Boolean
 }
 
 type RoleList {
@@ -20,6 +22,7 @@ type Role {
   id: Int
   name: String
   website_id: Int
+  access: Access
 }
 
 input RoleInput {

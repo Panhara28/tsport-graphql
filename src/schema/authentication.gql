@@ -1,6 +1,6 @@
 extend type Query {
   me: Me
-  adminMe: Me
+  adminMe(websiteId: Int): Me
 }
 
 extend type Mutation {
