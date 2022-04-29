@@ -54,6 +54,11 @@ import { UpdateUserMutation } from './SuperAdministrator/User/Mutation/UpdateUse
 import { CreateMediaMutation } from './Admin/Plugins/Media/Mutation/CreateMediaMutation';
 import { MediaListQuery } from './Admin/Plugins/Media/Query/MediaListQuery';
 import { RemoveMediaMutation } from './Admin/Plugins/Media/Mutation/RemoveMediaMutation';
+import { AdminCreateUserMutation } from './Admin/User/Mutation/AdminCreateUserMutation';
+import { AdminUpdateUserMutation } from './Admin/User/Mutation/AdminUpdateUserMutation';
+import { AdminUserListQuery } from './Admin/User/Query/AdminUserListQuery';
+import { AdminUserDetailQuery } from './Admin/User/Query/AdminUserDetailQuery';
+import { AdminAddPeopleToWebsiteMutation } from './Admin/Website/Mutation/AdminAddPeopleToWebsiteMutation';
 
 const AppResolver = [
   {
@@ -88,6 +93,8 @@ const AppResolver = [
       pluginManageAccessForUserDetail: PluginManageAccessForUserQuery,
       roleDetail: RoleDetailQuery,
       mediaList: MediaListQuery,
+      adminUserList: AdminUserListQuery,
+      adminUserDetail: AdminUserDetailQuery,
     },
 
     Mutation: {
@@ -125,6 +132,9 @@ const AppResolver = [
       roleManageAccess: RoleManageAccessMutation,
       createMedia: CreateMediaMutation,
       removeMedia: RemoveMediaMutation,
+      adminCreateUser: AdminCreateUserMutation,
+      adminUpdateUser: AdminUpdateUserMutation,
+      adminAddPeopleToWebsite: AdminAddPeopleToWebsiteMutation,
     },
   },
 ];

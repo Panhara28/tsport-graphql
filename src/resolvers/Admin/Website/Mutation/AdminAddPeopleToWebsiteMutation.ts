@@ -2,13 +2,12 @@ import { AuthenticationError } from 'apollo-server';
 import { Graph } from 'src/generated/graph';
 import ContextType from 'src/graphql/ContextType';
 
-export const AddPeopleToWebsiteMutation = async (
+export const AdminAddPeopleToWebsiteMutation = async (
   _,
   { websiteId, input }: { websiteId: number; input: Graph.UserInputId[] },
   ctx: ContextType,
 ) => {
   const knex = ctx.knex.default;
-  // await ctx.authSuperAdmin.requireLogin('SUPER_ADMIN');
   await ctx.authUser.requireLogin('USER');
   const checkIfThePeopleExisted = await knex
     .table('website_user_details')
