@@ -2,6 +2,7 @@ extend type Query {
   pluginList: PluginList
   plugin(id: Int): Plugin
   pluginManageAccessForUserDetail(websiteId: Int!, pluginId: Int!, userId: Int!): Access
+  adminPluginManageAccessForUserDetail(websiteId: Int!, pluginId: Int!, userId: Int!): Access
 }
 
 extend type Mutation {

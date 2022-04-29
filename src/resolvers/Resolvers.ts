@@ -59,6 +59,7 @@ import { AdminUpdateUserMutation } from './Admin/User/Mutation/AdminUpdateUserMu
 import { AdminUserListQuery } from './Admin/User/Query/AdminUserListQuery';
 import { AdminUserDetailQuery } from './Admin/User/Query/AdminUserDetailQuery';
 import { AdminAddPeopleToWebsiteMutation } from './Admin/Website/Mutation/AdminAddPeopleToWebsiteMutation';
+import { AdminPluginManageAccessForUserQuery } from './Admin/Website/Query/AdminPluginManageAccessForUserDetail';
 
 const AppResolver = [
   {
@@ -95,6 +96,7 @@ const AppResolver = [
       mediaList: MediaListQuery,
       adminUserList: AdminUserListQuery,
       adminUserDetail: AdminUserDetailQuery,
+      adminPluginManageAccessForUserDetail: AdminPluginManageAccessForUserQuery,
     },
 
     Mutation: {
