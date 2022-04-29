@@ -17,6 +17,16 @@ extend type Mutation {
     modified: Boolean
     remove: Boolean
   ): Boolean
+
+  adminPluginManageAccessForUser(
+    websiteId: Int!
+    pluginId: Int!
+    userId: Int!
+    read: Boolean
+    write: Boolean
+    modified: Boolean
+    remove: Boolean
+  ): Boolean
 }
 
 type PluginList {
