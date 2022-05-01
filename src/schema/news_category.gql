@@ -1,18 +1,24 @@
 extend type Query {
-  newsCategoryList: [NewsCategory]
-  newsCategoryDetail(id: Int!): NewsCategory
+  newsCategoryList(websiteId: Int!, pagination: PaginationInput): NewsCategoryList
+  newsCategoryDetail(websiteId: Int!, id: Int!): NewsCategory
   publicNewsCategoryList: [NewsCategory]
   publicNewsCategoryDetail(id: Int!): NewsCategory
 }
 
 extend type Mutation {
-  createNewsCategory(input: NewsCategoryInput): Int!
-  updateNewsCategory(id: Int!, input: NewsCategoryInput): Boolean
+  createNewsCategory(websiteId: Int!, input: NewsCategoryInput): Int!
+  updateNewsCategory(websiteId: Int!, id: Int!, input: NewsCategoryInput): Boolean
+}
+
+type NewsCategoryList {
+  data: [NewsCategory]
+  pagination: Pagination
 }
 
 type NewsCategory {
   id: Int
   name: String
+  created_at: String
   news: [News]
 }
 
