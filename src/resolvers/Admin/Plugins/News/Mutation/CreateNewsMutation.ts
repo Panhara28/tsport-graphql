@@ -2,6 +2,7 @@ import { AuthenticationError } from 'apollo-server';
 import { Graph } from 'src/generated/graph';
 import ContextType from 'src/graphql/ContextType';
 import NewsRepository from 'src/repository/NewsRepositoty';
+import moment from 'moment';
 
 export const CreateNewsMutation = async (
   _,
@@ -23,7 +24,23 @@ export const CreateNewsMutation = async (
       website_id: websiteId,
     });
 
-    return createNews;
+    if (createNews) {
+      await knex.table('activity_log').insert({
+        user_id: ctx.authUser.user.id,
+        type: 'NEWS',
+        activity: JSON.stringify(
+          `{'activityType': 'create_news', 'news_id': '${createNews}', 'logged_at': '${moment().format(
+            'DD-MMM-YYYY HH:mm:ss',
+          )}'}`,
+        ),
+        news_id: createNews,
+        website_id: websiteId,
+      });
+
+      return createNews;
+    } else {
+      throw new AuthenticationError('Something went wrong');
+    }
   } else {
     throw new AuthenticationError(`You don't have permission!`);
   }

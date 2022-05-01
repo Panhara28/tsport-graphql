@@ -1,0 +1,39 @@
+extend type Query {
+  activityLogsList(websiteId: Int!, filter: FilterActivityLogs, pagination: PaginationInput): ActivityLogsList
+  activityLogsNews(websiteId: Int!, pagination: PaginationInput, id: Int): ActivityLogsNewsList
+  activityLogsOptions(websiteId: Int!): [ActivityLogsOptions]
+}
+
+input FilterActivityLogs {
+  type: String
+}
+
+type ActivityLogsOptions {
+  type: String
+}
+
+type ActivityLogsNewsList {
+  data: [ActivityLogsNews]
+  pagination: Pagination
+}
+
+type ActivityLogsNews {
+  id: Int
+  type: String
+  user_id: Int
+  activity: JSON
+  user: User
+}
+
+type ActivityLogsList {
+  data: [ActivityLogs]
+  pagination: Pagination
+}
+
+type ActivityLogs {
+  id: Int
+  type: String
+  user_id: Int
+  activity: JSON
+  user: User
+}

@@ -61,6 +61,9 @@ import { AdminUserDetailQuery } from './Admin/User/Query/AdminUserDetailQuery';
 import { AdminAddPeopleToWebsiteMutation } from './Admin/Website/Mutation/AdminAddPeopleToWebsiteMutation';
 import { AdminPluginManageAccessForUserQuery } from './Admin/Website/Query/AdminPluginManageAccessForUserDetail';
 import { AdminPluginManageAccessForUser } from './Admin/Website/Mutation/AdminPluginManageAccessForUser';
+import { ActivityLogsListQuery } from './Admin/ActivityLog/Query/ActivityLogsListQuery';
+import { ActivityLogsNewsQuery } from './Admin/ActivityLog/Query/ActivityLogsNewsQuery';
+import { ActivityLogsOptionsQuery } from './Admin/ActivityLog/Query/ActivityLogsOptionsQuery';
 
 const AppResolver = [
   {
@@ -98,6 +101,9 @@ const AppResolver = [
       adminUserList: AdminUserListQuery,
       adminUserDetail: AdminUserDetailQuery,
       adminPluginManageAccessForUserDetail: AdminPluginManageAccessForUserQuery,
+      activityLogsList: ActivityLogsListQuery,
+      activityLogsNews: ActivityLogsNewsQuery,
+      activityLogsOptions: ActivityLogsOptionsQuery,
     },
 
     Mutation: {

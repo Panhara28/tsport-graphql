@@ -1,6 +1,7 @@
 import { AuthenticationError } from 'apollo-server';
 import { Graph } from 'src/generated/graph';
 import ContextType from 'src/graphql/ContextType';
+import moment from 'moment';
 
 export const UpdateNewsMuation = async (
   _,
@@ -11,7 +12,7 @@ export const UpdateNewsMuation = async (
   await ctx.authUser.requireLogin('USER');
   const isUpdated = await ctx.authUser.user.modified;
   if (isUpdated) {
-    await knex
+    const updateNews = await knex
       .table('news')
       .update({
         title: input.title,
@@ -24,7 +25,22 @@ export const UpdateNewsMuation = async (
       .where({ id })
       .andWhere('website_id', '=', websiteId);
 
-    return true;
+    if (updateNews) {
+      await knex.table('activity_log').insert({
+        user_id: ctx.authUser.user.id,
+        type: 'NEWS',
+        activity: JSON.stringify(
+          `{'activityType': 'edit_news', 'news_id': '${id}', 'logged_at': '${moment().format(
+            'DD-MMM-YYYY HH:mm:ss',
+          )}'}`,
+        ),
+        news_id: id,
+        website_id: websiteId,
+      });
+      return true;
+    } else {
+      throw new AuthenticationError('Something went wrong');
+    }
   } else {
     throw new AuthenticationError(`You don't have permission!`);
   }
