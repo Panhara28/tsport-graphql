@@ -3,7 +3,7 @@ import ContextType from 'src/graphql/ContextType';
 
 export const UpdateNewsCategoryMutation = async (
   _,
-  { id, input }: { id: number; input: Graph.NewsCategoryInput },
+  { websiteId, id, input }: { websiteId: number; id: number; input: Graph.NewsCategoryInput },
   ctx: ContextType,
 ) => {
   const knex = ctx.knex.default;
@@ -13,7 +13,8 @@ export const UpdateNewsCategoryMutation = async (
     .update({
       name: input.name,
     })
-    .where({ id });
+    .where({ id })
+    .andWhere('website_id', '=', websiteId);
 
   return updateNewsCategory > 0;
 };
