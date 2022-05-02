@@ -24,7 +24,7 @@ export const AdminMeQuery = async (_, { websiteId }: { websiteId: number }, ctx:
       )
       .where({ token })
       .first();
-
+    // Query current user by websiteId
     if (websiteId) {
       queryUser.andWhere('website_user_details.website_id', '=', websiteId);
     }

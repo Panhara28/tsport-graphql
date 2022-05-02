@@ -26,4 +26,12 @@ input UserInput {
   fullname: String
   username: String
   password: String
+  contact_village: String
+  contact_district: String
+  contact_kanh: String
+  contact_city_or_province: Int
+  district: String
+  commune: String
+  province_id: Int
+  village_or_group: String
 }
