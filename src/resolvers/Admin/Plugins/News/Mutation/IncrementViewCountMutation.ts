@@ -14,7 +14,7 @@ export const IncrementViewCountMutation = async (
 
   const incrementViewCount = await knex
     .table('news')
-    .update({ view_counts: Number(news?.view_counts) })
+    .update({ view_counts: Number(news?.view_counts) + 1 })
     .where({ id: id, website_id: websiteId });
 
   if (incrementViewCount) {
