@@ -64,6 +64,7 @@ import { AdminPluginManageAccessForUser } from './Admin/Website/Mutation/AdminPl
 import { ActivityLogsListQuery } from './Admin/ActivityLog/Query/ActivityLogsListQuery';
 import { ActivityLogsNewsQuery } from './Admin/ActivityLog/Query/ActivityLogsNewsQuery';
 import { ActivityLogsOptionsQuery } from './Admin/ActivityLog/Query/ActivityLogsOptionsQuery';
+import { IncrementViewCountMutation } from './Admin/Plugins/News/Mutation/incrementViewCountMutation';
 
 const AppResolver = [
   {
@@ -145,6 +146,7 @@ const AppResolver = [
       adminUpdateUser: AdminUpdateUserMutation,
       adminAddPeopleToWebsite: AdminAddPeopleToWebsiteMutation,
       adminPluginManageAccessForUser: AdminPluginManageAccessForUser,
+      incrementViewCount: IncrementViewCountMutation,
     },
   },
 ];
