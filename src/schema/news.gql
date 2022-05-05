@@ -9,7 +9,6 @@ extend type Mutation {
   createNews(input: NewsInput, websiteId: Int!): Int!
   updateNews(id: Int!, input: NewsInput, websiteId: Int!): Boolean
   updateNewsStatus(id: Int!, status: NewsEnum, websiteId: Int!): Boolean
-  incrementViewCount(id: Int!, websiteId: Int!): Boolean
 }
 
 type NewsList {
@@ -27,7 +26,6 @@ type News {
   new_category_id: Int
   created_at: String
   category: NewsCategory
-  view_counts: Int
   created_date: String
 }
 
