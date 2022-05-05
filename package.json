@@ -27,6 +27,7 @@
     "fs": "^0.0.1-security",
     "graphql": "^15.4.0",
     "graphql-request": "^3.6.1",
+    "graphql-subscriptions": "^2.0.0",
     "image-size": "^1.0.1",
     "knex": "^0.21.15",
     "moment": "^2.29.1",

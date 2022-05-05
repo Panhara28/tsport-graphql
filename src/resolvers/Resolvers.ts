@@ -64,6 +64,7 @@ import { AdminPluginManageAccessForUser } from './Admin/Website/Mutation/AdminPl
 import { ActivityLogsListQuery } from './Admin/ActivityLog/Query/ActivityLogsListQuery';
 import { ActivityLogsNewsQuery } from './Admin/ActivityLog/Query/ActivityLogsNewsQuery';
 import { ActivityLogsOptionsQuery } from './Admin/ActivityLog/Query/ActivityLogsOptionsQuery';
+import { NewNotificationsSubscription } from './Admin/Plugins/Notifications/Subscription/NewNotificationsSubscription';
 
 const AppResolver = [
   {
@@ -145,6 +146,11 @@ const AppResolver = [
       adminUpdateUser: AdminUpdateUserMutation,
       adminAddPeopleToWebsite: AdminAddPeopleToWebsiteMutation,
       adminPluginManageAccessForUser: AdminPluginManageAccessForUser,
+    },
+    Subscription: {
+      newNotification: {
+        subscribe: NewNotificationsSubscription,
+      },
     },
   },
 ];
