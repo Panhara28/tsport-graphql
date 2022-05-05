@@ -15,7 +15,12 @@ export const PublicNewsCategoryListQuery = async (_, {}, ctx: ContextType) => {
 
     return {
       ...category,
-      news: newsDetail,
+      news: newsDetail.map((item: any) => {
+        return {
+          ...item,
+          created_date: toKhmerFormat(item.created_date),
+        };
+      }),
     };
   });
 };

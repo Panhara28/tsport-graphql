@@ -30,6 +30,7 @@ export const PublicNewsListQuery = async (
     return {
       ...item,
       created_at: toKhmerFormat(item.created_at),
+      created_date: toKhmerFormat(item.created_date),
       category: () => newsCategory.load(item.new_category_id),
     };
   });

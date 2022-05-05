@@ -13,6 +13,7 @@ export const PublicNewsDetailQuery = async (_, { id }: { id: number }, ctx: Cont
   return {
     ...newsDetail,
     created_at: toKhmerFormat(newsDetail.created_at),
+    created_date: toKhmerFormat(newsDetail.created_date),
     category: () => newsCategory.load(newsDetail.new_category_id),
   };
 };
