@@ -47,7 +47,8 @@ export const NewsListQuery = async (
       data: newData.map(item => {
         return {
           ...item,
-          created_date: toKhmerFormat(item.created_date),
+          // created_date: toKhmerFormat(item.created_date),
+          published_date: item?.published_date ? toKhmerFormat(item?.published_date) : undefined,
         };
       }),
       pagination: {

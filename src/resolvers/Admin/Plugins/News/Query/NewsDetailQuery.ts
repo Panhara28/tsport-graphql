@@ -15,7 +15,8 @@ export const NewsDetailQuery = async (_, { id, websiteId }: { id: number; websit
 
     return {
       ...newsDetail,
-      created_date: toKhmerFormat(newsDetail.created_date),
+      // created_date: toKhmerFormat(newsDetail?.created_date),
+      published_date: newsDetail?.published_date ? toKhmerFormat(newsDetail?.published_date) : undefined,
       description: newsDetail.description ? newsDetail.description : undefined,
     };
   } else {

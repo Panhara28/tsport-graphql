@@ -15,7 +15,8 @@ export const PublicNewsCateogryDetailQuery = async (_, { id }: { id: number }, c
     news: news.map(item => {
       return {
         ...item,
-        created_date: toKhmerFormat(item.created_date),
+        // created_date: toKhmerFormat(item.created_date),
+        published_date: item?.published_date ? toKhmerFormat(item?.published_date) : undefined,
         created_at: toKhmerFormat(item.created_at),
       };
     }),

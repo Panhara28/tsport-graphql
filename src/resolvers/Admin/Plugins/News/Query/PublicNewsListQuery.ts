@@ -32,9 +32,10 @@ export const PublicNewsListQuery = async (
   return data.map(item => {
     return {
       ...item,
-      created_at: toKhmerFormat(item.created_at),
-      created_date: toKhmerFormat(item.created_date),
-      category: () => newsCategory.load(item.new_category_id),
+      created_at: toKhmerFormat(item?.created_at),
+      // created_date: toKhmerFormat(item.created_date),
+      published_date: item?.published_date ? toKhmerFormat(item?.published_date) : undefined,
+      category: () => newsCategory.load(item?.new_category_id),
     };
   });
 };

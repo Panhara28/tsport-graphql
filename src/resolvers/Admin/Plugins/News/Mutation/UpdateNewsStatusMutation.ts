@@ -20,6 +20,26 @@ export const UpdateNewsStatusMutation = async (
       .where({ id })
       .andWhere('website_id', '=', websiteId);
 
+    const newsDetail = await knex
+      .table('news')
+      .where({ id })
+      .andWhere('website_id', '=', websiteId)
+      .first();
+
+    if (newsDetail?.status === 'PUBLISHED') {
+      console.log(moment().format('YYYY-mm-DD HH:mm:ss'));
+
+      const updatePublishedDate = await knex
+        .table('news')
+        .update({
+          published_date: moment().format('YYYY-MM-DD HH:mm:ss'),
+        })
+        .where({ id })
+        .andWhere('website_id', '=', websiteId);
+
+      console.log(updatePublishedDate);
+    }
+
     if (updateStatus) {
       await knex.table('activity_log').insert({
         user_id: ctx.authUser.user.id,

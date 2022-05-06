@@ -13,4 +13,5 @@ export interface table_news {
   created_at?: number;
   updated_at?: number;
   created_date?: string;
+  published_date?: string;
 }

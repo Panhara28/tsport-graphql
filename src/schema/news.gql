@@ -27,6 +27,7 @@ type News {
   created_at: String
   category: NewsCategory
   created_date: String
+  published_date: String
 }
 
 input NewsInput {
@@ -36,6 +37,7 @@ input NewsInput {
   thumbnail: String
   new_category_id: Int
   created_date: String
+  published_date: String
 }
 
 enum NewsEnum {
