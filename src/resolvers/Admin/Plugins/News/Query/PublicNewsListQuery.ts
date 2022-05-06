@@ -11,7 +11,10 @@ export const PublicNewsListQuery = async (
 ) => {
   const knex = ctx.knex.default;
 
-  const query = knex.table('news').orderBy('created_at', 'desc');
+  const query = knex
+    .table('news')
+    .where({ status: 'PUBLISHED' })
+    .orderBy('created_at', 'desc');
 
   if (filter?.status != undefined) {
     query.andWhere({ status: filter.status });

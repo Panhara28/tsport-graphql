@@ -16,6 +16,18 @@ type User {
   id: Int
   fullname: String
   username: String
+  gender: UserGender
+  nationality: String
+  fullname_en: String
+  dob: String
+  homeNo: String
+  streetNo: String
+  phoneNumber: String
+  email: String
+  contact_village: String
+  contact_district: String
+  contact_commune: String
+  contact_city_or_province: String
 }
 
 type UserList {
@@ -26,12 +38,21 @@ input UserInput {
   fullname: String
   username: String
   password: String
+  gender: UserGender
+  nationality: String
+  fullname_en: String
+  dob: String
+  homeNo: String
+  streetNo: String
+  phoneNumber: String
+  email: String
   contact_village: String
   contact_district: String
-  contact_kanh: String
-  contact_city_or_province: Int
-  district: String
-  commune: String
-  province_id: Int
-  village_or_group: String
+  contact_commune: String
+  contact_city_or_province: String
+}
+
+enum UserGender {
+  MALE
+  FEMALE
 }

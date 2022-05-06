@@ -8,3 +8,7 @@ type Query {
 type Mutation {
   testing: Boolean
 }
+
+type Subscription {
+  testing: String
+}
