@@ -9,6 +9,10 @@ export async function up(knex: Knex): Promise<void> {
     table.string('homeNo');
     table.string('streetNo');
     table.string('email');
+    table.string('contact_district');
+    table.string('contact_commune');
+    table.string('contact_village');
+    table.string('contact_city_or_province');
   });
 }
 
