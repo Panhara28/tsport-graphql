@@ -11,7 +11,7 @@ export const PublicNewsCategoryListQuery = async (_, {}, ctx: ContextType) => {
     .limit(8);
 
   return newsCategoryList.map(async (category: Graph.NewsCategory) => {
-    const newsDetail = await knex.table('news').where({ new_category_id: category.id });
+    const newsDetail = await knex.table('news').where({ new_category_id: category.id, status: 'PUBLISHED' });
 
     return {
       ...category,
