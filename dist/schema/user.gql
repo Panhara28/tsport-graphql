@@ -1,0 +1,29 @@
+extend type Query {
+  adminUserList: UserList
+  adminUserDetail(id: Int!): User
+  userList: UserList
+  userDetail(id: Int!): User
+}
+
+extend type Mutation {
+  adminCreateUser(input: UserInput): Int!
+  adminUpdateUser(id: Int!, input: UserInput): Boolean
+  createUser(input: UserInput): Int!
+  updateUser(id: Int!, input: UserInput): Boolean
+}
+
+type User {
+  id: Int
+  fullname: String
+  username: String
+}
+
+type UserList {
+  data: [User]
+}
+
+input UserInput {
+  fullname: String
+  username: String
+  password: String
+}
