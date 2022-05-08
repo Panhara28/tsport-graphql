@@ -1,10 +1,16 @@
-import { ApolloServer, AuthenticationError } from 'apollo-server';
+import { ApolloServer, AuthenticationError, PubSub } from 'apollo-server';
 import ContextType, { AuthUser, SuperAdminAuth } from './ContextType';
 import createKnexContex from './createKnexContext';
 import extractRequestToken from './extractRequestToken';
 import loadMergeSchema from './loadMergedSchema';
 import Knex from 'knex';
 import AppResolver from 'src/resolvers/Resolvers';
+
+import { createServer } from 'http';
+import { ApolloServerPluginDrainHttpServer } from 'apollo-server-core';
+import { makeExecutableSchema } from '@graphql-tools/schema';
+import { WebSocketServer } from 'ws';
+import { useServer } from 'graphql-ws/lib/use/ws';
 
 async function RequireLogin(type: string, knex: Knex, token: string): Promise<boolean> {
   if (!token) {
@@ -40,6 +46,7 @@ async function RequireLogin(type: string, knex: Knex, token: string): Promise<bo
 
 export default function createApolloServer() {
   const knexConnectionList = createKnexContex();
+  const pubsub = new PubSub();
 
   return new ApolloServer({
     cors: true,
@@ -104,6 +111,7 @@ export default function createApolloServer() {
         authUser,
         token,
         authSuperAdmin,
+        pubsub: pubsub,
       };
     },
   });

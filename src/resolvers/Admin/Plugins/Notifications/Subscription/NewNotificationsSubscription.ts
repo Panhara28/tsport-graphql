@@ -1,12 +1,11 @@
 import ContextType from 'src/graphql/ContextType';
-import { PubSub } from 'graphql-subscriptions';
 
 export const NewNotificationsSubscription = async (_, {}, ctx: ContextType) => {
   const knex = await ctx.knex.default;
 
-  const notification_subscription_topic = 'newNotification';
+  const NOTIFICATION_SUBSCRIPTION_TOPIC = 'newNotification';
 
-  const pubsub = new PubSub();
+  const pubsub = ctx.pubsub;
 
-  return pubsub.asyncIterator(notification_subscription_topic);
+  return pubsub.asyncIterator(NOTIFICATION_SUBSCRIPTION_TOPIC);
 };

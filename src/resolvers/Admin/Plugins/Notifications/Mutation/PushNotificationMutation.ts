@@ -6,8 +6,16 @@ export const PushNotificationsMutation = async (
   ctx: ContextType,
 ) => {
   const knex = await ctx.knex.default;
+  const pubsub = ctx.pubsub;
+  const NOTIFICATION_SUBSCRIPTION_TOPIC = 'newNotification';
 
-  const [pushNotification] = await knex.table('notifications').insert({ name, websiteId });
+  const [pushNotification] = await knex.table('notifications').insert({ name, website_id: websiteId });
 
-  return pushNotification;
+  if (pushNotification) {
+    pubsub.publish(NOTIFICATION_SUBSCRIPTION_TOPIC, { newNotification: { name } });
+
+    return {
+      name,
+    };
+  }
 };

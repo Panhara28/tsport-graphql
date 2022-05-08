@@ -66,6 +66,8 @@ import { ActivityLogsNewsQuery } from './Admin/ActivityLog/Query/ActivityLogsNew
 import { ActivityLogsOptionsQuery } from './Admin/ActivityLog/Query/ActivityLogsOptionsQuery';
 import { NewNotificationsSubscription } from './Admin/Plugins/Notifications/Subscription/NewNotificationsSubscription';
 import { AdminUpdateWebsiteMutation } from './Admin/Website/Mutation/AdminUpdateWebsiteMutation';
+import { PushNotificationsMutation } from './Admin/Plugins/Notifications/Mutation/PushNotificationMutation';
+import { NotificationsListQuery } from './Admin/Plugins/Notifications/Query/NotificationsListQuery';
 
 const AppResolver = [
   {
@@ -106,6 +108,7 @@ const AppResolver = [
       activityLogsList: ActivityLogsListQuery,
       activityLogsNews: ActivityLogsNewsQuery,
       activityLogsOptions: ActivityLogsOptionsQuery,
+      notificationsList: NotificationsListQuery,
     },
 
     Mutation: {
@@ -148,6 +151,7 @@ const AppResolver = [
       adminUpdateUser: AdminUpdateUserMutation,
       adminAddPeopleToWebsite: AdminAddPeopleToWebsiteMutation,
       adminPluginManageAccessForUser: AdminPluginManageAccessForUser,
+      pushNotification: PushNotificationsMutation,
     },
     Subscription: {
       newNotification: {

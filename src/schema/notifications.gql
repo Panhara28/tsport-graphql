@@ -1,5 +1,5 @@
 extend type Query {
-  notifications: [Notification]
+  notificationsList: [Notification]
 }
 
 extend type Mutation {
