@@ -65,6 +65,7 @@ import { ActivityLogsListQuery } from './Admin/ActivityLog/Query/ActivityLogsLis
 import { ActivityLogsNewsQuery } from './Admin/ActivityLog/Query/ActivityLogsNewsQuery';
 import { ActivityLogsOptionsQuery } from './Admin/ActivityLog/Query/ActivityLogsOptionsQuery';
 import { NewNotificationsSubscription } from './Admin/Plugins/Notifications/Subscription/NewNotificationsSubscription';
+import { AdminUpdateWebsiteMutation } from './Admin/Website/Mutation/AdminUpdateWebsiteMutation';
 
 const AppResolver = [
   {
@@ -116,6 +117,7 @@ const AppResolver = [
       updateSuperAdmin: UpdateSuperAdminMutation,
       createWebsite: CreateWebsiteMutation,
       updateWebsite: UpdateWebsiteMutation,
+      adminUpdateWebsite: AdminUpdateWebsiteMutation,
       createPlugin: CreatePluginMutation,
       updatePlugin: UpdatePluginMutation,
       createRole: CreateRoleMutation,
