@@ -27,11 +27,17 @@ type Website {
   id: Int
   name: String
   description: String
+  website_logo: String
+  facebook_link: String
+  telegram_link: String
 }
 
 input WebsiteInput {
   name: String
   description: String
+  website_logo: String
+  facebook_link: String
+  telegram_link: String
 }
 
 input UserInputId {
