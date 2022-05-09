@@ -7,7 +7,6 @@ export const AdminUserDetailQuery = async (_, { id }: { id: number }, ctx: Conte
     .table('users')
     .where({ id })
     .first();
-  console.log(user);
 
   return {
     ...user,

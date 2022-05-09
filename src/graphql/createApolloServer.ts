@@ -6,12 +6,6 @@ import loadMergeSchema from './loadMergedSchema';
 import Knex from 'knex';
 import AppResolver from 'src/resolvers/Resolvers';
 
-import { createServer } from 'http';
-import { ApolloServerPluginDrainHttpServer } from 'apollo-server-core';
-import { makeExecutableSchema } from '@graphql-tools/schema';
-import { WebSocketServer } from 'ws';
-import { useServer } from 'graphql-ws/lib/use/ws';
-
 async function RequireLogin(type: string, knex: Knex, token: string): Promise<boolean> {
   if (!token) {
     throw new AuthenticationError(`{"errorMessage":"You don't have token", "typeError":"no_token"}`);
@@ -54,7 +48,11 @@ export default function createApolloServer() {
     resolvers: AppResolver,
     playground: process.env.NODE_ENV !== 'production',
     debug: process.env.NODE_ENV !== 'production',
-
+    subscriptions: {
+      onConnect: () => {
+        console.log('connected');
+      },
+    },
     context: async ({ req }): Promise<ContextType> => {
       const knex = knexConnectionList.default;
       const token = extractRequestToken(req);

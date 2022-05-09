@@ -13,12 +13,14 @@ export const ActivityLogsNewsQuery = async (
     .where({ news_id: id })
     .andWhere({ website_id: websiteId })
     .orderBy('id', 'desc');
+  const totalQuery = knex.table('activity_log').andWhere({ website_id: websiteId, news_id: id });
 
   if (pagination?.size !== undefined && pagination?.page !== undefined) {
     query.limit(pagination?.size).offset((pagination?.page - 1) * 10);
   }
 
   const data = await query;
+  const total: any = await totalQuery.count('id as CNT');
 
   const users = await knex.table('users');
 
@@ -32,7 +34,7 @@ export const ActivityLogsNewsQuery = async (
       };
     }),
     pagination: {
-      total: data.length,
+      total: Number(total[0].CNT),
       current: pagination?.page,
       size: pagination?.size,
     },
