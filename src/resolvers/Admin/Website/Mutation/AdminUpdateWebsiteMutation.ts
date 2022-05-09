@@ -7,13 +7,16 @@ export const AdminUpdateWebsiteMutation = async (
   ctx: ContextType,
 ) => {
   const knex = await ctx.knex.default;
-  await ctx.authUser.requireLogin('USER');
+  // await ctx.authUser.requireLogin('USER');
 
   const updateWebsite = await knex
     .table('websites')
     .update({
       name: input.name,
       description: input.description,
+      website_logo: input.website_logo,
+      facebook_link: input.facebook_link,
+      telegram_link: input.telegram_link,
     })
     .where({ id });
 
