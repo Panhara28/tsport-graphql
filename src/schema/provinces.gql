@@ -1,0 +1,26 @@
+extend type Query {
+  provinceList: [Province]
+  provinceDetail(id: Int!): Province
+  publicProvinceList: [PublicProvince]
+}
+
+extend type Mutation {
+  createProvince(input: ProvinceInput): Int!
+  updateProvince(input: ProvinceInput, id: Int!): Boolean
+}
+
+type PublicProvince {
+  id: Int
+  name: String
+}
+
+type Province {
+  id: Int
+  name: String
+}
+
+input ProvinceInput {
+  name: String
+  created_by: Int
+  updated_by: Int
+}

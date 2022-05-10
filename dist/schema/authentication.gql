@@ -1,0 +1,30 @@
+extend type Query {
+  me: Me
+  adminMe(websiteId: Int): Me
+}
+
+extend type Mutation {
+  signIn(input: SignInInput): Token
+  signOut(token: String!): Boolean
+  signInSuperAdmin(input: SignInInput): Token
+  signOutSuperAdmin(token: String!): Boolean
+  changePassword(password: String!): Boolean
+}
+
+input SignInInput {
+  username: String!
+  password: String!
+}
+
+type Token {
+  token: String
+}
+
+type Me {
+  id: Int
+  username: String
+  fullname: String
+  roleName: String
+  roleId: Int
+  plugins: [Plugin]
+}

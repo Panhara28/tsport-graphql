@@ -8,8 +8,8 @@ export const AddPeopleToWebsiteMutation = async (
   ctx: ContextType,
 ) => {
   const knex = ctx.knex.default;
-  await ctx.authSuperAdmin.requireLogin('SUPER_ADMIN');
-
+  // await ctx.authSuperAdmin.requireLogin('SUPER_ADMIN');
+  await ctx.authUser.requireLogin('USER');
   const checkIfThePeopleExisted = await knex
     .table('website_user_details')
     .whereIn(

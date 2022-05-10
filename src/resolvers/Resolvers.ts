@@ -54,6 +54,20 @@ import { UpdateUserMutation } from './SuperAdministrator/User/Mutation/UpdateUse
 import { CreateMediaMutation } from './Admin/Plugins/Media/Mutation/CreateMediaMutation';
 import { MediaListQuery } from './Admin/Plugins/Media/Query/MediaListQuery';
 import { RemoveMediaMutation } from './Admin/Plugins/Media/Mutation/RemoveMediaMutation';
+import { AdminCreateUserMutation } from './Admin/User/Mutation/AdminCreateUserMutation';
+import { AdminUpdateUserMutation } from './Admin/User/Mutation/AdminUpdateUserMutation';
+import { AdminUserListQuery } from './Admin/User/Query/AdminUserListQuery';
+import { AdminUserDetailQuery } from './Admin/User/Query/AdminUserDetailQuery';
+import { AdminAddPeopleToWebsiteMutation } from './Admin/Website/Mutation/AdminAddPeopleToWebsiteMutation';
+import { AdminPluginManageAccessForUserQuery } from './Admin/Website/Query/AdminPluginManageAccessForUserDetail';
+import { AdminPluginManageAccessForUser } from './Admin/Website/Mutation/AdminPluginManageAccessForUser';
+import { ActivityLogsListQuery } from './Admin/ActivityLog/Query/ActivityLogsListQuery';
+import { ActivityLogsNewsQuery } from './Admin/ActivityLog/Query/ActivityLogsNewsQuery';
+import { ActivityLogsOptionsQuery } from './Admin/ActivityLog/Query/ActivityLogsOptionsQuery';
+import { NewNotificationsSubscription } from './Admin/Plugins/Notifications/Subscription/NewNotificationsSubscription';
+import { AdminUpdateWebsiteMutation } from './Admin/Website/Mutation/AdminUpdateWebsiteMutation';
+import { PushNotificationsMutation } from './Admin/Plugins/Notifications/Mutation/PushNotificationMutation';
+import { NotificationsListQuery } from './Admin/Plugins/Notifications/Query/NotificationsListQuery';
 
 const AppResolver = [
   {
@@ -88,6 +102,13 @@ const AppResolver = [
       pluginManageAccessForUserDetail: PluginManageAccessForUserQuery,
       roleDetail: RoleDetailQuery,
       mediaList: MediaListQuery,
+      adminUserList: AdminUserListQuery,
+      adminUserDetail: AdminUserDetailQuery,
+      adminPluginManageAccessForUserDetail: AdminPluginManageAccessForUserQuery,
+      activityLogsList: ActivityLogsListQuery,
+      activityLogsNews: ActivityLogsNewsQuery,
+      activityLogsOptions: ActivityLogsOptionsQuery,
+      notificationsList: NotificationsListQuery,
     },
 
     Mutation: {
@@ -99,6 +120,7 @@ const AppResolver = [
       updateSuperAdmin: UpdateSuperAdminMutation,
       createWebsite: CreateWebsiteMutation,
       updateWebsite: UpdateWebsiteMutation,
+      adminUpdateWebsite: AdminUpdateWebsiteMutation,
       createPlugin: CreatePluginMutation,
       updatePlugin: UpdatePluginMutation,
       createRole: CreateRoleMutation,
@@ -125,6 +147,16 @@ const AppResolver = [
       roleManageAccess: RoleManageAccessMutation,
       createMedia: CreateMediaMutation,
       removeMedia: RemoveMediaMutation,
+      adminCreateUser: AdminCreateUserMutation,
+      adminUpdateUser: AdminUpdateUserMutation,
+      adminAddPeopleToWebsite: AdminAddPeopleToWebsiteMutation,
+      adminPluginManageAccessForUser: AdminPluginManageAccessForUser,
+      pushNotification: PushNotificationsMutation,
+    },
+    Subscription: {
+      newNotification: {
+        subscribe: NewNotificationsSubscription,
+      },
     },
   },
 ];

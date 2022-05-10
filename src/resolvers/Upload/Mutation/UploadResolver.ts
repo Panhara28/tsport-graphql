@@ -23,7 +23,7 @@ export const UploadResolver = async (_, { file }, ctx: ContextType) => {
     });
 
     const json = await request.post({
-      url: 'https://s1.moc.gov.kh/upload',
+      url: 'https://s2.moc.gov.kh/upload',
       formData: {
         mocspace: {
           value: await streamToBuffer(stream),

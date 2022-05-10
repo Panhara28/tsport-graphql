@@ -1,4 +1,5 @@
 import { AuthenticationError } from 'apollo-server';
+import { toKhmerFormat } from 'src/function/toKhmerFormat';
 import { Graph } from 'src/generated/graph';
 import { table_news } from 'src/generated/tables';
 import ContextType from 'src/graphql/ContextType';
@@ -46,6 +47,8 @@ export const NewsListQuery = async (
       data: newData.map(item => {
         return {
           ...item,
+          // created_date: toKhmerFormat(item.created_date),
+          published_date: item?.published_date ? toKhmerFormat(item?.published_date) : undefined,
         };
       }),
       pagination: {

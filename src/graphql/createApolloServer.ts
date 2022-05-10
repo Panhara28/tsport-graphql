@@ -1,4 +1,4 @@
-import { ApolloServer, AuthenticationError } from 'apollo-server';
+import { ApolloServer, AuthenticationError, PubSub } from 'apollo-server';
 import ContextType, { AuthUser, SuperAdminAuth } from './ContextType';
 import createKnexContex from './createKnexContext';
 import extractRequestToken from './extractRequestToken';
@@ -40,6 +40,7 @@ async function RequireLogin(type: string, knex: Knex, token: string): Promise<bo
 
 export default function createApolloServer() {
   const knexConnectionList = createKnexContex();
+  const pubsub = new PubSub();
 
   return new ApolloServer({
     cors: true,
@@ -47,7 +48,11 @@ export default function createApolloServer() {
     resolvers: AppResolver,
     playground: process.env.NODE_ENV !== 'production',
     debug: process.env.NODE_ENV !== 'production',
-
+    subscriptions: {
+      onConnect: () => {
+        console.log('connected');
+      },
+    },
     context: async ({ req }): Promise<ContextType> => {
       const knex = knexConnectionList.default;
       const token = extractRequestToken(req);
@@ -104,6 +109,7 @@ export default function createApolloServer() {
         authUser,
         token,
         authSuperAdmin,
+        pubsub: pubsub,
       };
     },
   });

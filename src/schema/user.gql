@@ -1,9 +1,13 @@
 extend type Query {
+  adminUserList: UserList
+  adminUserDetail(id: Int!): User
   userList: UserList
   userDetail(id: Int!): User
 }
 
 extend type Mutation {
+  adminCreateUser(input: UserInput): Int!
+  adminUpdateUser(id: Int!, input: UserInput): Boolean
   createUser(input: UserInput): Int!
   updateUser(id: Int!, input: UserInput): Boolean
 }
@@ -12,6 +16,18 @@ type User {
   id: Int
   fullname: String
   username: String
+  gender: UserGender
+  nationality: String
+  fullname_en: String
+  dob: String
+  homeNo: String
+  streetNo: String
+  phoneNumber: String
+  email: String
+  contact_village: String
+  contact_district: String
+  contact_commune: String
+  contact_city_or_province: String
 }
 
 type UserList {
@@ -22,4 +38,21 @@ input UserInput {
   fullname: String
   username: String
   password: String
+  gender: UserGender
+  nationality: String
+  fullname_en: String
+  dob: String
+  homeNo: String
+  streetNo: String
+  phoneNumber: String
+  email: String
+  contact_village: String
+  contact_district: String
+  contact_commune: String
+  contact_city_or_province: String
+}
+
+enum UserGender {
+  MALE
+  FEMALE
 }

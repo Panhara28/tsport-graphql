@@ -8,6 +8,7 @@ extend type Query {
 extend type Mutation {
   createWebsite(input: WebsiteInput): Int
   updateWebsite(id: Int!, input: WebsiteInput): Boolean
+  adminAddPeopleToWebsite(websiteId: Int!, input: [UserInputId]): Boolean
   addPeopleToWebsite(websiteId: Int!, input: [UserInputId]): Boolean
   addPluginToWebsite(websiteId: Int!, input: PluginInputId): Boolean
   uninstallPlugin(websiteId: Int!, pluginId: Int!): Boolean
@@ -15,6 +16,7 @@ extend type Mutation {
   assignRoleToUser(userId: Int!, websiteId: Int!, roleId: Int!): Int!
   adminAssignRoleToUser(userId: Int!, websiteId: Int!, roleId: Int!): Int!
   installPluginToUser(websiteId: Int!, pluginId: Int!, userId: Int!): Boolean
+  adminUpdateWebsite(id: Int!, input: WebsiteInput): Boolean
 }
 
 type WebsiteList {
@@ -25,11 +27,17 @@ type Website {
   id: Int
   name: String
   description: String
+  website_logo: String
+  facebook_link: String
+  telegram_link: String
 }
 
 input WebsiteInput {
   name: String
   description: String
+  website_logo: String
+  facebook_link: String
+  telegram_link: String
 }
 
 input UserInputId {

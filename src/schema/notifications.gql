@@ -1,0 +1,15 @@
+extend type Query {
+  notificationsList: [Notification]
+}
+
+extend type Mutation {
+  pushNotification(name: String!, websiteId: Int!): Notification
+}
+
+extend type Subscription {
+  newNotification: Notification
+}
+
+type Notification {
+  name: String
+}

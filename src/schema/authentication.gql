@@ -24,6 +24,7 @@ type Me {
   id: Int
   username: String
   fullname: String
+  profilePicture: String
   roleName: String
   roleId: Int
   plugins: [Plugin]

@@ -20,10 +20,11 @@ export const AdminMeQuery = async (_, { websiteId }: { websiteId: number }, ctx:
         'roles.id as roleId',
         'user_plugins.plugin_id as pluginId',
         'website_user_details.website_id as websiteId',
+        'users.profile_picture',
       )
       .where({ token })
       .first();
-
+    // Query current user by websiteId
     if (websiteId) {
       queryUser.andWhere('website_user_details.website_id', '=', websiteId);
     }
@@ -53,6 +54,7 @@ export const AdminMeQuery = async (_, { websiteId }: { websiteId: number }, ctx:
       plugins: plugins.map(item => {
         return {
           ...item,
+          profilePicture: item.profile_picture,
           access: {
             ...item,
           },

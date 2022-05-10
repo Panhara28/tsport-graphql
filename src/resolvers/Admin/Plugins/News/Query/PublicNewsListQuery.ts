@@ -11,7 +11,10 @@ export const PublicNewsListQuery = async (
 ) => {
   const knex = ctx.knex.default;
 
-  const query = knex.table('news').orderBy('created_at', 'desc');
+  const query = knex
+    .table('news')
+    .where({ status: 'PUBLISHED' })
+    .orderBy('created_at', 'desc');
 
   if (filter?.status != undefined) {
     query.andWhere({ status: filter.status });
@@ -29,8 +32,10 @@ export const PublicNewsListQuery = async (
   return data.map(item => {
     return {
       ...item,
-      created_at: toKhmerFormat(item.created_at),
-      category: () => newsCategory.load(item.new_category_id),
+      created_at: toKhmerFormat(item?.created_at),
+      // created_date: toKhmerFormat(item.created_date),
+      published_date: item?.published_date ? toKhmerFormat(item?.published_date) : undefined,
+      category: () => newsCategory.load(item?.new_category_id),
     };
   });
 };
