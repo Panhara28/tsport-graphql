@@ -23,7 +23,6 @@ export const CreateNewsMutation = async (
       new_category_id: input.new_category_id,
       created_by: admin_id,
       website_id: websiteId,
-      created_date: moment().format('DD-MM-YYYY HH:mm:ss'),
     });
 
     if (createNews) {

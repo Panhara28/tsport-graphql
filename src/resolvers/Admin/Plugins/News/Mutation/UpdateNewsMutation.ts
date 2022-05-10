@@ -20,7 +20,7 @@ export const UpdateNewsMuation = async (
         description: JSON.stringify(input.description),
         thumbnail: input.thumbnail ? input.thumbnail : '',
         new_category_id: input.new_category_id,
-        updated_by: 1,
+        updated_by: ctx.authUser.user.id,
       })
       .where({ id })
       .andWhere('website_id', '=', websiteId);

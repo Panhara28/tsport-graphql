@@ -12,7 +12,6 @@ RUN npm install
 COPY . .
 RUN npm run graph
 RUN npm run build
-RUN npm run migrate
 
 EXPOSE 80
 CMD [ "npm", "start" ]
