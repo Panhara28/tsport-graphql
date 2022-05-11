@@ -6,13 +6,18 @@ extend type Query {
 }
 
 extend type Mutation {
-  createNewsCategory(websiteId: Int!, input: NewsCategoryInput): Int!
+  createNewsCategory(websiteId: Int!, input: NewsCategoryInput): ReturnNewsCategory!
   updateNewsCategory(websiteId: Int!, id: Int!, input: NewsCategoryInput): Boolean
 }
 
 type NewsCategoryList {
   data: [NewsCategory]
   pagination: Pagination
+}
+
+type ReturnNewsCategory {
+  success: Int!
+  category: NewsCategory
 }
 
 type NewsCategory {

@@ -24,6 +24,7 @@ export const AdminUpdateUserMutation = async (
       phoneNumber: input?.phoneNumber,
       dob: input.dob,
       email: input?.email,
+      profile_picture: input?.profile_picture,
     })
     .where({ id });
 

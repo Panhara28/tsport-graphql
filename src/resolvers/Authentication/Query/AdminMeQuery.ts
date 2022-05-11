@@ -16,6 +16,12 @@ export const AdminMeQuery = async (_, { websiteId }: { websiteId: number }, ctx:
       .select(
         'users.id',
         'users.fullname',
+        'users.phoneNumber',
+        'users.email',
+        'users.contact_city_or_province',
+        'users.contact_district',
+        'users.contact_commune',
+        'users.contact_village',
         'roles.name as roleName',
         'roles.id as roleId',
         'user_plugins.plugin_id as pluginId',
@@ -51,10 +57,11 @@ export const AdminMeQuery = async (_, { websiteId }: { websiteId: number }, ctx:
 
     return {
       ...user,
+      profilePicture: user.profile_picture,
       plugins: plugins.map(item => {
         return {
           ...item,
-          profilePicture: item.profile_picture,
+
           access: {
             ...item,
           },

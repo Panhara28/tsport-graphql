@@ -28,6 +28,7 @@ type User {
   contact_district: String
   contact_commune: String
   contact_city_or_province: String
+  profile_picture: String
 }
 
 type UserList {
@@ -50,6 +51,7 @@ input UserInput {
   contact_district: String
   contact_commune: String
   contact_city_or_province: String
+  profile_picture: String
 }
 
 enum UserGender {

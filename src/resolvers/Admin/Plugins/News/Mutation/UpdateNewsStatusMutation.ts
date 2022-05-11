@@ -27,7 +27,7 @@ export const UpdateNewsStatusMutation = async (
       .first();
 
     if (newsDetail?.status === 'PUBLISHED') {
-      console.log(moment().format('YYYY-mm-DD HH:mm:ss'));
+      // console.log(moment().format('YYYY-mm-DD HH:mm:ss'));
 
       const updatePublishedDate = await knex
         .table('news')
@@ -37,7 +37,7 @@ export const UpdateNewsStatusMutation = async (
         .where({ id })
         .andWhere('website_id', '=', websiteId);
 
-      console.log(updatePublishedDate);
+      // console.log(updatePublishedDate);
     }
 
     if (updateStatus) {

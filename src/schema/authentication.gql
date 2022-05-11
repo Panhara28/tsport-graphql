@@ -26,6 +26,12 @@ type Me {
   fullname: String
   profilePicture: String
   roleName: String
+  contact_district: String
+  contact_commune: String
+  contact_city_or_province: String
+  contact_village: String
+  phoneNumber: String
+  email: String
   roleId: Int
   plugins: [Plugin]
 }
