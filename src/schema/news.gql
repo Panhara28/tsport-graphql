@@ -41,6 +41,7 @@ input NewsInput {
 }
 
 enum NewsEnum {
+  ALL
   PENDING
   INREVIEW
   PUBLISHED
