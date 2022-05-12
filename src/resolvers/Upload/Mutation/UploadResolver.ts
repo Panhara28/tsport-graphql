@@ -39,7 +39,7 @@ export const UploadResolver = async (_, { file }, ctx: ContextType) => {
     const extention = json.filename.split('/')[4].split('.')[1];
 
     if (extention === 'pdf' || extention === 'docx' || extention === 'csv') {
-      console.log('file');
+      // console.log('file');
     } else {
       dimensions = sizeOf(stream.path);
     }

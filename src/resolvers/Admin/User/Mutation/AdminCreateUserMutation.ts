@@ -23,6 +23,7 @@ export const AdminCreateUserMutation = async (_, { input }: { input: Graph.UserI
     phoneNumber: input?.phoneNumber,
     dob: input.dob,
     email: input?.email,
+    profile_picture: input?.profile_picture,
     // district: input.district ? input.district : undefined,
     // commune: input.commune ? input.commune : undefined,
     // province_id: input.province_id ? input.province_id : undefined,

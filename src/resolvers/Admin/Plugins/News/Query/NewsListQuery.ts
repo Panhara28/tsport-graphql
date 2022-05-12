@@ -19,9 +19,11 @@ export const NewsListQuery = async (
       .where('website_id', '=', websiteId);
     const totalQuery = knex.table('news');
 
-    if (filter?.status != undefined) {
-      query.andWhere({ status: filter.status });
-      totalQuery.andWhere({ status: filter.status });
+    if (filter?.status !== 'ALL') {
+      if (filter?.status != undefined) {
+        query.andWhere({ status: filter.status });
+        totalQuery.andWhere({ status: filter.status });
+      }
     }
 
     if (filter?.name) {
