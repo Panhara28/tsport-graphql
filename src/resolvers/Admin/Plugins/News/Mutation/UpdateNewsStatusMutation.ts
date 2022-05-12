@@ -29,13 +29,36 @@ export const UpdateNewsStatusMutation = async (
     if (newsDetail?.status === 'PUBLISHED') {
       // console.log(moment().format('YYYY-mm-DD HH:mm:ss'));
 
-      const updatePublishedDate = await knex
-        .table('news')
-        .update({
-          published_date: moment().format('YYYY-MM-DD HH:mm:ss'),
-        })
-        .where({ id })
-        .andWhere('website_id', '=', websiteId);
+      const isNotify = newsDetail.is_notify;
+
+      if (!isNotify) {
+        const pubsub = ctx.pubsub;
+        const NOTIFICATION_SUBSCRIPTION_TOPIC = 'newNotification';
+
+        const [pushNotification] = await knex
+          .table('notifications')
+          .insert({ name: newsDetail?.title, website_id: websiteId });
+
+        if (pushNotification) {
+          pubsub.publish(NOTIFICATION_SUBSCRIPTION_TOPIC, { newNotification: { name: newsDetail?.title } });
+        }
+
+        const updatePublishedDate = await knex
+          .table('news')
+          .update({
+            published_date: moment().format('YYYY-MM-DD HH:mm:ss'),
+          })
+          .where({ id, is_notify: true })
+          .andWhere('website_id', '=', websiteId);
+      } else {
+        const updatePublishedDate = await knex
+          .table('news')
+          .update({
+            published_date: moment().format('YYYY-MM-DD HH:mm:ss'),
+          })
+          .where({ id })
+          .andWhere('website_id', '=', websiteId);
+      }
 
       // console.log(updatePublishedDate);
     }

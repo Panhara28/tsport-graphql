@@ -56,6 +56,7 @@ export default function createApolloServer() {
     context: async ({ req }): Promise<ContextType> => {
       const knex = knexConnectionList.default;
       const token = extractRequestToken(req);
+      // const deviceToken = extractDeviceToken(req);
 
       const authUser: AuthUser = {
         requireLogin: async (type: string) => RequireLogin(type, knex, token),
