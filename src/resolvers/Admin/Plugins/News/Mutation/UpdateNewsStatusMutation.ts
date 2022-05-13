@@ -2,6 +2,7 @@ import { AuthenticationError } from 'apollo-server';
 import { Graph } from 'src/generated/graph';
 import ContextType from 'src/graphql/ContextType';
 import moment from 'moment';
+import { sendPushNotification } from 'src/function/notifications';
 
 export const UpdateNewsStatusMutation = async (
   _,
@@ -32,15 +33,23 @@ export const UpdateNewsStatusMutation = async (
       const isNotify = newsDetail.is_notify;
 
       if (!isNotify) {
-        const pubsub = ctx.pubsub;
-        const NOTIFICATION_SUBSCRIPTION_TOPIC = 'newNotification';
+        // const pubsub = ctx.pubsub;
+        // const NOTIFICATION_SUBSCRIPTION_TOPIC = 'newNotification';
 
-        const [pushNotification] = await knex
-          .table('notifications')
-          .insert({ name: newsDetail?.title, website_id: websiteId });
+        // const [pushNotification] = await knex
+        //   .table('notifications')
+        //   .insert({ name: newsDetail?.title, website_id: websiteId });
 
-        if (pushNotification) {
-          pubsub.publish(NOTIFICATION_SUBSCRIPTION_TOPIC, { newNotification: { name: newsDetail?.title } });
+        // if (pushNotification) {
+        //   pubsub.publish(NOTIFICATION_SUBSCRIPTION_TOPIC, { newNotification: { name: newsDetail?.title } });
+        // }
+
+        const android_devices = await knex.table('android_devices_token');
+
+        if (android_devices) {
+          for (const token of android_devices) {
+            sendPushNotification(token, newsDetail?.title);
+          }
         }
 
         const updatePublishedDate = await knex
