@@ -28,39 +28,27 @@ export const UpdateNewsStatusMutation = async (
       .first();
 
     if (newsDetail?.status === 'PUBLISHED') {
-      // console.log(moment().format('YYYY-mm-DD HH:mm:ss'));
-
       const isNotify = newsDetail.is_notify;
 
       if (!isNotify) {
-        // const pubsub = ctx.pubsub;
-        // const NOTIFICATION_SUBSCRIPTION_TOPIC = 'newNotification';
-
-        // const [pushNotification] = await knex
-        //   .table('notifications')
-        //   .insert({ name: newsDetail?.title, website_id: websiteId });
-
-        // if (pushNotification) {
-        //   pubsub.publish(NOTIFICATION_SUBSCRIPTION_TOPIC, { newNotification: { name: newsDetail?.title } });
-        // }
-
         const android_devices = await knex.table('android_devices_token');
 
         if (android_devices) {
           for (const token of android_devices) {
-            sendPushNotification(token, newsDetail?.title);
+            await sendPushNotification(token?.devices_token, newsDetail?.title);
           }
         }
 
-        const updatePublishedDate = await knex
+        await knex
           .table('news')
           .update({
             published_date: moment().format('YYYY-MM-DD HH:mm:ss'),
+            is_notify: true,
           })
-          .where({ id, is_notify: true })
+          .where({ id })
           .andWhere('website_id', '=', websiteId);
       } else {
-        const updatePublishedDate = await knex
+        await knex
           .table('news')
           .update({
             published_date: moment().format('YYYY-MM-DD HH:mm:ss'),
@@ -68,8 +56,6 @@ export const UpdateNewsStatusMutation = async (
           .where({ id })
           .andWhere('website_id', '=', websiteId);
       }
-
-      // console.log(updatePublishedDate);
     }
 
     if (updateStatus) {

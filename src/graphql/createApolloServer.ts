@@ -66,7 +66,7 @@ export default function createApolloServer() {
         requireLogin: async (type: string) => RequireLogin(type, knex, token),
       };
 
-      if (deviceToken) {
+      if (deviceToken && deviceToken.includes('ExponentPushToken')) {
         const isExits = await knex
           .table('android_devices_token')
           .where({ devices_token: deviceToken })
