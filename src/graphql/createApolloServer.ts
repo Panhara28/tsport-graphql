@@ -1,7 +1,7 @@
 import { ApolloServer, AuthenticationError, PubSub } from 'apollo-server';
 import ContextType, { AuthUser, SuperAdminAuth } from './ContextType';
 import createKnexContex from './createKnexContext';
-import extractRequestToken from './extractRequestToken';
+import extractRequestToken, { extractDeviceToken } from './extractRequestToken';
 import loadMergeSchema from './loadMergedSchema';
 import Knex from 'knex';
 import AppResolver from 'src/resolvers/Resolvers';
@@ -56,6 +56,7 @@ export default function createApolloServer() {
     context: async ({ req }): Promise<ContextType> => {
       const knex = knexConnectionList.default;
       const token = extractRequestToken(req);
+      const deviceToken = extractDeviceToken(req);
 
       const authUser: AuthUser = {
         requireLogin: async (type: string) => RequireLogin(type, knex, token),
@@ -64,6 +65,19 @@ export default function createApolloServer() {
       const authSuperAdmin: SuperAdminAuth = {
         requireLogin: async (type: string) => RequireLogin(type, knex, token),
       };
+
+      if (deviceToken && deviceToken.includes('ExponentPushToken')) {
+        const isExits = await knex
+          .table('android_devices_token')
+          .where({ devices_token: deviceToken })
+          .first();
+
+        if (!isExits) {
+          await knex.table('android_devices_token').insert({
+            devices_token: deviceToken,
+          });
+        }
+      }
 
       if (token) {
         // query admin token

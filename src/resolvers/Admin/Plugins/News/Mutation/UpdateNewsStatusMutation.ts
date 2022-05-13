@@ -2,6 +2,7 @@ import { AuthenticationError } from 'apollo-server';
 import { Graph } from 'src/generated/graph';
 import ContextType from 'src/graphql/ContextType';
 import moment from 'moment';
+import { sendPushNotification } from 'src/function/notifications';
 
 export const UpdateNewsStatusMutation = async (
   _,
@@ -27,17 +28,34 @@ export const UpdateNewsStatusMutation = async (
       .first();
 
     if (newsDetail?.status === 'PUBLISHED') {
-      // console.log(moment().format('YYYY-mm-DD HH:mm:ss'));
+      const isNotify = newsDetail.is_notify;
 
-      const updatePublishedDate = await knex
-        .table('news')
-        .update({
-          published_date: moment().format('YYYY-MM-DD HH:mm:ss'),
-        })
-        .where({ id })
-        .andWhere('website_id', '=', websiteId);
+      if (!isNotify) {
+        const android_devices = await knex.table('android_devices_token');
 
-      // console.log(updatePublishedDate);
+        if (android_devices) {
+          for (const token of android_devices) {
+            await sendPushNotification(token?.devices_token, newsDetail?.title);
+          }
+        }
+
+        await knex
+          .table('news')
+          .update({
+            published_date: moment().format('YYYY-MM-DD HH:mm:ss'),
+            is_notify: true,
+          })
+          .where({ id })
+          .andWhere('website_id', '=', websiteId);
+      } else {
+        await knex
+          .table('news')
+          .update({
+            published_date: moment().format('YYYY-MM-DD HH:mm:ss'),
+          })
+          .where({ id })
+          .andWhere('website_id', '=', websiteId);
+      }
     }
 
     if (updateStatus) {
