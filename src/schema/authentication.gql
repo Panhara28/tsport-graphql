@@ -1,6 +1,6 @@
 extend type Query {
   me: Me
-  adminMe(websiteId: Int): Me
+  adminMe(websiteId: Int, clientToken: String): Me
 }
 
 extend type Mutation {
