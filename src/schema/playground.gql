@@ -1,0 +1,20 @@
+extend type Query {
+  playgroundList: PlaygroundList
+}
+
+extend type Mutation {
+  createPlayground(input: PlaygroundInput): Int!
+}
+
+type Playground {
+  id: Int
+  title: String
+}
+
+type PlaygroundList {
+  data: [Playground]
+}
+
+input PlaygroundInput {
+  title: String
+}

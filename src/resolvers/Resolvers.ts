@@ -68,6 +68,8 @@ import { NewNotificationsSubscription } from './Admin/Plugins/Notifications/Subs
 import { AdminUpdateWebsiteMutation } from './Admin/Website/Mutation/AdminUpdateWebsiteMutation';
 import { PushNotificationsMutation } from './Admin/Plugins/Notifications/Mutation/PushNotificationMutation';
 import { NotificationsListQuery } from './Admin/Plugins/Notifications/Query/NotificationsListQuery';
+import { PlaygroundListQuery } from './Playground/Query/PlaygroundListQuery';
+import { CreatePlaygrounMutation } from './Playground/Mutation/CreatePlaygroundMutation';
 
 const AppResolver = [
   {
@@ -109,12 +111,14 @@ const AppResolver = [
       activityLogsNews: ActivityLogsNewsQuery,
       activityLogsOptions: ActivityLogsOptionsQuery,
       notificationsList: NotificationsListQuery,
+      playgroundList: PlaygroundListQuery,
     },
 
     Mutation: {
       testing: () => {
         return true;
       },
+      createPlayground: CreatePlaygrounMutation,
       singleUpload: UploadResolver,
       createSuperAdmin: CreateSuperAdminMutation,
       updateSuperAdmin: UpdateSuperAdminMutation,
