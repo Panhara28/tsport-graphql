@@ -70,6 +70,7 @@ import { PushNotificationsMutation } from './Admin/Plugins/Notifications/Mutatio
 import { NotificationsListQuery } from './Admin/Plugins/Notifications/Query/NotificationsListQuery';
 import { PlaygroundListQuery } from './Playground/Query/PlaygroundListQuery';
 import { CreatePlaygrounMutation } from './Playground/Mutation/CreatePlaygroundMutation';
+import { ChangePasswordMutation } from './Authentication/Mutation/ChangePasswordMutation';
 
 const AppResolver = [
   {
@@ -156,6 +157,7 @@ const AppResolver = [
       adminAddPeopleToWebsite: AdminAddPeopleToWebsiteMutation,
       adminPluginManageAccessForUser: AdminPluginManageAccessForUser,
       pushNotification: PushNotificationsMutation,
+      changePassword: ChangePasswordMutation,
     },
     Subscription: {
       newNotification: {
