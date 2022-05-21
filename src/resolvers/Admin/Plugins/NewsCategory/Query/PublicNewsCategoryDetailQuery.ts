@@ -8,7 +8,10 @@ export const PublicNewsCateogryDetailQuery = async (_, { id }: { id: number }, c
     .table('news_category')
     .where({ id })
     .first();
-  const news = await knex.table('news').where({ new_category_id: newsCategory.id });
+  const news = await knex
+    .table('news')
+    .where({ new_category_id: newsCategory.id, status: 'PUBLISHED' })
+    .orderBy('published_date', 'desc');
 
   return {
     ...newsCategory,

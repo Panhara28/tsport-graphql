@@ -11,11 +11,14 @@ export const PublicNewsCategoryListQuery = async (_, {}, ctx: ContextType) => {
     .limit(8);
 
   return newsCategoryList.map(async (category: Graph.NewsCategory) => {
-    const newsDetail = await knex.table('news').where({ new_category_id: category.id, status: 'PUBLISHED' });
+    const newsDetail = await knex
+      .table('news')
+      .where({ new_category_id: category.id, status: 'PUBLISHED' })
+      .orderBy('published_date', 'desc');
 
     return {
       ...category,
-      news: newsDetail.map((item: any) => {
+      news: newsDetail.map(item => {
         return {
           ...item,
           published_date: item?.published_date ? toKhmerFormat(item?.published_date) : undefined,

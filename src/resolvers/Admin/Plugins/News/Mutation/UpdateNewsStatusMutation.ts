@@ -42,7 +42,9 @@ export const UpdateNewsStatusMutation = async (
         await knex
           .table('news')
           .update({
-            published_date: moment().format('YYYY-MM-DD HH:mm:ss'),
+            published_date: newsDetail.published_date
+              ? newsDetail.published_date
+              : moment().format('YYYY-MM-DD HH:mm:ss'),
             is_notify: true,
           })
           .where({ id })
