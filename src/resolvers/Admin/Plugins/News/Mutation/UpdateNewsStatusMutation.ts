@@ -1,7 +1,7 @@
 import { AuthenticationError } from 'apollo-server';
 import { Graph } from 'src/generated/graph';
 import ContextType from 'src/graphql/ContextType';
-import moment from 'moment';
+import moment from 'moment-timezone';
 import { sendPushNotification } from 'src/function/notifications';
 
 export const UpdateNewsStatusMutation = async (
@@ -44,7 +44,9 @@ export const UpdateNewsStatusMutation = async (
           .update({
             published_date: newsDetail.published_date
               ? newsDetail.published_date
-              : moment().format('YYYY-MM-DD HH:mm:ss'),
+              : moment()
+                  .tz('Asia/Phnom_Penh')
+                  .format('YYYY-MM-DD HH:mm:ss'),
             is_notify: true,
           })
           .where({ id })
