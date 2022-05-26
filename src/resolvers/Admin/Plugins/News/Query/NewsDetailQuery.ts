@@ -1,6 +1,7 @@
 import { AuthenticationError } from 'apollo-server';
 import { toKhmerFormat } from 'src/function/toKhmerFormat';
 import ContextType from 'src/graphql/ContextType';
+import moment from 'moment';
 
 export const NewsDetailQuery = async (_, { id, websiteId }: { id: number; websiteId: number }, ctx: ContextType) => {
   const knex = ctx.knex.default;
