@@ -15,7 +15,7 @@ export const NewsDetailQuery = async (_, { id, websiteId }: { id: number; websit
   return {
     ...newsDetail,
     // created_date: toKhmerFormat(newsDetail?.created_date),
-    published_date: newsDetail?.published_date ? newsDetail?.published_date : undefined,
+    published_date: newsDetail?.published_date ? moment(newsDetail?.published_date) : undefined,
     description: newsDetail.description ? newsDetail.description : undefined,
   };
   // const isRead = await ctx.authUser.user.read;
