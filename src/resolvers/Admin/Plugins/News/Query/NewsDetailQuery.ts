@@ -1,7 +1,7 @@
 import { AuthenticationError } from 'apollo-server';
 import { toKhmerFormat } from 'src/function/toKhmerFormat';
 import ContextType from 'src/graphql/ContextType';
-import moment from 'moment';
+import moment from 'moment-timezone';
 
 export const NewsDetailQuery = async (_, { id, websiteId }: { id: number; websiteId: number }, ctx: ContextType) => {
   const knex = ctx.knex.default;
@@ -15,7 +15,11 @@ export const NewsDetailQuery = async (_, { id, websiteId }: { id: number; websit
   return {
     ...newsDetail,
     // created_date: toKhmerFormat(newsDetail?.created_date),
-    published_date: newsDetail?.published_date ? moment(newsDetail?.published_date) : undefined,
+    published_date: newsDetail?.published_date
+      ? moment(newsDetail?.published_date)
+          .tz('Asia/Phnom_Penh')
+          .valueOf()
+      : undefined,
     description: newsDetail.description ? newsDetail.description : undefined,
   };
   // const isRead = await ctx.authUser.user.read;
