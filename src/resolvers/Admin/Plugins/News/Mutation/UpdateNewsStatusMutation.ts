@@ -1,7 +1,7 @@
 import { AuthenticationError } from 'apollo-server';
 import { Graph } from 'src/generated/graph';
 import ContextType from 'src/graphql/ContextType';
-import moment from 'moment';
+import moment from 'moment-timezone';
 import { sendPushNotification } from 'src/function/notifications';
 
 export const UpdateNewsStatusMutation = async (
@@ -44,7 +44,9 @@ export const UpdateNewsStatusMutation = async (
           .update({
             published_date: newsDetail.published_date
               ? newsDetail.published_date
-              : moment().format('YYYY-MM-DD HH:mm:ss'),
+              : moment()
+                  .tz('Asia/Phnom_Penh')
+                  .format('YYYY-MM-DD HH:mm:ss'),
             is_notify: true,
           })
           .where({ id })
@@ -53,7 +55,9 @@ export const UpdateNewsStatusMutation = async (
         await knex
           .table('news')
           .update({
-            published_date: moment().format('YYYY-MM-DD HH:mm:ss'),
+            published_date: moment()
+              .tz('Asia/Phnom_Penh')
+              .format('YYYY-MM-DD HH:mm:ss'),
           })
           .where({ id })
           .andWhere('website_id', '=', websiteId);
@@ -65,9 +69,9 @@ export const UpdateNewsStatusMutation = async (
         user_id: ctx.authUser.user.id,
         type: 'NEWS',
         activity: JSON.stringify(
-          `{'activityType': 'edit_status', 'news_id': '${id}', 'changeStatus': '${status}', 'logged_at': '${moment().format(
-            'DD-MMM-YYYY HH:mm:ss',
-          )}'}`,
+          `{'activityType': 'edit_status', 'news_id': '${id}', 'changeStatus': '${status}', 'logged_at': '${moment()
+            .tz('Asia/Phnom_Penh')
+            .format('DD-MMM-YYYY HH:mm:ss')}'}`,
         ),
         news_id: id,
         website_id: websiteId,
