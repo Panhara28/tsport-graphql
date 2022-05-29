@@ -12,16 +12,6 @@ export const UpdateNewsMuation = async (
   const knex = ctx.knex.default;
   await ctx.authUser.requireLogin('USER');
   const isUpdated = await ctx.authUser.user.modified;
-  console.log('input.published_date', input.published_date);
-  console.log('connvert', moment(input.published_date).format('YYYY-MM-DD HH:mm:ss'));
-  const date = input.published_date
-    ? moment(input.published_date)
-        .tz('Asia/Phnom_Penh')
-        .format('YYYY-MM-DD HH:mm:ss')
-    : moment()
-        .tz('Asia/Phnom_Penh')
-        .format('YYYY-MM-DD HH:mm:ss');
-  console.log('date', date);
 
   if (isUpdated) {
     const updateNews = await knex
