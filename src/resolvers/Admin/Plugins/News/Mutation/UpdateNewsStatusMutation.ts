@@ -42,22 +42,7 @@ export const UpdateNewsStatusMutation = async (
         await knex
           .table('news')
           .update({
-            published_date: newsDetail.published_date
-              ? newsDetail.published_date
-              : moment()
-                  .tz('Asia/Phnom_Penh')
-                  .format('YYYY-MM-DD HH:mm:ss'),
             is_notify: true,
-          })
-          .where({ id })
-          .andWhere('website_id', '=', websiteId);
-      } else {
-        await knex
-          .table('news')
-          .update({
-            published_date: moment()
-              .tz('Asia/Phnom_Penh')
-              .format('YYYY-MM-DD HH:mm:ss'),
           })
           .where({ id })
           .andWhere('website_id', '=', websiteId);
