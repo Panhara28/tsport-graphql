@@ -9,6 +9,7 @@ extend type Mutation {
   createNews(input: NewsInput, websiteId: Int!): Int!
   updateNews(id: Int!, input: NewsInput, websiteId: Int!): Boolean
   updateNewsStatus(id: Int!, status: NewsEnum, websiteId: Int!): Boolean
+  clickPageViewCount(id: Int!): Boolean
 }
 
 type NewsList {

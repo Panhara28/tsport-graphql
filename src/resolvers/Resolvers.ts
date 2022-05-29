@@ -71,6 +71,7 @@ import { NotificationsListQuery } from './Admin/Plugins/Notifications/Query/Noti
 import { PlaygroundListQuery } from './Playground/Query/PlaygroundListQuery';
 import { CreatePlaygrounMutation } from './Playground/Mutation/CreatePlaygroundMutation';
 import { ChangePasswordMutation } from './Authentication/Mutation/ChangePasswordMutation';
+import { ClickCountPageViewMutation } from './Admin/Analytics/Mutation/ClickCountPageViewMutation';
 
 const AppResolver = [
   {
@@ -158,6 +159,7 @@ const AppResolver = [
       adminPluginManageAccessForUser: AdminPluginManageAccessForUser,
       pushNotification: PushNotificationsMutation,
       changePassword: ChangePasswordMutation,
+      clickPageViewCount: ClickCountPageViewMutation,
     },
     Subscription: {
       newNotification: {
