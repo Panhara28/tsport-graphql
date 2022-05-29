@@ -21,6 +21,7 @@ export const UpdateNewsMuation = async (
     : moment()
         .tz('Asia/Phnom_Penh')
         .format('YYYY-MM-DD HH:mm:ss');
+  console.log('date', date);
 
   if (isUpdated) {
     const updateNews = await knex
