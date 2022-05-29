@@ -30,7 +30,7 @@ export const CreateNewsMutation = async (
         user_id: admin_id,
         type: 'NEWS',
         activity: JSON.stringify(
-          `{'activityType': 'create_news', 'news_id': '${createNews}', 'logged_at': '${moment().format(
+          `{'ip':'${ctx.ip}','activityType': 'create_news', 'news_id': '${createNews}', 'logged_at': '${moment().format(
             'DD-MM-YYYY HH:mm:ss',
           )}'}`,
         ),

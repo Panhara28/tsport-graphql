@@ -31,4 +31,5 @@ export default interface ContextType {
   token: string;
   authSuperAdmin: SuperAdminAuth;
   pubsub: any;
+  ip: any;
 }

@@ -5,6 +5,7 @@ import extractRequestToken, { extractDeviceToken } from './extractRequestToken';
 import loadMergeSchema from './loadMergedSchema';
 import Knex from 'knex';
 import AppResolver from 'src/resolvers/Resolvers';
+import requestIp from 'request-ip';
 
 async function RequireLogin(type: string, knex: Knex, token: string): Promise<boolean> {
   if (!token) {
@@ -57,6 +58,7 @@ export default function createApolloServer() {
       const knex = knexConnectionList.default;
       const token = extractRequestToken(req);
       const deviceToken = extractDeviceToken(req);
+      const ip = requestIp.getClientIp(req);
 
       const authUser: AuthUser = {
         requireLogin: async (type: string) => RequireLogin(type, knex, token),
@@ -124,6 +126,7 @@ export default function createApolloServer() {
         token,
         authSuperAdmin,
         pubsub: pubsub,
+        ip,
       };
     },
   });
