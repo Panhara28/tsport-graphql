@@ -48,11 +48,11 @@ export default function createApolloServer() {
     resolvers: AppResolver,
     playground: process.env.NODE_ENV !== 'production',
     debug: process.env.NODE_ENV !== 'production',
-    subscriptions: {
-      onConnect: () => {
-        console.log('connected');
-      },
-    },
+    // subscriptions: {
+    //   onConnect: () => {
+    //     console.log('connected');
+    //   },
+    // },
     context: async ({ req }): Promise<ContextType> => {
       const knex = knexConnectionList.default;
       const token = extractRequestToken(req);
@@ -123,7 +123,7 @@ export default function createApolloServer() {
         authUser,
         token,
         authSuperAdmin,
-        pubsub: pubsub,
+        // pubsub: pubsub,
       };
     },
   });
