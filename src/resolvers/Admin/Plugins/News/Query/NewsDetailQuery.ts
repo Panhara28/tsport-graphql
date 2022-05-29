@@ -17,11 +17,7 @@ export const NewsDetailQuery = async (_, { id, websiteId }: { id: number; websit
   return {
     ...newsDetail,
     // created_date: toKhmerFormat(newsDetail?.created_date),
-    published_date: newsDetail?.published_date
-      ? moment(newsDetail?.published_date)
-          .tz('Asia/Phnom_Penh')
-          .format('YYYY-MM-DD HH:mm')
-      : undefined,
+    published_date: moment(newsDetail?.published_date).format('YYYY-MM-DD hh:mm'),
     description: newsDetail.description ? newsDetail.description : undefined,
   };
   // const isRead = await ctx.authUser.user.read;
