@@ -12,8 +12,6 @@ export const NewsDetailQuery = async (_, { id, websiteId }: { id: number; websit
     .andWhere('website_id', '=', websiteId)
     .first();
 
-  console.log('newsDetail?.published_date', moment(newsDetail?.published_date).format('YYYY-MM-DD hh:mm'));
-
   return {
     ...newsDetail,
     // created_date: toKhmerFormat(newsDetail?.created_date),
