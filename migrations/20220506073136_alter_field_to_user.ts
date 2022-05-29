@@ -13,6 +13,7 @@ export async function up(knex: Knex): Promise<void> {
     table.string('contact_commune');
     table.string('contact_village');
     table.string('contact_city_or_province');
+    table.string('profile_picture');
   });
 }
 

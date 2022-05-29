@@ -9,7 +9,8 @@ export async function up(knex: Knex): Promise<void> {
       table.integer('user_id');
       table.boolean('read').defaultTo(false);
       table.boolean('display').defaultTo(false);
-      table.boolean('write').defaultTo(false);
+      table.boolean('create').defaultTo(false);
+      table.boolean('edit').defaultTo(false);
       table.boolean('remove').defaultTo(false);
       table.timestamps(true, true);
     });

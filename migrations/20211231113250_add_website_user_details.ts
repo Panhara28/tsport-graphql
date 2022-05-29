@@ -6,6 +6,7 @@ export async function up(knex: Knex): Promise<void> {
       table.increments();
       table.integer('super_admin_id');
       table.integer('website_id');
+      table.integer('user_id');
       table.timestamps(true, true);
     });
   }

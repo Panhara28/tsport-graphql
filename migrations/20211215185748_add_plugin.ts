@@ -5,6 +5,7 @@ export async function up(knex: Knex): Promise<void> {
     return await knex.schema.createTable('plugins', function(table) {
       table.increments();
       table.string('name');
+      table.string('slug');
       table.integer('website_id');
       table.timestamps(true, true);
     });
