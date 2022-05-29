@@ -2,6 +2,7 @@ import { AuthenticationError } from 'apollo-server';
 import { Graph } from 'src/generated/graph';
 import ContextType from 'src/graphql/ContextType';
 import moment from 'moment';
+import DateHelper from 'src/function/DateHelper';
 
 export const UpdateNewsMuation = async (
   _,
@@ -11,6 +12,14 @@ export const UpdateNewsMuation = async (
   const knex = ctx.knex.default;
   await ctx.authUser.requireLogin('USER');
   const isUpdated = await ctx.authUser.user.modified;
+  const date = input.published_date
+    ? moment(input.published_date)
+        .tz('Asia/Phnom_Penh')
+        .format('YYYY-MM-DD HH:mm:ss')
+    : moment()
+        .tz('Asia/Phnom_Penh')
+        .format('YYYY-MM-DD HH:mm:ss');
+
   if (isUpdated) {
     const updateNews = await knex
       .table('news')
@@ -20,7 +29,7 @@ export const UpdateNewsMuation = async (
         description: JSON.stringify(input.description),
         thumbnail: input.thumbnail ? input.thumbnail : '',
         new_category_id: input.new_category_id,
-        published_date: input.published_date,
+        published_date: date,
         updated_by: ctx.authUser.user.id,
       })
       .where({ id })
