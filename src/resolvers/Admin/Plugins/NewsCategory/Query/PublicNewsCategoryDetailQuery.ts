@@ -1,3 +1,4 @@
+import { AuthorLoader } from 'src/dataloader/authorLoader';
 import { toKhmerFormat } from 'src/function/toKhmerFormat';
 import ContextType from 'src/graphql/ContextType';
 
@@ -8,10 +9,13 @@ export const PublicNewsCateogryDetailQuery = async (_, { id }: { id: number }, c
     .table('news_category')
     .where({ id })
     .first();
+
   const news = await knex
     .table('news')
     .where({ new_category_id: newsCategory.id, status: 'PUBLISHED' })
     .orderBy('published_date', 'desc');
+
+  const author = AuthorLoader(ctx);
 
   return {
     ...newsCategory,
@@ -21,6 +25,7 @@ export const PublicNewsCateogryDetailQuery = async (_, { id }: { id: number }, c
         // created_date: toKhmerFormat(item.created_date),
         published_date: item?.published_date ? toKhmerFormat(item?.published_date) : undefined,
         created_at: toKhmerFormat(item.created_at),
+        author: () => author.load(item.created_by),
       };
     }),
   };

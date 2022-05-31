@@ -29,6 +29,8 @@ type News {
   category: NewsCategory
   created_date: String
   published_date: String
+  pageview: Int
+  author: User
 }
 
 input NewsInput {

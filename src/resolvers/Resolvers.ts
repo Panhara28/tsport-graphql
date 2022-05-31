@@ -72,6 +72,7 @@ import { PlaygroundListQuery } from './Playground/Query/PlaygroundListQuery';
 import { CreatePlaygrounMutation } from './Playground/Mutation/CreatePlaygroundMutation';
 import { ChangePasswordMutation } from './Authentication/Mutation/ChangePasswordMutation';
 import { ClickCountPageViewMutation } from './Admin/Analytics/Mutation/ClickCountPageViewMutation';
+import { PublicNewsCateogryDetailQuery } from './Admin/Plugins/NewsCategory/Query/PublicNewsCategoryDetailQuery';
 
 const AppResolver = [
   {
@@ -114,6 +115,7 @@ const AppResolver = [
       activityLogsOptions: ActivityLogsOptionsQuery,
       notificationsList: NotificationsListQuery,
       playgroundList: PlaygroundListQuery,
+      publicNewsCategoryDetail: PublicNewsCateogryDetailQuery,
     },
 
     Mutation: {
