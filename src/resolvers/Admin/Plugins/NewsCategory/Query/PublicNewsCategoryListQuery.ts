@@ -7,7 +7,7 @@ export const PublicNewsCategoryListQuery = async (_, {}, ctx: ContextType) => {
 
   const newsCategoryList = await knex
     .table('news_category')
-    .orderBy('id', 'desc')
+    .orderBy('order', 'asc')
     .limit(8);
 
   return newsCategoryList.map(async (category: Graph.NewsCategory) => {
