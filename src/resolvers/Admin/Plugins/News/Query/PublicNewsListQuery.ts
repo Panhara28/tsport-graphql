@@ -12,17 +12,26 @@ export const PublicNewsListQuery = async (
 ) => {
   const knex = ctx.knex.default;
 
-  const query = knex
-    .table('news')
-    .where({ status: 'PUBLISHED' })
-    .orderBy('published_date', 'desc');
+  const query = knex.table('news');
 
   if (filter?.status != undefined) {
     query.andWhere({ status: filter.status });
   }
 
   if (pagination?.page != undefined || pagination?.size != undefined) {
-    query.limit(pagination.size).offset(pagination.page);
+    query.limit(pagination.size).offset((pagination.page - 1) * pagination.size);
+  } else {
+    query.limit(20).offset(0);
+  }
+
+  if (filter?.startDate != undefined || filter?.endDate != undefined) {
+    query.andWhereBetween('published_date', [filter?.startDate, filter?.endDate]);
+  }
+
+  if (filter?.sort === 'PAGEVIEW') {
+    query.orderBy('pageview', 'desc');
+  } else if (filter?.sort === 'PUBLISHED_DATE') {
+    query.orderBy('published_date', 'desc');
   }
 
   const data: table_news[] = await query;

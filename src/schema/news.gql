@@ -55,6 +55,14 @@ input FilterNews {
   status: NewsEnum
   id: Int
   name: String
+  startDate: String
+  endDate: String
+  sort: Sort
+}
+
+enum Sort {
+  PAGEVIEW
+  PUBLISHED_DATE
 }
 
 input PaginationInput {
