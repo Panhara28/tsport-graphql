@@ -1,7 +1,7 @@
 extend type Query {
   newsList(filter: FilterNews, pagination: PaginationInput!, websiteId: Int!): NewsList
   newsDetail(id: Int!, websiteId: Int!): News
-  publicNewsList(filter: FilterNews, pagination: PaginationInput, websiteId: Int!): [News]
+  publicNewsList(filter: FilterNews, pagination: PaginationInput, websiteId: Int!): NewsList
   publicNewsDetail(id: Int!, websiteId: Int!): News
 }
 

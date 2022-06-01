@@ -19,7 +19,7 @@ export const PublicNewsListQuery = async (
   }
 
   if (pagination?.page != undefined || pagination?.size != undefined) {
-    query.limit(pagination.size).offset((pagination.page - 1) * pagination.size);
+    query.offset((pagination.page - 1) * pagination.size).limit(pagination.size);
   } else {
     query.limit(20).offset(0);
   }
@@ -40,14 +40,16 @@ export const PublicNewsListQuery = async (
   const newsCategory = NewsCategoryLoader(ctx);
   const author = AuthorLoader(ctx);
 
-  return data.map(item => {
-    return {
-      ...item,
-      created_at: toKhmerFormat(item?.created_at),
-      // created_date: toKhmerFormat(item.created_date),
-      published_date: item?.published_date ? toKhmerFormat(item?.published_date) : undefined,
-      category: () => newsCategory.load(item?.new_category_id),
-      author: () => author.load(item.created_by),
-    };
-  });
+  return {
+    data: data.map(item => {
+      return {
+        ...item,
+        created_at: toKhmerFormat(item?.created_at),
+        // created_date: toKhmerFormat(item.created_date),
+        published_date: item?.published_date ? toKhmerFormat(item?.published_date) : undefined,
+        category: () => newsCategory.load(item?.new_category_id),
+        author: () => author.load(item.created_by),
+      };
+    }),
+  };
 };
