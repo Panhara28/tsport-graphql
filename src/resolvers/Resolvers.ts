@@ -73,6 +73,7 @@ import { CreatePlaygrounMutation } from './Playground/Mutation/CreatePlaygroundM
 import { ChangePasswordMutation } from './Authentication/Mutation/ChangePasswordMutation';
 import { ClickCountPageViewMutation } from './Admin/Analytics/Mutation/ClickCountPageViewMutation';
 import { PublicNewsCateogryDetailQuery } from './Admin/Plugins/NewsCategory/Query/PublicNewsCategoryDetailQuery';
+import { NextPublicNewsId } from './Admin/Plugins/News/Query/NextPubicNewsId';
 
 const AppResolver = [
   {
@@ -116,6 +117,7 @@ const AppResolver = [
       notificationsList: NotificationsListQuery,
       playgroundList: PlaygroundListQuery,
       publicNewsCategoryDetail: PublicNewsCateogryDetailQuery,
+      nextPublicNewsId: NextPublicNewsId,
     },
 
     Mutation: {

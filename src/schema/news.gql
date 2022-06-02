@@ -3,6 +3,7 @@ extend type Query {
   newsDetail(id: Int!, websiteId: Int!): News
   publicNewsList(filter: FilterNews, pagination: PaginationInput, websiteId: Int!): NewsList
   publicNewsDetail(id: Int!, websiteId: Int!): News
+  nextPublicNewsId(prevId: Int!): Int!
 }
 
 extend type Mutation {
@@ -31,6 +32,7 @@ type News {
   published_date: String
   pageview: Int
   author: User
+  next_id: Int
 }
 
 input NewsInput {
