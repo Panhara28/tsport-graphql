@@ -16,7 +16,7 @@ async function NextPublicNewsId(ctx: ContextType, prevId) {
     { prev_id: prevId },
   );
 
-  return query[0].next_id;
+  return query[0]?.next_id ? query[0]?.next_id : 1;
 }
 
 export const PublicNewsDetailQuery = async (_, { id }: { id: number }, ctx: ContextType) => {
@@ -31,6 +31,7 @@ export const PublicNewsDetailQuery = async (_, { id }: { id: number }, ctx: Cont
   const author = await knex('users')
     .where({ id: newsDetail.created_by })
     .first();
+
   return {
     ...newsDetail,
     created_at: toKhmerFormat(newsDetail?.created_at),
