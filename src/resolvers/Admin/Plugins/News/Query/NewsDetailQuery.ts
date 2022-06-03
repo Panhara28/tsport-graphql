@@ -13,8 +13,18 @@ export const NewsDetailQuery = async (_, { id, websiteId }: { id: number; websit
     .first();
 
   const publishedDate = newsDetail?.published_date
-    ? Number(newsDetail?.published_date)
+    ? moment(Number(newsDetail?.published_date)).format('YYYY-MM-DDTHH:mm')
     : moment(new Date()).format('YYYY-MM-DDTHH:mm');
+  console.log('Not: moment', newsDetail?.published_date);
+
+  console.log('Moment: ', moment(Number(newsDetail?.published_date)).format('YYYY-MM-DDTHH:mm'));
+
+  console.log(
+    'Server',
+    moment(1655112240000)
+      .tz('Asia/Phnom_Penh')
+      .format('YYYY-MM-DDTHH:mm'),
+  );
 
   return {
     ...newsDetail,
