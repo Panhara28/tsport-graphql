@@ -12,10 +12,14 @@ export const NewsDetailQuery = async (_, { id, websiteId }: { id: number; websit
     .andWhere('website_id', '=', websiteId)
     .first();
 
+  const publishedDate = newsDetail?.published_date
+    ? Number(newsDetail?.published_date)
+    : moment(new Date()).format('YYYY-MM-DDTHH:mm');
+
   return {
     ...newsDetail,
     // created_date: toKhmerFormat(newsDetail?.created_date),
-    published_date: moment(newsDetail?.published_date).format('YYYY-MM-DDThh:mm'),
+    published_date: publishedDate,
     description: newsDetail.description ? newsDetail.description : undefined,
   };
   // const isRead = await ctx.authUser.user.read;
