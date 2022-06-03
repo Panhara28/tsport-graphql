@@ -23,6 +23,7 @@ type ReturnNewsCategory {
 type NewsCategory {
   id: Int
   name: String
+  status: String
   created_at: String
   news: [News]
 }

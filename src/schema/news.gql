@@ -4,6 +4,7 @@ extend type Query {
   publicNewsList(filter: FilterNews, pagination: PaginationInput, websiteId: Int!): NewsList
   publicNewsDetail(id: Int!, websiteId: Int!): News
   nextPublicNewsId(prevId: Int!): Int!
+  publicNewsByCategory(filter: FilterNews, pagination: PaginationInput, websiteId: Int!): NewsList
 }
 
 extend type Mutation {
@@ -60,6 +61,7 @@ input FilterNews {
   startDate: String
   endDate: String
   sort: Sort
+  category_id: Int
 }
 
 enum Sort {

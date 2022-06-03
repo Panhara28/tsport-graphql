@@ -74,6 +74,7 @@ import { ChangePasswordMutation } from './Authentication/Mutation/ChangePassword
 import { ClickCountPageViewMutation } from './Admin/Analytics/Mutation/ClickCountPageViewMutation';
 import { PublicNewsCateogryDetailQuery } from './Admin/Plugins/NewsCategory/Query/PublicNewsCategoryDetailQuery';
 import { NextPublicNewsId } from './Admin/Plugins/News/Query/NextPubicNewsId';
+import { NewsByCategoryQuery } from './Admin/Plugins/News/Query/NewsByCategoryQuery';
 
 const AppResolver = [
   {
@@ -118,6 +119,7 @@ const AppResolver = [
       playgroundList: PlaygroundListQuery,
       publicNewsCategoryDetail: PublicNewsCateogryDetailQuery,
       nextPublicNewsId: NextPublicNewsId,
+      publicNewsByCategory: NewsByCategoryQuery,
     },
 
     Mutation: {

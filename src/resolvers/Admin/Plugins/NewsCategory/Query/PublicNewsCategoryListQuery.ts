@@ -7,6 +7,7 @@ export const PublicNewsCategoryListQuery = async (_, {}, ctx: ContextType) => {
 
   const newsCategoryList = await knex
     .table('news_category')
+    .where({ status: 'PUBLISHED' })
     .orderBy('order', 'asc')
     .limit(8);
 
