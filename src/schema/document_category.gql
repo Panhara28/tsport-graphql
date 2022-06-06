@@ -1,0 +1,41 @@
+extend type Query {
+  documentCategoryList(pagination: PaginationInput, filter: FilterDocumentCategory): DocumentCategoryList
+  documentCategoryDetail(id: Int!): DocumentCategory
+}
+
+extend type Mutation {
+  createDocumentCategory(input: DocumentCategoryInput): Int!
+  updateDocumentCategory(id: Int!, input: DocumentCategoryInput): Boolean
+}
+
+type DocumentCategory {
+  id: Int
+  category_name: String
+  layerOne: [LayerOne]
+  # documents: DocumentList
+}
+
+type DocumentCategoryList {
+  data: [DocumentCategory]
+  pagination: Pagination
+}
+
+input DocumentCategoryInput {
+  category_name: String
+  parent_id: Int
+}
+
+type LayerOne {
+  id: Int
+  category_name: String
+}
+
+input FilterDocumentCategory {
+  hasChildren: Status
+  category_name: String
+}
+
+enum Status {
+  ALL
+  PARENT
+}
