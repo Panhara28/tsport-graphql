@@ -1,3 +1,4 @@
+import { AuthenticationError } from 'apollo-server';
 import { Graph } from 'src/generated/graph';
 import ContextType from 'src/graphql/ContextType';
 
@@ -7,14 +8,19 @@ export const CreateDocumentCategoryMutation = async (
   ctx: ContextType,
 ) => {
   const knex = await ctx.knex.default;
-  const admin_id = ctx.authUser.user.id;
-  const [createDocumentCategory] = await knex.table('document_category').insert({
-    category_name: input.category_name,
-    parent_id: input.parent_id ? input.parent_id : 0,
-    website_id: 1,
-    created_by: admin_id,
-    updated_by: admin_id,
-  });
+  const admin_id = ctx?.authUser?.user?.id;
+  const isCreated = ctx?.authUser?.user?.write;
+  if (isCreated) {
+    const [createDocumentCategory] = await knex.table('document_category').insert({
+      category_name: input.category_name,
+      parent_id: input.parent_id ? input.parent_id : 0,
+      website_id: 1,
+      created_by: admin_id,
+      updated_by: admin_id,
+    });
 
-  return createDocumentCategory;
+    return createDocumentCategory;
+  } else {
+    throw new AuthenticationError(`You don't have permission!`);
+  }
 };

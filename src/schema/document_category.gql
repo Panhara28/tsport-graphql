@@ -11,8 +11,8 @@ extend type Mutation {
 type DocumentCategory {
   id: Int
   category_name: String
-  layerOne: [LayerOne]
-  # documents: DocumentList
+  subcategory: LayerOne
+  documents: DocumentList
 }
 
 type DocumentCategoryList {
@@ -26,8 +26,8 @@ input DocumentCategoryInput {
 }
 
 type LayerOne {
-  id: Int
-  category_name: String
+  data: [DocumentCategory]
+  documents: DocumentList
 }
 
 input FilterDocumentCategory {

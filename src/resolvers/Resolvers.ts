@@ -78,6 +78,11 @@ import { NewsByCategoryQuery } from './Admin/Plugins/News/Query/NewsByCategoryQu
 import { CreateDocumentCategoryMutation } from './Admin/Plugins/DocumentCategory/Mutation/CreateDocumentCategoryMutation';
 import { UpdateDocumentCategoryMutation } from './Admin/Plugins/DocumentCategory/Mutation/UpdateDocumentCategoryMutation';
 import { DocumentCategoryListQuery } from './Admin/Plugins/DocumentCategory/Query/DocumentCategoryListQuery';
+import { DocumentCategoryDetailQuery } from './Admin/Plugins/DocumentCategory/Query/DocumentCategoryDetailQuery';
+import { CreateDocumentMutation } from './Admin/Plugins/Documents/Mutation/CreateDocumentMutation';
+import { UpdateDocumentMutation } from './Admin/Plugins/Documents/Mutation/UpdateDocumentMutation';
+import { DocumentDetailQuery } from './Admin/Plugins/Documents/Query/DocumentDetailQuery';
+import { DocumentListQuery } from './Admin/Plugins/Documents/Query/DocumentListQuery';
 
 const AppResolver = [
   {
@@ -124,6 +129,9 @@ const AppResolver = [
       nextPublicNewsId: NextPublicNewsId,
       publicNewsByCategory: NewsByCategoryQuery,
       documentCategoryList: DocumentCategoryListQuery,
+      documentCategoryDetail: DocumentCategoryDetailQuery,
+      documentDetail: DocumentDetailQuery,
+      documentList: DocumentListQuery,
     },
 
     Mutation: {
@@ -172,6 +180,8 @@ const AppResolver = [
       clickPageViewCount: ClickCountPageViewMutation,
       createDocumentCategory: CreateDocumentCategoryMutation,
       updateDocumentCategory: UpdateDocumentCategoryMutation,
+      createDocument: CreateDocumentMutation,
+      updateDocument: UpdateDocumentMutation,
     },
     Subscription: {
       newNotification: {

@@ -1,0 +1,38 @@
+extend type Query {
+  documentList(pagination: PaginationInput, filter: FilterDocumentInput): DocumentList
+  documentDetail(id: Int!): Document
+}
+
+extend type Mutation {
+  createDocument(input: DocumentInput): Int!
+  updateDocument(id: Int!, input: DocumentInput): Boolean
+}
+
+type Document {
+  id: Int
+  title: String
+  document_category_id: Int
+  document_category_sub_id: Int
+  published_date: String
+  file_url: String
+}
+
+type DocumentList {
+  data: [Document]
+  pagination: Pagination
+}
+
+input DocumentInput {
+  title: String
+  document_category_id: Int
+  document_category_sub_id: Int
+  published_date: String
+  file_url: String
+}
+
+input FilterDocumentInput {
+  title: String
+  category: Int
+  categorySubId: Int
+  published_date: String
+}

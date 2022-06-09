@@ -9,6 +9,7 @@ export async function up(knex: Knex): Promise<void> {
       table.integer('document_category_sub_id');
       table.dateTime('published_date');
       table.string('file_url');
+      table.enum('status', ['PENDING', 'INREVIEW', 'REVERSION', 'PUBLISHED']);
       table.integer('website_id');
       table.integer('created_by');
       table.integer('updated_by');
