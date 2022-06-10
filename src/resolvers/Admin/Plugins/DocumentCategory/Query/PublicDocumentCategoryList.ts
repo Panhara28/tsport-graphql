@@ -1,10 +1,11 @@
 import { AuthenticationError } from 'apollo-server';
 import { ChildrenCategory } from 'src/dataloader/childrenCategory';
 import { DocumentLoader } from 'src/dataloader/documentLoader';
+import { buildTree } from 'src/function/buildTree';
 import { Graph } from 'src/generated/graph';
 import ContextType from 'src/graphql/ContextType';
 
-export const DocumentCategoryListQuery = async (
+export const PublicDocumentCategoryList = async (
   _,
   { pagination, filter }: { pagination: Graph.PaginationInput; filter: Graph.FilterDocumentCategory },
   ctx: ContextType,
@@ -26,14 +27,36 @@ export const DocumentCategoryListQuery = async (
     }
 
     const data = await query;
+    const documents = DocumentLoader(ctx);
+    let tree;
 
-    return {
-      data: data.map(async item => {
-        return {
-          ...item,
-        };
-      }),
-    };
+    if (filter?.brand_id) {
+      tree = await buildTree(data, filter?.brand_id, documents);
+    } else {
+      tree = await buildTree(data, _, documents);
+    }
+
+    if (filter?.branch_level || filter?.branch_level === 0) {
+      tree = tree.children;
+    } else if (filter?.branch_level === 1) {
+      const new_tree: any[] = [];
+
+      for (const branch of tree.children) {
+        new_tree.push(...branch.children);
+      }
+
+      tree = new_tree;
+    } else if (filter?.branch_level === 2) {
+      const new_tree: any[] = [];
+      for (const branch of tree.children) {
+        for (const child_branch of branch.children) {
+          new_tree.push(...child_branch.children);
+        }
+      }
+      tree = new_tree;
+    }
+
+    return tree;
   } else {
     throw new AuthenticationError(`You don't have permission!`);
   }

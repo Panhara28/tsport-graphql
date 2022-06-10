@@ -1,8 +1,13 @@
-export function buildTree(data: any, id?: number) {
+export async function buildTree(data: any, id?: number, docs?: any) {
+  const documents = [
+    { id: 1, title: 'Title 1', document_category_id: 1 },
+    { id: 2, title: 'Title 2', document_category_id: 2 },
+  ];
   const hash: { [key: number]: any } = {
     0: {
       id: 0,
-      name: 'data',
+      category_name: 'data',
+      documents: [],
       children: [],
     },
   };
@@ -11,10 +16,10 @@ export function buildTree(data: any, id?: number) {
   for (const item of data) {
     const node: any = {
       id: item?.id,
-      name: item?.name as string,
+      category_name: item?.category_name as string,
+      documents: [],
       children: [],
     };
-
     hash[item.id] = node;
   }
 
@@ -25,7 +30,13 @@ export function buildTree(data: any, id?: number) {
         hash[item.parent_id].children.push(hash[item.id]);
       }
     } else {
+      const d = await docs.load(item.id);
+
       hash[0].children.push(hash[item.id]);
+
+      d.filter(x => x.document_category_id === item.id).map(x => {
+        hash[item.id].documents.push(x);
+      });
     }
   }
 

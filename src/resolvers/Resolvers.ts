@@ -83,6 +83,7 @@ import { CreateDocumentMutation } from './Admin/Plugins/Documents/Mutation/Creat
 import { UpdateDocumentMutation } from './Admin/Plugins/Documents/Mutation/UpdateDocumentMutation';
 import { DocumentDetailQuery } from './Admin/Plugins/Documents/Query/DocumentDetailQuery';
 import { DocumentListQuery } from './Admin/Plugins/Documents/Query/DocumentListQuery';
+import { PublicDocumentCategoryList } from './Admin/Plugins/DocumentCategory/Query/PublicDocumentCategoryList';
 
 const AppResolver = [
   {
@@ -132,6 +133,7 @@ const AppResolver = [
       documentCategoryDetail: DocumentCategoryDetailQuery,
       documentDetail: DocumentDetailQuery,
       documentList: DocumentListQuery,
+      publicDocumentCategoryList: PublicDocumentCategoryList,
     },
 
     Mutation: {

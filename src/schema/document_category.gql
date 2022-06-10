@@ -1,6 +1,7 @@
 extend type Query {
   documentCategoryList(pagination: PaginationInput, filter: FilterDocumentCategory): DocumentCategoryList
   documentCategoryDetail(id: Int!): DocumentCategory
+  publicDocumentCategoryList(pagination: PaginationInput, filter: FilterDocumentCategory): JSON
 }
 
 extend type Mutation {
@@ -11,8 +12,6 @@ extend type Mutation {
 type DocumentCategory {
   id: Int
   category_name: String
-  subcategory: LayerOne
-  documents: DocumentList
 }
 
 type DocumentCategoryList {
@@ -25,14 +24,10 @@ input DocumentCategoryInput {
   parent_id: Int
 }
 
-type LayerOne {
-  data: [DocumentCategory]
-  documents: DocumentList
-}
-
 input FilterDocumentCategory {
-  hasChildren: Status
   category_name: String
+  branch_level: Int
+  brand_id: Int
 }
 
 enum Status {
