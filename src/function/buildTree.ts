@@ -27,6 +27,10 @@ export async function buildTree(data: any, id?: number, docs?: any) {
   for (const item of data) {
     if (item.parent_id) {
       if (hash[item.parent_id]) {
+        const d = await docs.load(item.id);
+
+        hash[item.id]?.documents.push(d);
+
         hash[item.parent_id].children.push(hash[item.id]);
       }
     } else {
