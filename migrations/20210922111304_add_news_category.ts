@@ -6,6 +6,7 @@ export async function up(knex: Knex): Promise<any> {
       table.increments();
       table.string('name');
       table.enum('status', ['PENDING', 'INREVIEW', 'REVERSION', 'PUBLISHED']).defaultTo('PENDING');
+      table.integer('order');
       table.integer('created_by');
       table.integer('updated_by');
       table.timestamps(true, true);
