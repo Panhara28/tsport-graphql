@@ -10,10 +10,16 @@ export const MediaListQuery = async (
 ) => {
   const knex = ctx.knex.default;
 
-  const mediaList = await knex
+  const query = knex
     .table('media')
     .where('website_id', '=', websiteId)
     .orderBy('id', 'desc');
+
+  if (pagination.size != undefined && pagination.page != undefined) {
+    query.limit(pagination.size).offset((pagination.page - 1) * pagination.size);
+  }
+
+  const mediaList = await query;
 
   const mediaUser = MediaUserLoader(ctx);
 
