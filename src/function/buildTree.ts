@@ -31,6 +31,8 @@ export async function buildTree(data: any, id?: number, docs?: any) {
 
         hash[item.id]?.documents.push(d);
 
+        hash[item.parent_id]?.documents.push(d[0]);
+
         hash[item.parent_id].children.push(hash[item.id]);
       }
     } else {
