@@ -84,6 +84,10 @@ import { UpdateDocumentMutation } from './Admin/Plugins/Documents/Mutation/Updat
 import { DocumentDetailQuery } from './Admin/Plugins/Documents/Query/DocumentDetailQuery';
 import { DocumentListQuery } from './Admin/Plugins/Documents/Query/DocumentListQuery';
 import { PublicDocumentCategoryList } from './Admin/Plugins/DocumentCategory/Query/PublicDocumentCategoryList';
+import { ImportsListQuery } from './Admin/Plugins/Imports/Query/ImportsListQuery';
+import { importsDetailQuery } from './Admin/Plugins/Imports/Query/importsDetailQuery';
+import { CreateImportsMutation } from './Admin/Plugins/Imports/Mutation/createImportsMutation';
+import { UpdateImportsMutation } from './Admin/Plugins/Imports/Mutation/UpdateImportsMutation';
 
 const AppResolver = [
   {
@@ -134,6 +138,8 @@ const AppResolver = [
       documentDetail: DocumentDetailQuery,
       documentList: DocumentListQuery,
       publicDocumentCategoryList: PublicDocumentCategoryList,
+      importsList: ImportsListQuery,
+      importsDetail: importsDetailQuery,
     },
 
     Mutation: {
@@ -184,6 +190,8 @@ const AppResolver = [
       updateDocumentCategory: UpdateDocumentCategoryMutation,
       createDocument: CreateDocumentMutation,
       updateDocument: UpdateDocumentMutation,
+      createImports: CreateImportsMutation,
+      updateImports: UpdateImportsMutation,
     },
     Subscription: {
       newNotification: {

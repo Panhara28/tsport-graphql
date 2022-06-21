@@ -1,0 +1,24 @@
+extend type Query {
+  exportsList: ExportsList
+  exportsDetail(id: Int!): Exports
+}
+
+extend type Mutation {
+  createExports(input: ExportsInput): Int!
+  updateExports(id: Int!, input: ExportsInput): Boolean
+}
+
+type ExportsList {
+  data: [Exports]
+}
+
+type Exports {
+  id: Int
+  name: String
+  referenceFile: String
+}
+
+input ExportsInput {
+  name: String
+  referenceFile: String
+}

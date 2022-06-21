@@ -1,0 +1,24 @@
+extend type Query {
+  importsList: ImportsList
+  importsDetail(id: Int!): Imports
+}
+
+extend type Mutation {
+  createImports(input: ImportsInput): Int!
+  updateImports(id: Int!, input: ImportsInput): Boolean
+}
+
+type ImportsList {
+  data: [Imports]
+}
+
+type Imports {
+  id: Int
+  name: String
+  referenceFile: String
+}
+
+input ImportsInput {
+  name: String
+  referenceFile: String
+}
