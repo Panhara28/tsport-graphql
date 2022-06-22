@@ -5,7 +5,7 @@ export async function up(knex: Knex): Promise<void> {
     return await knex.schema.createTable('exports', table => {
       table.increments();
       table.string('name');
-      table.string('referenceFile');
+      table.integer('website_id');
       table.timestamps(true, true);
     });
   }

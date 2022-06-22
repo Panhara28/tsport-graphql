@@ -15,10 +15,21 @@ type ImportsList {
 type Imports {
   id: Int
   name: String
-  referenceFile: String
 }
 
 input ImportsInput {
   name: String
-  referenceFile: String
+  data: [ImportsInputDetail]
+}
+
+input ImportsInputDetail {
+  year: String
+  month: String
+  origin_country: String
+  hs_code: String
+  net_weight_kgm: String
+  supplementary_unit: String
+  quantity: String
+  custom_value_khr: Float
+  custom_value_usd: Float
 }

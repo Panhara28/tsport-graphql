@@ -15,7 +15,6 @@ export const UpdateExportsMutation = async (
     })
     .update({
       name: input?.name,
-      referenceFile: input?.referenceFile,
     });
 
   return updateExports[0] > 0;
