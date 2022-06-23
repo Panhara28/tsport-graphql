@@ -15,10 +15,12 @@ type ExportsList {
 type Exports {
   id: Int
   name: String
+  websiteId: Int
 }
 
 input ExportsInput {
   name: String
+  websiteId: Int
   data: [ExportsInputDetail]
 }
 

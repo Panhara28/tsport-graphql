@@ -6,6 +6,7 @@ export const CreateExportsMutation = async (_: any, { input }: { input: Graph.Ex
 
   const createExports = await knex.table('exports').insert({
     name: input?.name,
+    website_id: input?.websiteId,
   });
 
   if (createExports[0] > 0) {

@@ -15,10 +15,12 @@ type ImportsList {
 type Imports {
   id: Int
   name: String
+  websiteId: Int
 }
 
 input ImportsInput {
   name: String
+  websiteId: Int
   data: [ImportsInputDetail]
 }
 
