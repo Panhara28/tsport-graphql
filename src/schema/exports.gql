@@ -1,0 +1,37 @@
+extend type Query {
+  exportsList: ExportsList
+  exportsDetail(id: Int!): Exports
+}
+
+extend type Mutation {
+  createExports(input: ExportsInput): Int!
+  updateExports(id: Int!, input: ExportsInput): Boolean
+}
+
+type ExportsList {
+  data: [Exports]
+}
+
+type Exports {
+  id: Int
+  name: String
+  websiteId: Int
+}
+
+input ExportsInput {
+  name: String
+  websiteId: Int
+  data: [ExportsInputDetail]
+}
+
+input ExportsInputDetail {
+  year: String
+  month: String
+  destination_country: String
+  hs_code: String
+  net_weight_kgm: String
+  supplementary_unit: String
+  quantity: String
+  custom_value_khr: Float
+  custom_value_usd: Float
+}

@@ -84,6 +84,15 @@ import { UpdateDocumentMutation } from './Admin/Plugins/Documents/Mutation/Updat
 import { DocumentDetailQuery } from './Admin/Plugins/Documents/Query/DocumentDetailQuery';
 import { DocumentListQuery } from './Admin/Plugins/Documents/Query/DocumentListQuery';
 import { PublicDocumentCategoryList } from './Admin/Plugins/DocumentCategory/Query/PublicDocumentCategoryList';
+import { ImportsListQuery } from './Admin/Plugins/Imports/Query/ImportsListQuery';
+import { importsDetailQuery } from './Admin/Plugins/Imports/Query/importsDetailQuery';
+import { CreateImportsMutation } from './Admin/Plugins/Imports/Mutation/createImportsMutation';
+import { UpdateImportsMutation } from './Admin/Plugins/Imports/Mutation/UpdateImportsMutation';
+import { ExportsListQuery } from './Admin/Plugins/Exports/Query/ExportsListQuery';
+import { ExportsDetailQuery } from './Admin/Plugins/Exports/Query/ExportsDetailQuery';
+import { CreateExportsMutation } from './Admin/Plugins/Exports/Mutation/CreateExportsMutation';
+import { UpdateExportsMutation } from './Admin/Plugins/Exports/Mutation/UpdateExportsMutation';
+import { ImportExportReportQuery } from './Admin/Plugins/ImportExportReport/ImportExportReportQuery';
 
 const AppResolver = [
   {
@@ -134,6 +143,11 @@ const AppResolver = [
       documentDetail: DocumentDetailQuery,
       documentList: DocumentListQuery,
       publicDocumentCategoryList: PublicDocumentCategoryList,
+      importsList: ImportsListQuery,
+      importsDetail: importsDetailQuery,
+      exportsList: ExportsListQuery,
+      exportsDetail: ExportsDetailQuery,
+      importExportReport: ImportExportReportQuery,
     },
 
     Mutation: {
@@ -184,6 +198,10 @@ const AppResolver = [
       updateDocumentCategory: UpdateDocumentCategoryMutation,
       createDocument: CreateDocumentMutation,
       updateDocument: UpdateDocumentMutation,
+      createImports: CreateImportsMutation,
+      updateImports: UpdateImportsMutation,
+      createExports: CreateExportsMutation,
+      updateExports: UpdateExportsMutation,
     },
     Subscription: {
       newNotification: {

@@ -1,0 +1,14 @@
+extend type Query {
+  importExportReport(filter: ImportExportFilter): JSON
+}
+
+input ImportExportFilter {
+  countries: [String]
+  timeframe: String
+  year: String
+  second_year: String
+  month: String
+  second_month: String
+  semester: String
+  trimester: String
+}
