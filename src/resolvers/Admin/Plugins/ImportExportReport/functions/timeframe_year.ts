@@ -36,8 +36,14 @@ export async function timeframe_year(filter: filterProps, knex) {
       .andWhere('year', '=', filter?.second_year)
       .first();
 
+    const full_country_name = await knex
+      .table('stat_countries')
+      .where('code', '=', country)
+      .first();
+
     data.push({
       country: country,
+      country_name: full_country_name?.country_name,
       data: {
         year: {
           year: filter?.year,

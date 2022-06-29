@@ -93,6 +93,7 @@ import { ExportsDetailQuery } from './Admin/Plugins/Exports/Query/ExportsDetailQ
 import { CreateExportsMutation } from './Admin/Plugins/Exports/Mutation/CreateExportsMutation';
 import { UpdateExportsMutation } from './Admin/Plugins/Exports/Mutation/UpdateExportsMutation';
 import { ImportExportReportQuery } from './Admin/Plugins/ImportExportReport/ImportExportReportQuery';
+import { StatCountriesListQuery } from './Admin/Plugins/StatCountries/StatCountriesListQuery';
 
 const AppResolver = [
   {
@@ -148,6 +149,7 @@ const AppResolver = [
       exportsList: ExportsListQuery,
       exportsDetail: ExportsDetailQuery,
       importExportReport: ImportExportReportQuery,
+      statCountriesList: StatCountriesListQuery,
     },
 
     Mutation: {

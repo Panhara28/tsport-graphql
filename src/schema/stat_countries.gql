@@ -1,0 +1,14 @@
+extend type Query {
+  statCountriesList: StatCountriesList
+}
+
+type StatCountriesList {
+  data: [StatCountry]
+}
+
+type StatCountry {
+  id: Int
+  code: String
+  country_name: String
+  country_name_kh: String
+}
