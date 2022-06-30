@@ -40,10 +40,14 @@ export async function timeframe_trimester(filter: filterProps, knex) {
       .andWhereBetween('month', [Number(filter?.trimester) * 3 + 1, Number(filter?.trimester) * 3 + 3])
       .first();
 
-    console.log(Number(filter?.trimester) * 3 + 1, Number(filter?.trimester) * 3 + 3);
+    const full_country_name = await knex
+      .table('stat_countries')
+      .where('code', '=', country)
+      .first();
 
     data.push({
       country: country,
+      country_name: full_country_name?.country_name,
       data: {
         year: {
           year: Number(filter?.year) - 1,

@@ -4,13 +4,17 @@ import ContextType from 'src/graphql/ContextType';
 
 export const DocumentListQuery = async (
   _,
-  { pagination, filter }: { pagination: Graph.PaginationInput; filter: Graph.FilterDocumentInput },
+  {
+    pagination,
+    filter,
+    websiteId,
+  }: { pagination: Graph.PaginationInput; filter: Graph.FilterDocumentInput; websiteId: number },
   ctx: ContextType,
 ) => {
   const knex = ctx.knex.default;
   const isRead = ctx?.authUser?.user?.read;
   if (isRead) {
-    const query = knex.table('documents');
+    const query = knex.table('documents').where({ website_id: websiteId });
 
     if (pagination.size != undefined && pagination.page != undefined) {
       query.limit(pagination.size).offset((pagination.page - 1) * pagination.size);
@@ -30,6 +34,10 @@ export const DocumentListQuery = async (
 
     if (filter?.title !== undefined) {
       query.andWhere({ title: filter?.title });
+    }
+
+    if (filter?.status !== undefined) {
+      query.andWhere({ status: filter?.status });
     }
 
     const documentList = await query;

@@ -13,8 +13,8 @@ export async function timeframe_month(filter: filterProps, knex) {
       .table('imports_detail')
       .sum({ custom_value_usd: 'custom_value_usd' })
       .where('origin_country', '=', country)
-      .andWhere('year', '=', filter?.year)
-      .andWhere('month', '=', filter?.month)
+      .andWhere('year', '=', Number(filter?.year) - 1)
+      .andWhereBetween('month', [Number(filter?.month), Number(filter?.second_month)])
       .first();
 
     const second_year_import = await knex
@@ -22,15 +22,15 @@ export async function timeframe_month(filter: filterProps, knex) {
       .sum({ custom_value_usd: 'custom_value_usd' })
       .where('origin_country', '=', country)
       .andWhere('year', '=', filter?.year)
-      .andWhere('month', '=', filter?.second_month)
+      .andWhereBetween('month', [Number(filter?.month), Number(filter?.second_month)])
       .first();
 
     const first_year_export = await knex
       .table('exports_detail')
       .sum({ custom_value_usd: 'custom_value_usd' })
       .where('destination_country', '=', country)
-      .andWhere('year', '=', filter?.year)
-      .andWhere('month', '=', filter?.month)
+      .andWhere('year', '=', Number(filter?.year) - 1)
+      .andWhereBetween('month', [Number(filter?.month), Number(filter?.second_month)])
       .first();
 
     const second_year_export = await knex
@@ -38,15 +38,22 @@ export async function timeframe_month(filter: filterProps, knex) {
       .sum({ custom_value_usd: 'custom_value_usd' })
       .where('destination_country', '=', country)
       .andWhere('year', '=', filter?.year)
-      .andWhere('month', '=', filter?.second_month)
+      .andWhereBetween('month', [Number(filter?.month), Number(filter?.second_month)])
+      .first();
+
+    const full_country_name = await knex
+      .table('stat_countries')
+      .where('code', '=', country)
       .first();
 
     data.push({
       country: country,
+      country_name: full_country_name?.country_name,
       data: {
-        month: {
-          month: filter?.month,
-          year: filter?.year,
+        year: {
+          month_start: filter?.month,
+          month_end: filter?.second_month,
+          year: Number(filter?.year) - 1,
           imports: first_year_import.custom_value_usd,
           exports: first_year_export.custom_value_usd,
           volumes: Number(first_year_import.custom_value_usd) + Number(first_year_export.custom_value_usd),
@@ -55,8 +62,9 @@ export async function timeframe_month(filter: filterProps, knex) {
               ? (Number(first_year_import.custom_value_usd) - Number(first_year_export.custom_value_usd)) * -1
               : Number(first_year_import.custom_value_usd) - Number(first_year_export.custom_value_usd),
         },
-        second_month: {
-          month: filter?.second_month,
+        second_year: {
+          month_start: filter?.month,
+          month_end: filter?.second_month,
           year: filter?.year,
           imports: second_year_import.custom_value_usd,
           exports: second_year_export.custom_value_usd,
