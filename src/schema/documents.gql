@@ -1,6 +1,6 @@
 extend type Query {
-  documentList(pagination: PaginationInput, filter: FilterDocumentInput): DocumentList
-  documentDetail(id: Int!): Document
+  documentList(websiteId: Int!, pagination: PaginationInput, filter: FilterDocumentInput): DocumentList
+  documentDetail(websiteId: Int!, id: Int!): Document
 }
 
 extend type Mutation {
@@ -35,4 +35,13 @@ input FilterDocumentInput {
   category: Int
   categorySubId: Int
   published_date: String
+  status: OfficialDocumentStatusEnum
+}
+
+enum OfficialDocumentStatusEnum {
+  ALL
+  PENDING
+  INREVIEW
+  PUBLISHED
+  REVERSION
 }
