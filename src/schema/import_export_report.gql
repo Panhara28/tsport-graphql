@@ -26,5 +26,6 @@ type ImportExportTopTenCountryVolume {
 
 type ImportExportTopTenCountryVolumeItem {
   country: String
+  country_name: String
   volume: String
 }
