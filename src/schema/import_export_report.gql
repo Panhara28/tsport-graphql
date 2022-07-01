@@ -1,5 +1,6 @@
 extend type Query {
   importExportReport(filter: ImportExportFilter): JSON
+  importExportTopTenCountryVolume: ImportExportTopTenCountryVolumeList
 }
 
 input ImportExportFilter {
@@ -11,4 +12,19 @@ input ImportExportFilter {
   second_month: String
   semester: String
   trimester: String
+}
+
+type ImportExportTopTenCountryVolumeList {
+  data: ImportExportTopTenCountryVolume
+}
+
+type ImportExportTopTenCountryVolume {
+  imports: [ImportExportTopTenCountryVolumeItem]
+  exports: [ImportExportTopTenCountryVolumeItem]
+  volumes: [ImportExportTopTenCountryVolumeItem]
+}
+
+type ImportExportTopTenCountryVolumeItem {
+  country: String
+  volume: String
 }
