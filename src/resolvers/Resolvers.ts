@@ -86,7 +86,7 @@ import { DocumentListQuery } from './Admin/Plugins/Documents/Query/DocumentListQ
 import { PublicDocumentCategoryList } from './Admin/Plugins/DocumentCategory/Query/PublicDocumentCategoryList';
 import { ImportsListQuery } from './Admin/Plugins/Imports/Query/ImportsListQuery';
 import { importsDetailQuery } from './Admin/Plugins/Imports/Query/importsDetailQuery';
-import { CreateImportsMutation } from './Admin/Plugins/Imports/Mutation/createImportsMutation';
+import { CreateImportsMutation } from './Admin/Plugins/Imports/Mutation/CreateImportsMutation';
 import { UpdateImportsMutation } from './Admin/Plugins/Imports/Mutation/UpdateImportsMutation';
 import { ExportsListQuery } from './Admin/Plugins/Exports/Query/ExportsListQuery';
 import { ExportsDetailQuery } from './Admin/Plugins/Exports/Query/ExportsDetailQuery';
