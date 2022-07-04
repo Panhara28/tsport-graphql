@@ -50,20 +50,14 @@ export async function timeframe_year(filter: filterProps, knex) {
           imports: first_year_import.custom_value_usd,
           exports: first_year_export.custom_value_usd,
           volumes: Number(first_year_import.custom_value_usd) + Number(first_year_export.custom_value_usd),
-          balances:
-            Number(first_year_import.custom_value_usd) - Number(first_year_export.custom_value_usd) < 0
-              ? (Number(first_year_import.custom_value_usd) - Number(first_year_export.custom_value_usd)) * -1
-              : Number(first_year_import.custom_value_usd) - Number(first_year_export.custom_value_usd),
+          balances: Number(first_year_export.custom_value_usd) - Number(first_year_import.custom_value_usd),
         },
         second_year: {
           year: filter?.second_year,
           imports: second_year_import.custom_value_usd,
           exports: second_year_export.custom_value_usd,
           volumes: Number(second_year_import.custom_value_usd) + Number(second_year_export.custom_value_usd),
-          balances:
-            Number(second_year_import.custom_value_usd) - Number(second_year_export.custom_value_usd) < 0
-              ? Number(second_year_import.custom_value_usd) - Number(second_year_export.custom_value_usd) * -1
-              : Number(second_year_import.custom_value_usd) - Number(second_year_export.custom_value_usd),
+          balances: Number(second_year_export.custom_value_usd) - Number(second_year_import.custom_value_usd),
         },
       },
     });
