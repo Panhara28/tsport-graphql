@@ -94,7 +94,7 @@ import { CreateExportsMutation } from './Admin/Plugins/Exports/Mutation/CreateEx
 import { UpdateExportsMutation } from './Admin/Plugins/Exports/Mutation/UpdateExportsMutation';
 import { ImportExportReportQuery } from './Admin/Plugins/ImportExportReport/ImportExportReportQuery';
 import { StatCountriesListQuery } from './Admin/Plugins/StatCountries/StatCountriesListQuery';
-import { ImportExportTopTenCountryVolume } from './Admin/Plugins/ImportExportReport/importExportTopTenCountryVolume';
+import { ImportExportTopTenCountryVolume } from './Admin/Plugins/ImportExportReport/ImportExportTopTenCountryVolume';
 
 const AppResolver = [
   {
