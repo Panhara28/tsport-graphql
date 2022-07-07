@@ -1,0 +1,20 @@
+extend type Mutation {
+  createCOExports(input: COExportsInput): Int!
+}
+
+input COExportsInput {
+  name: String
+  websiteId: Int
+  data: [COExportsInputDetail]
+}
+
+input COExportsInputDetail {
+  year: String
+  month: String
+  destination_country: String
+  hs_code: String
+  unit: String
+  quantity: Float
+  fob_value_usd: Float
+  form_type: String
+}

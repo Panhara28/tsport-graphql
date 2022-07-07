@@ -95,6 +95,9 @@ import { UpdateExportsMutation } from './Admin/Plugins/Exports/Mutation/UpdateEx
 import { ImportExportReportQuery } from './Admin/Plugins/ImportExportReport/ImportExportReportQuery';
 import { StatCountriesListQuery } from './Admin/Plugins/StatCountries/StatCountriesListQuery';
 import { ImportExportTopTenCountryVolume } from './Admin/Plugins/ImportExportReport/ImportExportTopTenCountryVolume';
+import { CreateCOExportsMutation } from './Admin/Plugins/COExports/Mutation/CreateCOExportsMutation';
+import { GDCEByCountryAndHSCodeReportQuery } from './Admin/Plugins/GDCEByCountryReport/Query/GDCEByCountryAndHSCodeReportQuery';
+import { GDCEByCountryReportQuery } from './Admin/Plugins/GDCEByCountryReport/Query/GDCEByCountryReportQuery';
 
 const AppResolver = [
   {
@@ -152,6 +155,8 @@ const AppResolver = [
       importExportReport: ImportExportReportQuery,
       statCountriesList: StatCountriesListQuery,
       importExportTopTenCountryVolume: ImportExportTopTenCountryVolume,
+      gdceByCountryAndHSCodeReport: GDCEByCountryAndHSCodeReportQuery,
+      gdceByCountryReport: GDCEByCountryReportQuery,
     },
 
     Mutation: {
@@ -206,6 +211,7 @@ const AppResolver = [
       updateImports: UpdateImportsMutation,
       createExports: CreateExportsMutation,
       updateExports: UpdateExportsMutation,
+      createCOExports: CreateCOExportsMutation,
     },
     Subscription: {
       newNotification: {

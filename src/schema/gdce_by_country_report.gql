@@ -1,0 +1,52 @@
+extend type Query {
+  gdceByCountryReport(filter: GDCEByCountryReportFilters): GDCEByCountryReport
+  gdceByCountryAndHSCodeReport(hs_code: String!, filter: GDCEByCountryReportFilters): GDCEByCountryAndHSCodeReport
+}
+
+input GDCEByCountryReportFilters {
+  from: String
+  to: String
+  country: String
+}
+
+type GDCEByCountryReport {
+  importsList: [GDCEImports]
+  exportsList: [GDCEExports]
+  volume: Float
+  balance: Float
+  volumeEachYear: [GDCEByCountryReportVolumeEachYear]
+  balanceEachYear: [GDCEByCountryReportBalanceEachYear]
+}
+
+type GDCEByCountryReportVolumeEachYear {
+  year: String
+  volume: Float
+}
+
+type GDCEByCountryReportBalanceEachYear {
+  year: String
+  balance: Float
+}
+
+type GDCEByCountryAndHSCodeReport {
+  importsList: [GDCEImports]
+  exportsList: [GDCEExports]
+  imports_total_qty: Float
+  exports_total_qty: Float
+  volumeEachYear: [GDCEByCountryReportVolumeEachYear]
+  balanceEachYear: [GDCEByCountryReportBalanceEachYear]
+}
+
+type GDCEImports {
+  origin_country: String
+  custom_value_usd: Float
+  hs_code: String
+  quantity: Float
+}
+
+type GDCEExports {
+  destination_country: String
+  custom_value_usd: Float
+  hs_code: String
+  quantity: Float
+}
