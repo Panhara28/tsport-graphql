@@ -2,6 +2,8 @@ import { Graph } from 'src/generated/graph';
 import ContextType from 'src/graphql/ContextType';
 import { each_year_balance } from '../functions/each_year_balance';
 import { each_year_volume } from '../functions/each_year_volume';
+import { each_year_exports } from '../functions/exports_each_year';
+import { each_year_imports } from '../functions/imports_each_year';
 
 export const GDCEByCountryReportQuery = async (
   _,
@@ -53,11 +55,25 @@ export const GDCEByCountryReportQuery = async (
   }, 0);
 
   return {
-    importsList: imports,
-    exportsList: exports,
-    volume: imports_total + exports_total,
-    balance: exports_total - imports_total,
+    importsList: imports.map(x => {
+      return {
+        ...x,
+        quantity: Number(x?.quantity) ? Number(x?.quantity) : 1,
+      };
+    }),
+    exportsList: exports.map(x => {
+      return {
+        ...x,
+        quantity: Number(x?.quantity) ? Number(x?.quantity) : 1,
+      };
+    }),
+    imports_total: imports_total.toFixed(2),
+    exports_total: exports_total.toFixed(2),
+    volume_total: (imports_total + exports_total).toFixed(2),
+    balance_total: (exports_total - imports_total).toFixed(2),
     volumeEachYear: each_year_volume(imports_each_year, exports_each_year),
     balanceEachYear: each_year_balance(imports_each_year, exports_each_year),
+    importsEachYear: each_year_imports(imports_each_year),
+    exportsEachYear: each_year_exports(exports_each_year),
   };
 };
