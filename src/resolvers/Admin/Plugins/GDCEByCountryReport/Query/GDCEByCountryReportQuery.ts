@@ -69,11 +69,19 @@ export const GDCEByCountryReportQuery = async (
     }),
     imports_total: imports_total.toFixed(2),
     exports_total: exports_total.toFixed(2),
+    imports_total_qty: imports.reduce((prev, cur) => {
+      let cur_qty = Number(cur?.quantity) ? Number(cur?.quantity) : 1;
+      return prev + cur_qty;
+    }, 0),
+    exports_total_qty: exports.reduce((prev, cur) => {
+      let cur_qty = Number(cur?.quantity) ? Number(cur?.quantity) : 1;
+      return prev + cur_qty;
+    }, 0),
     volume_total: (imports_total + exports_total).toFixed(2),
     balance_total: (exports_total - imports_total).toFixed(2),
     volumeEachYear: each_year_volume(imports_each_year, exports_each_year),
     balanceEachYear: each_year_balance(imports_each_year, exports_each_year),
-    importsEachYear: each_year_imports(imports_each_year),
-    exportsEachYear: each_year_exports(exports_each_year),
+    importsEachYear: each_year_imports(imports_each_year, filter?.from, filter?.to),
+    exportsEachYear: each_year_exports(exports_each_year, filter?.from, filter?.to),
   };
 };
