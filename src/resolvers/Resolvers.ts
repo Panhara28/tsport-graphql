@@ -98,6 +98,9 @@ import { ImportExportTopTenCountryVolume } from './Admin/Plugins/ImportExportRep
 import { CreateCOExportsMutation } from './Admin/Plugins/COExports/Mutation/CreateCOExportsMutation';
 import { GDCEByCountryAndHSCodeReportQuery } from './Admin/Plugins/GDCEByCountryReport/Query/GDCEByCountryAndHSCodeReportQuery';
 import { GDCEByCountryReportQuery } from './Admin/Plugins/GDCEByCountryReport/Query/GDCEByCountryReportQuery';
+import { CountryListQuery } from './Admin/Plugins/Countries/Query/CountryListQuery';
+import { CountryDetailQuery } from './Admin/Plugins/Countries/Query/CountryDetailQuery';
+import { UpdateCountryMutation } from './Admin/Plugins/Countries/Mutation/UpdateCountryMutation';
 
 const AppResolver = [
   {
@@ -157,6 +160,8 @@ const AppResolver = [
       importExportTopTenCountryVolume: ImportExportTopTenCountryVolume,
       gdceByCountryAndHSCodeReport: GDCEByCountryAndHSCodeReportQuery,
       gdceByCountryReport: GDCEByCountryReportQuery,
+      countryList: CountryListQuery,
+      countryDetail: CountryDetailQuery,
     },
 
     Mutation: {
@@ -212,6 +217,7 @@ const AppResolver = [
       createExports: CreateExportsMutation,
       updateExports: UpdateExportsMutation,
       createCOExports: CreateCOExportsMutation,
+      updateCountry: UpdateCountryMutation,
     },
     Subscription: {
       newNotification: {
