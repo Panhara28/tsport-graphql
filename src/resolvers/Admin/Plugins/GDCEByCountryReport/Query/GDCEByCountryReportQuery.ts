@@ -11,7 +11,10 @@ export const GDCEByCountryReportQuery = async (
   ctx: ContextType,
 ) => {
   const knex = await ctx.knex.default;
-
+  const country = await knex
+    .table('stat_countries')
+    .where({ code: filter.country })
+    .first();
   const imports_query = knex.table('imports_detail');
   const exports_query = knex.table('exports_detail');
 
@@ -70,11 +73,11 @@ export const GDCEByCountryReportQuery = async (
     imports_total: imports_total.toFixed(2),
     exports_total: exports_total.toFixed(2),
     imports_total_qty: imports.reduce((prev, cur) => {
-      let cur_qty = Number(cur?.quantity) ? Number(cur?.quantity) : 1;
+      const cur_qty = Number(cur?.quantity) ? Number(cur?.quantity) : 1;
       return prev + cur_qty;
     }, 0),
     exports_total_qty: exports.reduce((prev, cur) => {
-      let cur_qty = Number(cur?.quantity) ? Number(cur?.quantity) : 1;
+      const cur_qty = Number(cur?.quantity) ? Number(cur?.quantity) : 1;
       return prev + cur_qty;
     }, 0),
     volume_total: (imports_total + exports_total).toFixed(2),
@@ -83,5 +86,7 @@ export const GDCEByCountryReportQuery = async (
     balanceEachYear: each_year_balance(imports_each_year, exports_each_year),
     importsEachYear: each_year_imports(imports_each_year, filter?.from, filter?.to),
     exportsEachYear: each_year_exports(exports_each_year, filter?.from, filter?.to),
+    country_name: country.country_name,
+    country_image: country.country_image,
   };
 };

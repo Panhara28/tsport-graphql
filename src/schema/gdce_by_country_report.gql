@@ -22,6 +22,8 @@ type GDCEByCountryReport {
   balanceEachYear: [GDCEByCountryReportBalanceEachYear]
   importsEachYear: [GDCEByCountryReportValueEachYear]
   exportsEachYear: [GDCEByCountryReportValueEachYear]
+  country_name: String
+  country_image: String
 }
 
 type GDCEByCountryReportVolumeEachYear {
