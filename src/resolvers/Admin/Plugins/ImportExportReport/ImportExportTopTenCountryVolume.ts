@@ -5,7 +5,7 @@ export const ImportExportTopTenCountryVolume = async (_, {}, ctx: ContextType) =
 
   const imports_detail = await knex.raw(
     `
-    SELECT ed.origin_country as country, sum(ed.custom_value_usd) as volume, sc.country_name as country_name
+    SELECT ed.origin_country as country, sum(ed.custom_value_usd) as volume, sc.country_name as country_name, sc.country_image as country_image
     FROM imports_detail AS ed
     INNER JOIN stat_countries as sc ON sc.code = ed.origin_country
     GROUP BY ed.origin_country
@@ -15,7 +15,7 @@ export const ImportExportTopTenCountryVolume = async (_, {}, ctx: ContextType) =
 
   const exports_detail = await knex.raw(
     `
-    SELECT ed.destination_country as country, sum(ed.custom_value_usd) as volume, sc.country_name as country_name
+    SELECT ed.destination_country as country, sum(ed.custom_value_usd) as volume, sc.country_name as country_name, sc.country_image as country_image
     FROM exports_detail AS ed
     INNER JOIN stat_countries as sc ON sc.code = ed.destination_country
     GROUP BY ed.destination_country
