@@ -1,5 +1,6 @@
 extend type Mutation {
   createCOExports(input: COExportsInput): Int!
+  deleteCOExports(coExportId: Int!): Boolean
 }
 
 input COExportsInput {

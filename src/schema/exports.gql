@@ -6,6 +6,7 @@ extend type Query {
 extend type Mutation {
   createExports(input: ExportsInput): Int!
   updateExports(id: Int!, input: ExportsInput): Boolean
+  deleteExports(exportId: Int!): Boolean
 }
 
 type ExportsList {

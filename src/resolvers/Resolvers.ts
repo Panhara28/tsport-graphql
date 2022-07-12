@@ -101,6 +101,9 @@ import { GDCEByCountryReportQuery } from './Admin/Plugins/GDCEByCountryReport/Qu
 import { CountryListQuery } from './Admin/Plugins/Countries/Query/CountryListQuery';
 import { CountryDetailQuery } from './Admin/Plugins/Countries/Query/CountryDetailQuery';
 import { UpdateCountryMutation } from './Admin/Plugins/Countries/Mutation/UpdateCountryMutation';
+import { DeleteImportsMutation } from './Admin/Plugins/Imports/Mutation/DeleteImportsMutation';
+import { DeleteExportsMutation } from './Admin/Plugins/Exports/Mutation/DeleteExportsMutation';
+import { DeleteCOExportsMutation } from './Admin/Plugins/COExports/Mutation/DeleteCOExportsMutation';
 
 const AppResolver = [
   {
@@ -218,6 +221,9 @@ const AppResolver = [
       updateExports: UpdateExportsMutation,
       createCOExports: CreateCOExportsMutation,
       updateCountry: UpdateCountryMutation,
+      deleteImports: DeleteImportsMutation,
+      deleteExports: DeleteExportsMutation,
+      deleteCOExports: DeleteCOExportsMutation,
     },
     Subscription: {
       newNotification: {
