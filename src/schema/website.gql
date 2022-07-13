@@ -2,7 +2,7 @@ extend type Query {
   websiteList: WebsiteList
   website(id: Int): Website
   installedPluginList(websiteId: Int!): [InstalledPluginProps]
-  addedPeopleList(websiteId: Int!): [AddedPeople]
+  addedPeopleList(websiteId: Int!, pagination: PaginationInput): AddedPeople
 }
 
 extend type Mutation {
@@ -53,7 +53,12 @@ type InstalledPluginProps {
   pluginName: String
 }
 
-type AddedPeople {
+type AddedPeopleInfo {
   userId: Int
   fullName: String
+}
+
+type AddedPeople {
+  data: [AddedPeopleInfo]
+  pagination: Pagination
 }
