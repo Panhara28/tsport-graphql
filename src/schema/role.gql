@@ -22,7 +22,6 @@ type Role {
   id: Int
   name: String
   website_id: Int
-  access: Access
 }
 
 input RoleInput {

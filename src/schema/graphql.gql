@@ -12,3 +12,14 @@ type Mutation {
 type Subscription {
   testing: String
 }
+
+input PaginationInput {
+  page: Int
+  size: Int
+}
+
+type Pagination {
+  total: Int
+  size: Int
+  current: Int
+}

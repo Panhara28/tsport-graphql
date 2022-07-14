@@ -1,5 +1,5 @@
 extend type Query {
-  adminUserList: UserList
+  adminUserList(pagination: PaginationInput): UserList
   adminUserDetail(id: Int!): User
   userList: UserList
   userDetail(id: Int!): User
@@ -16,41 +16,18 @@ type User {
   id: Int
   fullname: String
   username: String
-  gender: UserGender
-  nationality: String
-  fullname_en: String
-  dob: String
-  homeNo: String
-  streetNo: String
-  phoneNumber: String
-  email: String
-  contact_village: String
-  contact_district: String
-  contact_commune: String
-  contact_city_or_province: String
   profile_picture: String
 }
 
 type UserList {
   data: [User]
+  pagination: Pagination
 }
 
 input UserInput {
   fullname: String
   username: String
   password: String
-  gender: UserGender
-  nationality: String
-  fullname_en: String
-  dob: String
-  homeNo: String
-  streetNo: String
-  phoneNumber: String
-  email: String
-  contact_village: String
-  contact_district: String
-  contact_commune: String
-  contact_city_or_province: String
   profile_picture: String
 }
 

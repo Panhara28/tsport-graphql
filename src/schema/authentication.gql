@@ -33,5 +33,4 @@ type Me {
   phoneNumber: String
   email: String
   roleId: Int
-  plugins: [Plugin]
 }
