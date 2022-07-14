@@ -20,10 +20,6 @@ export const AdminCreateUserMutation = async (_, { input }: { input: Graph.UserI
       user_id: createUser,
       role_id: 1,
     });
-    await knex('user_plugins').insert({
-      user_id: createUser,
-      plugin_id: 1,
-    });
     return createUser;
   } else {
     throw new AuthenticationError(`You can't do that!`);
