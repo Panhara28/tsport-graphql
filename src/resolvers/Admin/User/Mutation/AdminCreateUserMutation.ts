@@ -12,22 +12,7 @@ export const AdminCreateUserMutation = async (_, { input }: { input: Graph.UserI
     fullname: input?.fullname ? input?.fullname : undefined,
     username: input?.username ? input?.username : undefined,
     password: input?.password ? hash : undefined,
-    fullname_en: input?.fullname_en,
-    contact_village: input.contact_village ? input.contact_village : undefined,
-    contact_district: input.contact_district ? input.contact_district : undefined,
-    contact_commune: input.contact_commune ? input.contact_commune : undefined,
-    contact_city_or_province: input.contact_city_or_province ? input.contact_city_or_province : undefined,
-    nationality: input?.nationality,
-    homeNo: input?.homeNo,
-    streetNo: input?.streetNo,
-    phoneNumber: input?.phoneNumber,
-    dob: input.dob,
-    email: input?.email,
     profile_picture: input?.profile_picture,
-    // district: input.district ? input.district : undefined,
-    // commune: input.commune ? input.commune : undefined,
-    // province_id: input.province_id ? input.province_id : undefined,
-    // village_or_group: input.village_or_group ? input.village_or_group : undefined,
   });
 
   if (createUser) {

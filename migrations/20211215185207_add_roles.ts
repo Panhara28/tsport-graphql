@@ -5,7 +5,6 @@ export async function up(knex: Knex): Promise<void> {
     return await knex.schema.createTable('roles', function(table) {
       table.increments();
       table.string('name');
-      table.integer('website_id');
       table.timestamps(true, true);
     });
   }

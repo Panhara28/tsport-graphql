@@ -8,7 +8,6 @@ export async function up(knex: Knex): Promise<void> {
       field.json('activity');
       field.integer('user_id');
       field.integer('news_id');
-      field.integer('website_id');
       field.timestamps(true, true);
     });
   }
