@@ -11,9 +11,8 @@ export const ActivityLogsNewsQuery = async (
   const query = knex
     .table('activity_log')
     .where({ news_id: id })
-    .andWhere({ website_id: websiteId })
     .orderBy('id', 'desc');
-  const totalQuery = knex.table('activity_log').andWhere({ website_id: websiteId, news_id: id });
+  const totalQuery = knex.table('activity_log');
 
   if (pagination?.size !== undefined && pagination?.page !== undefined) {
     query.limit(pagination?.size).offset((pagination?.page - 1) * 10);

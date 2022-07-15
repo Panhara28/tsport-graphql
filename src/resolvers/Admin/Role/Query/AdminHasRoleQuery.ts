@@ -1,10 +1,6 @@
 import ContextType from 'src/graphql/ContextType';
 
-export const AdminHasRoleQuery = async (
-  _,
-  { userId, websiteId }: { userId: number; websiteId: number },
-  ctx: ContextType,
-) => {
+export const AdminHasRoleQuery = async (_, { userId }: { userId: number }, ctx: ContextType) => {
   const knex = ctx.knex.default;
   await ctx.authUser.requireLogin('USER');
 
@@ -14,7 +10,6 @@ export const AdminHasRoleQuery = async (
     .innerJoin('roles', 'roles.id', 'role_permissions.role_id')
     .select('roles.id', 'roles.name as name')
     .where('users.id', '=', userId)
-    .andWhere('role_permissions.website_id', '=', websiteId)
     .first();
 
   return {

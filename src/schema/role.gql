@@ -1,16 +1,17 @@
 extend type Query {
-  roleList(websiteId: Int!): RoleList
+  roleList: RoleList
   role(id: Int): Role
-  adminRoleList(websiteId: Int!): RoleList
-  hasRole(userId: Int!, websiteId: Int!): Role
-  adminHasRole(userId: Int!, websiteId: Int!): Role
-  roleDetail(websiteId: Int!, roleId: Int!): Role
+  adminRoleList: RoleList
+  hasRole(userId: Int!): Role
+  adminHasRole(userId: Int!): Role
+  roleDetail(roleId: Int!): Role
 }
 
 extend type Mutation {
   createRole(input: RoleInput, permission: RolePermissionInput): Int
   updateRole(id: Int, input: RoleInput): Boolean
-  roleManageAccess(websiteId: Int!, roleId: Int!, read: Boolean, write: Boolean, modified: Boolean): Boolean
+  roleManageAccess(roleId: Int!, read: Boolean, write: Boolean, modify: Boolean, remove: Boolean): Boolean
+  adminAssignRoleToUser(userId: Int!, roleId: Int!): Boolean
 }
 
 type RoleList {
@@ -21,12 +22,18 @@ type RoleList {
 type Role {
   id: Int
   name: String
-  website_id: Int
+  access: RoleAccess
+}
+
+type RoleAccess {
+  read: Boolean
+  write: Boolean
+  modify: Boolean
+  delete: Boolean
 }
 
 input RoleInput {
   name: String
-  website_id: Int
 }
 
 type RolePermission {

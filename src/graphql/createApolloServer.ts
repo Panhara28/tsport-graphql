@@ -82,11 +82,6 @@ export default function createApolloServer() {
       }
 
       if (token) {
-        // query admin token
-        const super_admin = await knex
-          .table('super_admin_token')
-          .where({ token: token })
-          .first();
         const user = await knex
           .table('user_token')
           .innerJoin('role_permissions', 'role_permissions.user_id', 'user_token.user_id')
@@ -95,28 +90,23 @@ export default function createApolloServer() {
             'user_token.user_id as user_id',
             'roles.write as write',
             'roles.read as read',
-            'roles.modified as modified',
+            'roles.modify as modify',
+            'roles.delete as delete',
           )
           .where({ token: token })
           .first();
 
-        if (super_admin) {
-          authSuperAdmin.super_admin = {
-            id: super_admin.super_admin_id,
+        if (user) {
+          authUser.user = {
+            id: user.user_id,
             token: token,
+            read: user.read,
+            write: user.write,
+            modify: user.modified,
+            delete: user.delete,
           };
         } else {
-          if (user) {
-            authUser.user = {
-              id: user.user_id,
-              token: token,
-              read: user.read,
-              write: user.write,
-              modified: user.modified,
-            };
-          } else {
-            throw new AuthenticationError('Incorrect Token!!');
-          }
+          throw new AuthenticationError('Incorrect Token!!');
         }
       }
 

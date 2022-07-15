@@ -1,10 +1,11 @@
 import * as Knex from 'knex';
 
 export async function up(knex: Knex): Promise<void> {
-  return knex.schema.table('roles', function(field) {
-    field.boolean('read').defaultTo(false);
-    field.boolean('write').defaultTo(false);
-    field.boolean('modified').defaultTo(false);
+  return knex.schema.table('roles', function(table) {
+    table.boolean('read').defaultTo(false);
+    table.boolean('write').defaultTo(false);
+    table.boolean('modify').defaultTo(false);
+    table.boolean('delete').defaultTo(false);
   });
 }
 

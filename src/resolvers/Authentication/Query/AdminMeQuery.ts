@@ -12,7 +12,6 @@ export const AdminMeQuery = async (
     const queryUser = knex
       .table('user_token')
       .innerJoin('users', 'users.id', 'user_token.user_id')
-      .innerJoin('website_user_details', 'website_user_details.user_id', 'users.id')
       .innerJoin('role_permissions', 'role_permissions.user_id', 'users.id')
       .innerJoin('roles', 'roles.id', 'role_permissions.role_id')
       .innerJoin('user_plugins', 'user_plugins.user_id', 'users.id')
@@ -20,9 +19,6 @@ export const AdminMeQuery = async (
       .where({ token: clientToken })
       .first();
     // Query current user by websiteId
-    if (websiteId) {
-      queryUser.andWhere('website_user_details.website_id', '=', websiteId);
-    }
 
     const user = await queryUser;
 
