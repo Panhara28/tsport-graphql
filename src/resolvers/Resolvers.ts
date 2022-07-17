@@ -20,6 +20,9 @@ import { CreatePlaygrounMutation } from './Playground/Mutation/CreatePlaygroundM
 import { ChangePasswordMutation } from './Authentication/Mutation/ChangePasswordMutation';
 import { RoleDetailQuery } from './Admin/Role/Query/RoleDetailQuery';
 import { RoleManageAccessMutation } from './Admin/Role/Mutation/RoleManageAccessMutation';
+import { HrEmployeeListQuery } from './Admin/HrEmployee/Query/HrEmployeeListQuery';
+import { HrEmployeeDetailQuery } from './Admin/HrEmployee/Query/HrEmployeeDetailQuery';
+import { CreateHrEmployeeMutation } from './Admin/HrEmployee/Mutation/CreateHrEmployeeMutation';
 
 const AppResolver = [
   {
@@ -38,6 +41,8 @@ const AppResolver = [
       activityLogsOptions: ActivityLogsOptionsQuery,
       playgroundList: PlaygroundListQuery,
       roleDetail: RoleDetailQuery,
+      hrEmployeeList: HrEmployeeListQuery,
+      hrEmployee: HrEmployeeDetailQuery,
     },
 
     Mutation: {
@@ -55,6 +60,7 @@ const AppResolver = [
       changePassword: ChangePasswordMutation,
       adminAssignRoleToUser: AdminAssignRoleToUserMutation,
       roleManageAccess: RoleManageAccessMutation,
+      createHrEmployee: CreateHrEmployeeMutation,
     },
   },
 ];

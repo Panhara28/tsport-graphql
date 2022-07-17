@@ -16,6 +16,8 @@ type User {
   id: Int
   fullname: String
   username: String
+  email: String
+  phoneNumber: String
   profile_picture: String
 }
 
@@ -28,6 +30,8 @@ input UserInput {
   fullname: String
   username: String
   password: String
+  email: String
+  phoneNumber: String
   profile_picture: String
 }
 
