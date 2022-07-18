@@ -23,6 +23,11 @@ import { RoleManageAccessMutation } from './Admin/Role/Mutation/RoleManageAccess
 import { HrEmployeeListQuery } from './Admin/HrEmployee/Query/HrEmployeeListQuery';
 import { HrEmployeeDetailQuery } from './Admin/HrEmployee/Query/HrEmployeeDetailQuery';
 import { CreateHrEmployeeMutation } from './Admin/HrEmployee/Mutation/CreateHrEmployeeMutation';
+import { UpdateHrEmployeeMutation } from './Admin/HrEmployee/Mutation/UpdateHrEmployeeMutation';
+import { CreateHrDepartmentMutation } from './Admin/HrDepartment/Mutation/CreateHrDepartmentMutation';
+import { HrDepartmentListQuery } from './Admin/HrDepartment/Query/HrDepartmentListQuery';
+import { UpdateHrDepartmentMutation } from './Admin/HrDepartment/Mutation/UpdateHrDepartmentMutation';
+import { HrDepartmentDetailQuery } from './Admin/HrDepartment/Query/HrDepartmentDetailQuery';
 
 const AppResolver = [
   {
@@ -43,6 +48,8 @@ const AppResolver = [
       roleDetail: RoleDetailQuery,
       hrEmployeeList: HrEmployeeListQuery,
       hrEmployee: HrEmployeeDetailQuery,
+      hrDepartmentList: HrDepartmentListQuery,
+      hrDepartment: HrDepartmentDetailQuery,
     },
 
     Mutation: {
@@ -61,6 +68,9 @@ const AppResolver = [
       adminAssignRoleToUser: AdminAssignRoleToUserMutation,
       roleManageAccess: RoleManageAccessMutation,
       createHrEmployee: CreateHrEmployeeMutation,
+      updateHrEmployee: UpdateHrEmployeeMutation,
+      createHrDepartment: CreateHrDepartmentMutation,
+      updateHrDepartment: UpdateHrDepartmentMutation,
     },
   },
 ];

@@ -1,0 +1,24 @@
+extend type Query {
+  hrDepartmentList(branch_level: Int): JSON
+  hrDepartment(id: Int!): HrDepartment
+}
+
+extend type Mutation {
+  createHrDepartment(input: HrDepartmentInput): Int
+  updateHrDepartment(id: Int!, input: HrDepartmentInput): Boolean
+}
+
+type HrDepartmentList {
+  data: [HrDepartment]
+}
+
+type HrDepartment {
+  id: Int
+  name: String
+  parent_id: Int
+}
+
+input HrDepartmentInput {
+  name: String
+  parent_id: Int
+}
