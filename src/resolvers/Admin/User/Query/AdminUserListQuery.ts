@@ -23,9 +23,9 @@ export const AdminUserListQuery = async (
       };
     }),
     pagination: {
-      curent: pagination.page,
-      total: users.length,
-      page: users.length,
+      current: pagination.page,
+      total: Number(users.length),
+      size: users.length,
     },
   };
 };
