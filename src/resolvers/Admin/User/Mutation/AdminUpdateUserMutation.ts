@@ -12,8 +12,9 @@ export const AdminUpdateUserMutation = async (
   const updateUser = await knex('users')
     .update({
       fullname: input?.fullname ? input?.fullname : undefined,
-      username: input?.username ? input?.username : undefined,
-      profile_picture: input?.profile_picture,
+      phoneNumber: input?.phoneNumber ? input?.phoneNumber : undefined,
+      email: input?.email ? input?.email : undefined,
+      profile_picture: input?.profile_picture ? input?.profile_picture : undefined,
     })
     .where({ id });
 

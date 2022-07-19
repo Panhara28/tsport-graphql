@@ -19,6 +19,8 @@ type User {
   email: String
   phoneNumber: String
   profile_picture: String
+  email: String
+  phoneNumber: String
 }
 
 type UserList {
@@ -33,6 +35,8 @@ input UserInput {
   email: String
   phoneNumber: String
   profile_picture: String
+  email: String
+  phoneNumber: String
 }
 
 enum UserGender {
