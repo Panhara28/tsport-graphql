@@ -24,7 +24,7 @@ export const AdminUserListQuery = async (
     }),
     pagination: {
       current: pagination.page,
-      total: Number(users.length),
+      total: users.length,
       size: users.length,
     },
   };

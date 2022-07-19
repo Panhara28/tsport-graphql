@@ -5,7 +5,6 @@ export const ActivityLogsOptionsQuery = async (_, { websiteId }: { websiteId: nu
 
   const options = await knex
     .table('activity_log')
-    .andWhere({ website_id: websiteId })
     .select('type')
     .distinct();
 

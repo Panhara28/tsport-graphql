@@ -1,13 +1,9 @@
 import ContextType from 'src/graphql/ContextType';
 
-export const AdminRoleListQuery = async (_, { websiteId }: { websiteId: number }, ctx: ContextType) => {
+export const AdminRoleListQuery = async (_, {}, ctx: ContextType) => {
   const knex = ctx.knex.default;
   await ctx.authUser.requireLogin('USER');
-  const adminRoleList = await knex
-    .table('websites')
-    .innerJoin('roles', 'websites.id', 'roles.website_id')
-    .select('roles.id', 'roles.name as name')
-    .where('websites.id', '=', websiteId);
+  const adminRoleList = await knex.table('roles');
 
   return {
     data: adminRoleList.map(item => {

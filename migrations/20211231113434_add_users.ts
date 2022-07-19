@@ -8,7 +8,7 @@ export async function up(knex: Knex): Promise<void> {
       table.string('password');
       table.string('fullname');
       table.integer('created_by');
-      table.integer('phoneNumber');
+      table.integer('phone_number');
       table.string('profile_picture');
       table.timestamps(true, true);
     });

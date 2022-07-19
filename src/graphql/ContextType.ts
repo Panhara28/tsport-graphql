@@ -10,7 +10,8 @@ export interface AuthUserInterface {
   token: string;
   read?: boolean | null;
   write?: boolean | null;
-  modified?: boolean | null;
+  modify?: boolean | null;
+  delete?: boolean | null;
 }
 
 export interface AuthUser {

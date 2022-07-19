@@ -18,6 +18,8 @@ import { ActivityLogsOptionsQuery } from './Admin/ActivityLog/Query/ActivityLogs
 import { PlaygroundListQuery } from './Playground/Query/PlaygroundListQuery';
 import { CreatePlaygrounMutation } from './Playground/Mutation/CreatePlaygroundMutation';
 import { ChangePasswordMutation } from './Authentication/Mutation/ChangePasswordMutation';
+import { RoleDetailQuery } from './Admin/Role/Query/RoleDetailQuery';
+import { RoleManageAccessMutation } from './Admin/Role/Mutation/RoleManageAccessMutation';
 
 const AppResolver = [
   {
@@ -35,6 +37,7 @@ const AppResolver = [
       activityLogsNews: ActivityLogsNewsQuery,
       activityLogsOptions: ActivityLogsOptionsQuery,
       playgroundList: PlaygroundListQuery,
+      roleDetail: RoleDetailQuery,
     },
 
     Mutation: {
@@ -50,6 +53,8 @@ const AppResolver = [
       adminCreateUser: AdminCreateUserMutation,
       adminUpdateUser: AdminUpdateUserMutation,
       changePassword: ChangePasswordMutation,
+      adminAssignRoleToUser: AdminAssignRoleToUserMutation,
+      roleManageAccess: RoleManageAccessMutation,
     },
   },
 ];

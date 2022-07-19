@@ -4,20 +4,13 @@ import ContextType from 'src/graphql/ContextType';
 
 export const ActivityLogsListQuery = async (
   _,
-  {
-    websiteId,
-    filter,
-    pagination,
-  }: { websiteId: number; filter: Graph.FilterActivityLogs; pagination: Graph.PaginationInput },
+  { filter, pagination }: { websiteId: number; filter: Graph.FilterActivityLogs; pagination: Graph.PaginationInput },
   ctx: ContextType,
 ) => {
   const knex = await ctx.knex.default;
 
-  const query = knex
-    .table('activity_log')
-    .andWhere({ website_id: websiteId })
-    .orderBy('id', 'desc');
-  const totalQuery = knex.table('activity_log').andWhere({ website_id: websiteId });
+  const query = knex.table('activity_log').orderBy('id', 'desc');
+  const totalQuery = knex.table('activity_log');
 
   if (pagination?.page !== undefined && pagination?.size !== undefined) {
     query.limit(pagination?.size).offset((pagination?.page - 1) * pagination?.size);

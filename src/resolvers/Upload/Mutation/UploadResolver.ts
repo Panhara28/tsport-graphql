@@ -33,7 +33,6 @@ export const UploadResolver = async (_, { file }, ctx: ContextType) => {
     },
     json: true,
   });
-  console.log(json);
   let dimensions;
   const extention = json.filename.split('/')[4].split('.')[1];
 

@@ -17,6 +17,8 @@ type User {
   fullname: String
   username: String
   profile_picture: String
+  email: String
+  phoneNumber: String
 }
 
 type UserList {
@@ -29,6 +31,8 @@ input UserInput {
   username: String
   password: String
   profile_picture: String
+  email: String
+  phoneNumber: String
 }
 
 enum UserGender {
