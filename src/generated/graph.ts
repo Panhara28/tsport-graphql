@@ -7,6 +7,10 @@ export declare namespace Graph {
     me?: null | Me;
     adminMe?: null | Me;
     testing?: null | string;
+    hrDepartmentList?: null | any;
+    hrDepartment?: null | HrDepartment;
+    hrEmployeeList?: null | HrEmployeeList;
+    hrEmployee?: null | HrEmployee;
     playgroundList?: null | PlaygroundList;
     roleList?: null | RoleList;
     role?: null | Role;
@@ -63,6 +67,11 @@ export declare namespace Graph {
     signOutSuperAdmin?: null | boolean;
     changePassword?: null | boolean;
     testing?: null | boolean;
+    createHrDepartment?: null | number;
+    updateHrDepartment?: null | boolean;
+    updateHrEmployee?: null | boolean;
+    createHrEmployee?: null | number;
+    updateHrEmployeeStatus?: null | boolean;
     createPlayground: number;
     createRole?: null | number;
     updateRole?: null | boolean;
@@ -114,6 +123,93 @@ export declare namespace Graph {
     total?: null | number;
     size?: null | number;
     current?: null | number;
+  }
+
+  export interface HrDepartmentList {
+    data?: HrDepartment[] | null;
+  }
+
+  export interface HrDepartment {
+    id?: null | number;
+    name?: null | string;
+    parent_id?: null | number;
+  }
+
+  export interface HrDepartmentInput {
+    name?: null | string;
+    parent_id?: null | number;
+  }
+
+  export interface HrEmployee {
+    id?: null | number;
+    username?: null | string;
+    fullname?: null | string;
+    fullname_en?: null | string;
+    profile?: null | string;
+    phoneNumber?: null | string;
+    status?: null | boolean;
+    email?: null | string;
+    gender?: null | string;
+    nationality?: null | string;
+    dob?: null | string;
+    district?: null | string;
+    commune?: null | string;
+    education_level?: null | string;
+    passport_id?: null | string;
+    national_id?: null | string;
+    position_level?: null | number;
+    position_description?: null | string;
+    unit?: null | string;
+    department_id?: null | number;
+    general_department_id?: null | number;
+    contact_city_or_province?: null | string;
+    province?: null | string;
+    homeNo?: null | string;
+    streetNo?: null | string;
+    village_or_group?: null | string;
+    contact_district?: null | string;
+    contact_village?: null | string;
+    contact_commune?: null | string;
+    officer_id?: null | string;
+    office_id?: null | number;
+  }
+
+  export interface HrEmployeeInput {
+    username?: null | string;
+    fullname?: null | string;
+    password?: null | string;
+    fullname_en?: null | string;
+    profile?: null | string;
+    phoneNumber?: null | string;
+    email?: null | string;
+    gender?: null | string;
+    nationality?: null | string;
+    dob?: null | string;
+    district?: null | string;
+    commune?: null | string;
+    education_level?: null | string;
+    passport_id?: null | string;
+    national_id?: null | string;
+    position_level?: null | number;
+    position_description?: null | string;
+    unit?: null | string;
+    department_id?: null | number;
+    general_department_id?: null | number;
+    contact_city_or_province?: null | string;
+    province?: null | string;
+    homeNo?: null | string;
+    streetNo?: null | string;
+    village_or_group?: null | string;
+    contact_district?: null | string;
+    contact_village?: null | string;
+    contact_commune?: null | string;
+    officer_id?: null | string;
+    office_id?: null | number;
+  }
+
+  export interface HrEmployeeList {
+    data?: HrEmployee[] | null;
+    pagination?: null | Pagination;
   }
 
   export interface Playground {
@@ -196,9 +292,9 @@ export declare namespace Graph {
     id?: null | number;
     fullname?: null | string;
     username?: null | string;
-    profile_picture?: null | string;
     email?: null | string;
     phoneNumber?: null | string;
+    profile_picture?: null | string;
   }
 
   export interface UserList {
@@ -211,7 +307,6 @@ export declare namespace Graph {
     username?: null | string;
     password?: null | string;
     profile_picture?: null | string;
-    email?: null | string;
     phoneNumber?: null | string;
   }
 
