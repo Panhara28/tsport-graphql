@@ -12,6 +12,7 @@ export declare namespace Graph {
     hrEmployeeList?: null | HrEmployeeList;
     hrEmployee?: null | HrEmployee;
     playgroundList?: null | PlaygroundList;
+    employeeReport?: null | EmployeeReportList;
     roleList?: null | RoleList;
     role?: null | Role;
     adminRoleList?: null | RoleList;
@@ -225,6 +226,19 @@ export declare namespace Graph {
     title?: null | string;
   }
 
+  export interface EmployeeReportList {
+    data?: null | HrEmployee;
+    pagination?: null | Pagination;
+  }
+
+  export interface EmployeeReportFilter {
+    all?: null | string;
+    officerName?: null | string;
+    generalDepartmentId?: null | number;
+    departmentId?: null | number;
+    officeId?: null | number;
+  }
+
   export interface RoleList {
     data?: Role[] | null;
     permission?: null | RolePermission;
@@ -306,8 +320,9 @@ export declare namespace Graph {
     fullname?: null | string;
     username?: null | string;
     password?: null | string;
-    profile_picture?: null | string;
+    email?: null | string;
     phoneNumber?: null | string;
+    profile_picture?: null | string;
   }
 
   export type UserGender = 'MALE' | 'FEMALE';
