@@ -1,12 +1,25 @@
 import { buildTree } from 'src/function/buildTree';
 import ContextType from 'src/graphql/ContextType';
 
-export const HrDepartmentListQuery = async (_, { branch_level }: { branch_level: number }, ctx: ContextType) => {
+export const HrDepartmentListQuery = async (
+  _,
+  { branch_level, parent_id }: { branch_level: number; parent_id: number },
+  ctx: ContextType,
+) => {
   const knex = await ctx.knex.default;
 
-  const data = await knex.table('hr_departments');
+  const data_query = knex.table('hr_departments');
 
   let tree;
+  let data;
+
+  if (parent_id) {
+    data = await data_query?.andWhere({ parent_id });
+
+    return data;
+  }
+
+  data = await data_query;
 
   tree = buildTree(data);
 
