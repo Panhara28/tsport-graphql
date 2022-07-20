@@ -8,6 +8,8 @@ export const UpdateHrEmployeeMutation = async (
 ) => {
   const knex = await ctx.knex.default;
 
+  console.log(input?.nationality);
+
   const hrEmployee = await knex
     .table('hr_employees')
     .update({

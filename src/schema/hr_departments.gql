@@ -1,11 +1,23 @@
 extend type Query {
-  hrDepartmentList(branch_level: Int): JSON
+  hrDepartmentList(branch_level: Int, parent_id: Int): JSON
   hrDepartment(id: Int!): HrDepartment
+  hrDepartmentUsersCount(filter: HrDepartmentUsersCountFilter): JSON
 }
 
 extend type Mutation {
   createHrDepartment(input: HrDepartmentInput): Int
   updateHrDepartment(id: Int!, input: HrDepartmentInput): Boolean
+}
+
+input HrDepartmentUsersCountFilter {
+  parent_id: Int
+  type: HrDepartmentUsersCountEnum
+}
+
+enum HrDepartmentUsersCountEnum {
+  DEPARTMENT
+  OFFICE
+  GENERAL_DEPARTMENT
 }
 
 type HrDepartmentList {
