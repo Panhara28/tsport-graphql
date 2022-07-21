@@ -22,6 +22,10 @@ export const HrDepartmentUsersCountQuery = async (
     hr_departments = await data.andWhere({ parent_id: filter?.parent_id });
     parent = await parent_data.andWhere({ id: filter?.parent_id }).first();
 
+    if (filter?.officerName) {
+      users_data?.andWhere('fullname', 'like', `%${filter?.officerName}%`);
+    }
+
     if (filter?.type === 'GENERAL_DEPARTMENT') {
       total_users = await users_data.where({ general_department_id: filter?.parent_id });
     } else if (filter?.type === 'DEPARTMENT') {
@@ -30,6 +34,10 @@ export const HrDepartmentUsersCountQuery = async (
       total_users = await users_data.where({ office_id: filter?.parent_id });
     }
   } else {
+    if (filter?.officerName) {
+      users_data?.andWhere('fullname', 'like', `%${filter?.officerName}%`);
+    }
+
     hr_departments = await data.andWhere({ parent_id: 0 });
     total_users = await users_data;
     parent = undefined;

@@ -12,6 +12,7 @@ extend type Mutation {
 input HrDepartmentUsersCountFilter {
   parent_id: Int
   type: HrDepartmentUsersCountEnum
+  officerName: String
 }
 
 enum HrDepartmentUsersCountEnum {

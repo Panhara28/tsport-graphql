@@ -1,5 +1,5 @@
 extend type Query {
-  hrEmployeeList(pagination: PaginationInput): HrEmployeeList
+  hrEmployeeList(pagination: PaginationInput, filter: HrEmployeeFilter): HrEmployeeList
   hrEmployee(id: Int!): HrEmployee
 }
 
@@ -41,6 +41,10 @@ type HrEmployee {
   contact_commune: String
   officer_id: String
   office_id: Int
+}
+
+input HrEmployeeFilter {
+  officerName: String
 }
 
 input HrEmployeeInput {

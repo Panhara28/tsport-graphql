@@ -1,5 +1,5 @@
 extend type Query {
-  adminUserList(pagination: PaginationInput): UserList
+  adminUserList(pagination: PaginationInput, filter: UserFilter): UserList
   adminUserDetail(id: Int!): User
   userList: UserList
   userDetail(id: Int!): User
@@ -19,6 +19,10 @@ type User {
   email: String
   phoneNumber: String
   profile_picture: String
+}
+
+input UserFilter {
+  fullname: String
 }
 
 type UserList {
