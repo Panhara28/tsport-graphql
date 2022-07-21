@@ -19,9 +19,9 @@ export const HrEmployeeListQuery = async (
   return {
     data: hrEmployeeList,
     pagination: {
-      curent: pagination.page,
-      total: hrEmployeeList.length,
-      page: hrEmployeeList.length,
+      current: pagination?.page,
+      total: hrEmployeeList?.length,
+      size: hrEmployeeList?.length,
     },
   };
 };

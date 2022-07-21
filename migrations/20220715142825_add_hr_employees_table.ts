@@ -25,7 +25,7 @@ export async function up(knex: Knex): Promise<void> {
       \`passport_id\` varchar(255) DEFAULT NULL,
       \`national_id\` varchar(255) DEFAULT NULL,
       \`position_description\` varchar(255) DEFAULT NULL,
-      \`position_level\` int(11) DEFAULT NULL,
+      \`position_level\` varchar(255) DEFAULT NULL,
       \`unit\` varchar(255) DEFAULT NULL,
       \`department_id\` int(11) DEFAULT NULL,
       \`homeNo\` varchar(255) DEFAULT NULL,
