@@ -1,12 +1,13 @@
 extend type Query {
   hrDepartmentList(branch_level: Int, parent_id: Int): JSON
   hrDepartment(id: Int!): HrDepartment
-  hrDepartmentUsersCount(filter: HrDepartmentUsersCountFilter): JSON
+  hrDepartmentUsersCount(pagination: PaginationInput, filter: HrDepartmentUsersCountFilter): JSON
 }
 
 extend type Mutation {
   createHrDepartment(input: HrDepartmentInput): Int
   updateHrDepartment(id: Int!, input: HrDepartmentInput): Boolean
+  removeHrDepartment(id: Int!): Boolean
 }
 
 input HrDepartmentUsersCountFilter {

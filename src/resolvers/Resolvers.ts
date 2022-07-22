@@ -30,6 +30,7 @@ import { UpdateHrDepartmentMutation } from './Admin/HrDepartment/Mutation/Update
 import { HrDepartmentDetailQuery } from './Admin/HrDepartment/Query/HrDepartmentDetailQuery';
 import { EmployeeReportQuery } from './Admin/Reports/EmployeeReportQuery';
 import { HrDepartmentUsersCountQuery } from './Admin/HrEmployee/Query/HrDepartmentUsersCountQuery';
+import { RemoveHrDepartmentMutation } from './Admin/HrDepartment/Mutation/RemoveHrDepartmentMutation';
 
 const AppResolver = [
   {
@@ -75,6 +76,7 @@ const AppResolver = [
       updateHrEmployee: UpdateHrEmployeeMutation,
       createHrDepartment: CreateHrDepartmentMutation,
       updateHrDepartment: UpdateHrDepartmentMutation,
+      removeHrDepartment: RemoveHrDepartmentMutation,
     },
   },
 ];
