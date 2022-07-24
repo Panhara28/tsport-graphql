@@ -31,6 +31,7 @@ import { HrDepartmentDetailQuery } from './Admin/HrDepartment/Query/HrDepartment
 import { EmployeeReportQuery } from './Admin/Reports/EmployeeReportQuery';
 import { HrDepartmentUsersCountQuery } from './Admin/HrEmployee/Query/HrDepartmentUsersCountQuery';
 import { RemoveHrDepartmentMutation } from './Admin/HrDepartment/Mutation/RemoveHrDepartmentMutation';
+import { GenderDashbaordCountQuery } from './Admin/Dashboard/Query/GenderDashboardCountQuery';
 
 const AppResolver = [
   {
@@ -55,6 +56,7 @@ const AppResolver = [
       hrDepartment: HrDepartmentDetailQuery,
       employeeReport: EmployeeReportQuery,
       hrDepartmentUsersCount: HrDepartmentUsersCountQuery,
+      genderDashboardCount: GenderDashbaordCountQuery,
     },
 
     Mutation: {

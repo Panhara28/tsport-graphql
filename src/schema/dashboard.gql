@@ -1,0 +1,8 @@
+extend type Query {
+  genderDashboardCount: GenderDashboardCount
+}
+
+type GenderDashboardCount {
+  total_male: Int
+  total_female: Int
+}
