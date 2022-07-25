@@ -24,8 +24,6 @@ export const ChangePasswordMutation = async (_, { password }: { password: string
           'DD-MM-YYYY HH:mm:ss',
         )}'}`,
       ),
-      news_id: changePassword,
-      website_id: changePassword,
     });
 
     return changePassword > 0;

@@ -8,7 +8,7 @@ import Validation from 'src/function/validation';
 export const AdminCreateUserMutation = async (_, { input }: { input: Graph.UserInput }, ctx: ContextType) => {
   const knex = ctx.knex.default;
   await ctx.authUser.requireLogin('USER');
-  const user_id = ctx.authUser.user.id;
+  const admin_id = await ctx.authUser.user.id;
 
   const validation = new Validation(input);
 
@@ -21,7 +21,7 @@ export const AdminCreateUserMutation = async (_, { input }: { input: Graph.UserI
 
   const hash = bcrypt.hashSync(input?.password, 12);
 
-  const [createUser] = await knex('users').insert({
+  const [createUser] = await knex('').insert({
     fullname: input?.fullname ? input?.fullname : undefined,
     username: input?.username ? input?.username : undefined,
     password: input?.password ? hash : undefined,
@@ -35,13 +35,13 @@ export const AdminCreateUserMutation = async (_, { input }: { input: Graph.UserI
     });
 
     await knex('activity_log').insert({
-      type: 'USERS',
+      user_id: admin_id,
+      type: 'USER',
       activity: JSON.stringify(
-        `{'activityType': 'Create User', created_user: '${createUser}', 'logged_at': '${moment().format(
+        `{'activityType': 'create_user', 'user_id': '${createUser}', 'logged_at': '${moment().format(
           'DD-MM-YYYY HH:mm:ss',
         )}'}`,
       ),
-      user_id,
     });
 
     return createUser;

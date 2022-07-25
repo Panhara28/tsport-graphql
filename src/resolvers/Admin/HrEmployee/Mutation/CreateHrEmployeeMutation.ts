@@ -1,10 +1,13 @@
 import { Graph } from 'src/generated/graph';
 import ContextType from 'src/graphql/ContextType';
 import bcrypt from 'bcryptjs';
+import moment from 'moment';
+import { AuthenticationError } from 'apollo-server';
 
 export const CreateHrEmployeeMutation = async (_, { input }: { input: Graph.HrEmployeeInput }, ctx: ContextType) => {
   const knex = await ctx.knex.default;
   const hash = await bcrypt.hashSync(input?.password, 12);
+  const admin_id = await ctx.authUser.user.id;
 
   const [hrEmployee] = await knex.table('hr_employees').insert({
     username: input?.username,
@@ -39,5 +42,21 @@ export const CreateHrEmployeeMutation = async (_, { input }: { input: Graph.HrEm
     office_id: input?.office_id,
   });
 
-  return hrEmployee;
+  if (hrEmployee) {
+    await knex.table('activity_log').insert({
+      user_id: admin_id,
+      type: 'HR_EMPLOYEE',
+      activity: JSON.stringify(
+        `{'ip':'${
+          ctx.ip
+        }','activityType': 'create_hr_employee', 'hr_employee_id': '${hrEmployee}', 'logged_at': '${moment().format(
+          'DD-MM-YYYY HH:mm:ss',
+        )}'}`,
+      ),
+    });
+
+    return hrEmployee;
+  } else {
+    throw new AuthenticationError('Something went wrong');
+  }
 };

@@ -15,7 +15,15 @@ export const AdminMeQuery = async (
       .innerJoin('role_permissions', 'role_permissions.user_id', 'users.id')
       .innerJoin('roles', 'roles.id', 'role_permissions.role_id')
       .innerJoin('user_plugins', 'user_plugins.user_id', 'users.id')
-      .select('users.id', 'users.fullname', 'roles.name as roleName', 'roles.id as roleId', 'users.profile_picture')
+      .select(
+        'users.id',
+        'users.fullname',
+        'roles.name as roleName',
+        'roles.id as roleId',
+        'users.profile_picture',
+        'users.email',
+        'users.phone_number as phoneNumber',
+      )
       .where({ token: clientToken })
       .first();
     // Query current user by websiteId

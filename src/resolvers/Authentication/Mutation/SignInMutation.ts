@@ -4,6 +4,8 @@ import { Graph } from '../../../generated/graph';
 import bcrypt from 'bcryptjs';
 import crypto from 'crypto';
 import { GraphQLError } from 'graphql';
+import moment from 'moment';
+import { AuthenticationError } from 'apollo-server';
 
 export const SignInMutation = async (_, { input }: { input: Graph.SignInInput }, ctx: ContextType) => {
   const knex = ctx.knex.default;
@@ -40,12 +42,26 @@ export const SignInMutation = async (_, { input }: { input: Graph.SignInInput },
 
   const randomToken = crypto.randomBytes(64).toString('hex');
 
-  await knex.table('user_token').insert({
+  const [loggedIn] = await knex.table('user_token').insert({
     user_id: getUser.id,
     token: randomToken,
   });
 
-  return {
-    token: randomToken,
-  };
+  if (loggedIn > 0) {
+    await knex.table('activity_log').insert({
+      user_id: getUser.id,
+      type: 'AUTHENTICATION',
+      activity: JSON.stringify(
+        `{'ip':'${ctx.ip}','activityType': 'sign_in', 'user_id': '${getUser.id}', 'logged_at': '${moment().format(
+          'DD-MM-YYYY HH:mm:ss',
+        )}'}`,
+      ),
+    });
+
+    return {
+      token: randomToken,
+    };
+  } else {
+    throw new AuthenticationError('Something went wrong');
+  }
 };

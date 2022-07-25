@@ -10,5 +10,6 @@ export const AdminUserDetailQuery = async (_, { id }: { id: number }, ctx: Conte
 
   return {
     ...user,
+    phoneNumber: user?.phone_number,
   };
 };

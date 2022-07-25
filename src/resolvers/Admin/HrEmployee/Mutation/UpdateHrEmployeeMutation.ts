@@ -1,5 +1,7 @@
 import { Graph } from 'src/generated/graph';
 import ContextType from 'src/graphql/ContextType';
+import moment from 'moment';
+import { AuthenticationError } from 'apollo-server';
 
 export const UpdateHrEmployeeMutation = async (
   _,
@@ -7,6 +9,7 @@ export const UpdateHrEmployeeMutation = async (
   ctx: ContextType,
 ) => {
   const knex = await ctx.knex.default;
+  const admin_id = await ctx.authUser.user.id;
 
   const hrEmployee = await knex
     .table('hr_employees')
@@ -43,5 +46,21 @@ export const UpdateHrEmployeeMutation = async (
     })
     .where({ id });
 
-  return hrEmployee;
+  if (hrEmployee) {
+    await knex.table('activity_log').insert({
+      user_id: admin_id,
+      type: 'HR_EMPLOYEE',
+      activity: JSON.stringify(
+        `{'ip':'${
+          ctx.ip
+        }','activityType': 'update_hr_employee', 'hr_employee_id': '${hrEmployee}', 'logged_at': '${moment().format(
+          'DD-MM-YYYY HH:mm:ss',
+        )}'}`,
+      ),
+    });
+
+    return hrEmployee;
+  } else {
+    throw new AuthenticationError('Something went wrong');
+  }
 };
