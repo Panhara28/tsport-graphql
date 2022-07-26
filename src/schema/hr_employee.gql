@@ -7,6 +7,7 @@ extend type Mutation {
   updateHrEmployee(id: Int!, input: HrEmployeeInput): Boolean
   createHrEmployee(input: HrEmployeeInput): Int
   updateHrEmployeeStatus(id: Int!, status: Boolean): Boolean
+  removeHrEmployee(id: Int!): Boolean
 }
 
 type HrEmployee {
