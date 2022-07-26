@@ -11,9 +11,18 @@ export const CreateHrDepartmentMutation = async (
   const knex = await ctx.knex.default;
   const admin_id = await ctx.authUser.user.id;
 
+  const existHrDepartment = await knex
+    .table('hr_departments')
+    .where({ name: input?.name })
+    .first();
+
+  if (existHrDepartment) {
+    throw new AuthenticationError('Already Existed!');
+  }
+
   const [createHRDepartment] = await knex.table('hr_departments').insert({
-    name: input.name,
-    parent_id: input.parent_id,
+    name: input?.name,
+    parent_id: input?.parent_id,
   });
 
   if (createHRDepartment) {
