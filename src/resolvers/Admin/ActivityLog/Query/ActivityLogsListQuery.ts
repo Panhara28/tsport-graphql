@@ -4,7 +4,7 @@ import ContextType from 'src/graphql/ContextType';
 
 export const ActivityLogsListQuery = async (
   _,
-  { filter, pagination }: { websiteId: number; filter: Graph.FilterActivityLogs; pagination: Graph.PaginationInput },
+  { filter, pagination }: { filter: Graph.FilterActivityLogs; pagination: Graph.PaginationInput },
   ctx: ContextType,
 ) => {
   const knex = await ctx.knex.default;

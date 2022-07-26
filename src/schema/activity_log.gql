@@ -1,7 +1,7 @@
 extend type Query {
-  activityLogsList(websiteId: Int!, filter: FilterActivityLogs, pagination: PaginationInput): ActivityLogsList
-  activityLogsNews(websiteId: Int!, pagination: PaginationInput, id: Int): ActivityLogsNewsList
-  activityLogsOptions(websiteId: Int!): [ActivityLogsOptions]
+  activityLogsList(filter: FilterActivityLogs, pagination: PaginationInput): ActivityLogsList
+  activityLogsNews(pagination: PaginationInput, id: Int): ActivityLogsNewsList
+  activityLogsOptions: [ActivityLogsOptions]
 }
 
 input FilterActivityLogs {

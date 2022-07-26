@@ -14,23 +14,23 @@ export const AdminUserListQuery = async (
     query?.andWhere('fullname', 'like', `%${filter?.fullname}%`);
   }
 
-  if (pagination.size != undefined && pagination.page != undefined) {
-    query.limit(pagination.size).offset((pagination.page - 1) * pagination.size);
+  if (pagination?.size != undefined && pagination?.page != undefined) {
+    query.limit(pagination?.size).offset((pagination?.page - 1) * pagination?.size);
   }
 
   const users = await query;
   const tatal_users: any = await knex.table('users').count('id as CNT');
 
   return {
-    data: users.map(x => {
+    data: users?.map(x => {
       return {
         ...x,
       };
     }),
     pagination: {
-      current: pagination.page,
+      current: pagination?.page,
       total: tatal_users[0]?.CNT,
-      size: users.length,
+      size: users?.length,
     },
   };
 };
