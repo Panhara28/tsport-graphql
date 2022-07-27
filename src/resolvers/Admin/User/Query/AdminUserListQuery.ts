@@ -25,6 +25,7 @@ export const AdminUserListQuery = async (
     data: users?.map(x => {
       return {
         ...x,
+        phoneNumber: x?.phone_number,
       };
     }),
     pagination: {

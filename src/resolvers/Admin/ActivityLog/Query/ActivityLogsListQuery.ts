@@ -32,7 +32,10 @@ export const ActivityLogsListQuery = async (
 
       return {
         ...item,
-        user,
+        user: {
+          ...user,
+          phoneNumber: user?.phone_number,
+        },
       };
     }),
     pagination: {
