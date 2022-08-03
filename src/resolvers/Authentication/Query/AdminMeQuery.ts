@@ -30,13 +30,21 @@ export const AdminMeQuery = async (
 
     const user = await queryUser;
 
+    const access = await knex
+      .table('roles')
+      .where({ id: user?.roleId })
+      .first();
+
     if (!user) {
       throw new AuthenticationError(`Please contact your admin to add you a plugin`);
     }
 
     return {
       ...user,
-      profilePicture: user.profile_picture,
+      profilePicture: user?.profile_picture,
+      access: {
+        ...access,
+      },
     };
   }
 

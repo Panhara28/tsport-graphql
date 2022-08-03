@@ -1,16 +1,11 @@
 import ContextType from 'src/graphql/ContextType';
 import moment from 'moment';
 import { AuthenticationError } from 'apollo-server';
+import { Graph } from 'src/generated/graph';
 
 export const RoleManageAccessMutation = async (
   _,
-  {
-    roleId,
-    read,
-    write,
-    modify,
-    remove,
-  }: { roleId: number; read: boolean; write: boolean; modify: boolean; remove: boolean },
+  { roleId, input }: { roleId: number; input: Graph.RoleAccessInput },
   ctx: ContextType,
 ) => {
   const knex = ctx.knex.default;
@@ -20,10 +15,26 @@ export const RoleManageAccessMutation = async (
   const assignRoleToUser = await knex
     .table('roles')
     .update({
-      read,
-      write,
-      modify,
-      delete: remove,
+      read: input?.read,
+      write: input?.write,
+      modify: input?.modify,
+      delete: input?.remove,
+      generalDepartmentRead: input?.generalDepartmentRead,
+      generalDepartmentWrite: input?.generalDepartmentWrite,
+      generalDepartmentModify: input?.generalDepartmentModify,
+      generalDepartmentRemove: input?.generalDepartmentRemove,
+      departmentRead: input?.departmentRead,
+      departmentWrite: input?.departmentWrite,
+      departmentModify: input?.departmentModify,
+      departmentRemove: input?.departmentRemove,
+      officeRead: input?.officeRead,
+      officeWrite: input?.officeWrite,
+      officeModify: input?.officeModify,
+      officeRemove: input?.officeRemove,
+      officerRead: input?.officerRead,
+      officerWrite: input?.officerWrite,
+      officerModify: input?.officerModify,
+      officerRemove: input?.officerRemove,
     })
     .where({ id: roleId });
 

@@ -10,7 +10,7 @@ extend type Query {
 extend type Mutation {
   createRole(input: RoleInput, permission: RolePermissionInput): Int
   updateRole(id: Int, input: RoleInput): Boolean
-  roleManageAccess(roleId: Int!, read: Boolean, write: Boolean, modify: Boolean, remove: Boolean): Boolean
+  roleManageAccess(roleId: Int!, input: RoleAccessInput): Boolean
   adminAssignRoleToUser(userId: Int!, roleId: Int!): Boolean
 }
 
@@ -25,11 +25,50 @@ type Role {
   access: RoleAccess
 }
 
+input RoleAccessInput {
+  read: Boolean
+  write: Boolean
+  modify: Boolean
+  remove: Boolean
+  generalDepartmentRead: Boolean
+  generalDepartmentWrite: Boolean
+  generalDepartmentModify: Boolean
+  generalDepartmentRemove: Boolean
+  departmentRead: Boolean
+  departmentWrite: Boolean
+  departmentModify: Boolean
+  departmentRemove: Boolean
+  officeRead: Boolean
+  officeWrite: Boolean
+  officeModify: Boolean
+  officeRemove: Boolean
+  officerRead: Boolean
+  officerWrite: Boolean
+  officerModify: Boolean
+  officerRemove: Boolean
+}
+
 type RoleAccess {
   read: Boolean
   write: Boolean
   modify: Boolean
   delete: Boolean
+  generalDepartmentRead: Boolean
+  generalDepartmentWrite: Boolean
+  generalDepartmentModify: Boolean
+  generalDepartmentRemove: Boolean
+  departmentRead: Boolean
+  departmentWrite: Boolean
+  departmentModify: Boolean
+  departmentRemove: Boolean
+  officeRead: Boolean
+  officeWrite: Boolean
+  officeModify: Boolean
+  officeRemove: Boolean
+  officerRead: Boolean
+  officerWrite: Boolean
+  officerModify: Boolean
+  officerRemove: Boolean
 }
 
 input RoleInput {

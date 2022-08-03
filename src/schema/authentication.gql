@@ -33,4 +33,5 @@ type Me {
   phoneNumber: String
   email: String
   roleId: Int
+  access: RoleAccess
 }
