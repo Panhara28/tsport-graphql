@@ -1,0 +1,21 @@
+extend type Mutation {
+  createCustomer(data: CustomerInput): Boolean @auth(public: true)
+  changePasswordCustomer(oldPassword: String!, newPassword: String!): Boolean @auth(roles: ["CUSTOMER"])
+  loginCustomer(username: String!, password: String!): String @auth(public: true)
+}
+
+input CustomerInput {
+  fullname: String
+  username: String
+  password: String
+  phone: String
+  address: String
+  type: CustomerType
+  discount: Float
+  profile: String
+}
+
+enum CustomerType {
+  premium
+  default
+}

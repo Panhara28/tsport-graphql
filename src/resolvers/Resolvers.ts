@@ -21,6 +21,7 @@ import { ChangePasswordMutation } from './Authentication/Mutation/ChangePassword
 import { RoleDetailQuery } from './Admin/Role/Query/RoleDetailQuery';
 import { RoleManageAccessMutation } from './Admin/Role/Mutation/RoleManageAccessMutation';
 import { GenderDashbaordCountQuery } from './Admin/Dashboard/Query/GenderDashboardCountQuery';
+import { CustomerResolver } from './Customer';
 
 const AppResolver = [
   {
@@ -59,6 +60,7 @@ const AppResolver = [
       roleManageAccess: RoleManageAccessMutation,
     },
   },
+  CustomerResolver,
 ];
 
 export default AppResolver;

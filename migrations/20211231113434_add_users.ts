@@ -10,6 +10,7 @@ export async function up(knex: Knex): Promise<void> {
       table.integer('created_by');
       table.integer('phone_number');
       table.string('profile_picture');
+      table.enum('type', ['SUPER_ADMIN', 'ADMIN']).defaultTo('ADMIN');
       table.timestamps(true, true);
     });
   }

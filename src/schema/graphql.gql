@@ -1,12 +1,15 @@
 scalar JSON
 scalar JSONObject
+scalar Upload
+
+directive @auth(roles: [String], public: Boolean) on FIELD_DEFINITION
 
 type Query {
-  testing: String
+  testing: String @auth(public: true)
 }
 
 type Mutation {
-  testing: Boolean
+  testing: Boolean @auth(public: true)
 }
 
 type Subscription {

@@ -1,9 +1,9 @@
 extend type Query {
-  playgroundList: PlaygroundList
+  playgroundList: PlaygroundList @auth(public: true)
 }
 
 extend type Mutation {
-  createPlayground(input: PlaygroundInput): Int!
+  createPlayground(input: PlaygroundInput): Int! @auth(public: true)
 }
 
 type Playground {

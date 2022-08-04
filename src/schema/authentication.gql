@@ -1,14 +1,14 @@
 extend type Query {
-  me: Me
-  adminMe(websiteId: Int, clientToken: String): Me
+  me: Me @auth(public: true)
+  adminMe(websiteId: Int, clientToken: String): Me @auth(roles: ["ADMIN", "SUPER_ADMIN"])
 }
 
 extend type Mutation {
-  signIn(input: SignInInput): Token
-  signOut(token: String!): Boolean
-  signInSuperAdmin(input: SignInInput): Token
-  signOutSuperAdmin(token: String!): Boolean
-  changePassword(password: String!): Boolean
+  signIn(input: SignInInput): Token @auth(public: true)
+  signOut(token: String!): Boolean @auth(public: true)
+  signInSuperAdmin(input: SignInInput): Token @auth(public: true)
+  signOutSuperAdmin(token: String!): Boolean @auth(public: true)
+  changePassword(password: String!): Boolean @auth(roles: ["ADMIN", "SUPER_ADMIN"])
 }
 
 input SignInInput {

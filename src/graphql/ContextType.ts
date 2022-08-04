@@ -12,6 +12,7 @@ export interface AuthUserInterface {
   write?: boolean | null;
   modify?: boolean | null;
   delete?: boolean | null;
+  type?: string | null;
 }
 
 export interface AuthUser {

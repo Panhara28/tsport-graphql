@@ -1,7 +1,7 @@
 extend type Query {
-  activityLogsList(filter: FilterActivityLogs, pagination: PaginationInput): ActivityLogsList
-  activityLogsNews(pagination: PaginationInput, id: Int): ActivityLogsNewsList
-  activityLogsOptions: [ActivityLogsOptions]
+  activityLogsList(filter: FilterActivityLogs, pagination: PaginationInput): ActivityLogsList @auth(public: true)
+  activityLogsNews(pagination: PaginationInput, id: Int): ActivityLogsNewsList @auth(public: true)
+  activityLogsOptions: [ActivityLogsOptions] @auth(public: true)
 }
 
 input FilterActivityLogs {

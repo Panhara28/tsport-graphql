@@ -1,5 +1,5 @@
 extend type Query {
-  genderDashboardCount: GenderDashboardCount
+  genderDashboardCount: GenderDashboardCount @auth(public: true)
 }
 
 type GenderDashboardCount {

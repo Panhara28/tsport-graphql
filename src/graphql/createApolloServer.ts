@@ -6,6 +6,8 @@ import loadMergeSchema from './loadMergedSchema';
 import Knex from 'knex';
 import AppResolver from 'src/resolvers/Resolvers';
 import requestIp from 'request-ip';
+import { upperDirectiveTransformer } from './upperDirectiveTranformer';
+import { makeExecutableSchema } from '@graphql-tools/schema';
 
 async function RequireLogin(type: string, knex: Knex, token: string): Promise<boolean> {
   if (!token) {
@@ -41,12 +43,18 @@ async function RequireLogin(type: string, knex: Knex, token: string): Promise<bo
 
 export default function createApolloServer() {
   const knexConnectionList = createKnexContex();
-  const pubsub = new PubSub();
+  // const pubsub = new PubSub();
+
+  let subgraphSchema = makeExecutableSchema({
+    typeDefs: loadMergeSchema(),
+    resolvers: AppResolver,
+  });
+
+  subgraphSchema = upperDirectiveTransformer(subgraphSchema, 'auth');
 
   return new ApolloServer({
     cors: true,
-    typeDefs: loadMergeSchema(),
-    resolvers: AppResolver,
+    schema: subgraphSchema,
     playground: process.env.NODE_ENV !== 'production',
     debug: process.env.NODE_ENV !== 'production',
     subscriptions: {
@@ -86,12 +94,14 @@ export default function createApolloServer() {
           .table('user_token')
           .innerJoin('role_permissions', 'role_permissions.user_id', 'user_token.user_id')
           .innerJoin('roles', 'roles.id', 'role_permissions.role_id')
+          .innerJoin('users', 'users.id', 'user_token.user_id')
           .select(
             'user_token.user_id as user_id',
             'roles.write as write',
             'roles.read as read',
             'roles.modify as modify',
             'roles.delete as delete',
+            'users.type as type',
           )
           .where({ token: token })
           .first();
@@ -104,6 +114,7 @@ export default function createApolloServer() {
             write: user.write,
             modify: user.modified,
             delete: user.delete,
+            type: user.type,
           };
         } else {
           throw new AuthenticationError('Incorrect Token!!');
@@ -115,7 +126,7 @@ export default function createApolloServer() {
         authUser,
         token,
         authSuperAdmin,
-        pubsub: pubsub,
+        pubsub: null,
         ip,
       };
     },

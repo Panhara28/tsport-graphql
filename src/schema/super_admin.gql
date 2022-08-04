@@ -1,11 +1,11 @@
 extend type Query {
-  superAdminList: SuperAdminList
-  superAdmin(id: Int): SuperAdminList
+  superAdminList: SuperAdminList @auth(public: true)
+  superAdmin(id: Int): SuperAdminList @auth(public: true)
 }
 
 extend type Mutation {
-  createSuperAdmin(input: SuperAdminInput): Int
-  updateSuperAdmin(id: Int, input: SuperAdminInput): Boolean
+  createSuperAdmin(input: SuperAdminInput): Int @auth(public: true)
+  updateSuperAdmin(id: Int, input: SuperAdminInput): Boolean @auth(public: true)
 }
 
 type SuperAdminList {

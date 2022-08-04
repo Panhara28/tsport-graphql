@@ -1,17 +1,17 @@
 extend type Query {
-  roleList: RoleList
-  role(id: Int): Role
-  adminRoleList: RoleList
-  hasRole(userId: Int!): Role
-  adminHasRole(userId: Int!): Role
-  roleDetail(roleId: Int!): Role
+  roleList: RoleList @auth(public: true)
+  role(id: Int): Role @auth(public: true)
+  adminRoleList: RoleList @auth(public: true)
+  hasRole(userId: Int!): Role @auth(public: true)
+  adminHasRole(userId: Int!): Role @auth(public: true)
+  roleDetail(roleId: Int!): Role @auth(public: true)
 }
 
 extend type Mutation {
-  createRole(input: RoleInput, permission: RolePermissionInput): Int
-  updateRole(id: Int, input: RoleInput): Boolean
-  roleManageAccess(roleId: Int!, input: RoleAccessInput): Boolean
-  adminAssignRoleToUser(userId: Int!, roleId: Int!): Boolean
+  createRole(input: RoleInput, permission: RolePermissionInput): Int @auth(public: true)
+  updateRole(id: Int, input: RoleInput): Boolean @auth(public: true)
+  roleManageAccess(roleId: Int!, input: RoleAccessInput): Boolean @auth(public: true)
+  adminAssignRoleToUser(userId: Int!, roleId: Int!): Boolean @auth(public: true)
 }
 
 type RoleList {

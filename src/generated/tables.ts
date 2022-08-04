@@ -1,1 +1,1 @@
-export * from './tables/table_news';export * from './tables/table_users';
+export * from './tables/table_customers';export * from './tables/table_news';export * from './tables/table_users';

@@ -2,7 +2,7 @@ import ContextType from '../../../graphql/ContextType';
 
 export const MeQuery = async (_, {}, ctx: ContextType) => {
   const knex = ctx.knex.default;
-  const token = ctx.authSuperAdmin.super_admin.token;
+  const token = ctx.token;
 
   if (token) {
     const user = await knex
