@@ -8,11 +8,6 @@ export declare namespace Graph {
     adminMe?: null | Me;
     genderDashboardCount?: null | GenderDashboardCount;
     testing?: null | string;
-    hrDepartmentList?: null | any;
-    hrDepartment?: null | HrDepartment;
-    hrDepartmentUsersCount?: null | any;
-    hrEmployeeList?: null | HrEmployeeList;
-    hrEmployee?: null | HrEmployee;
     playgroundList?: null | PlaygroundList;
     employeeReport?: null | EmployeeReportList;
     roleList?: null | RoleList;
@@ -70,13 +65,6 @@ export declare namespace Graph {
     signOutSuperAdmin?: null | boolean;
     changePassword?: null | boolean;
     testing?: null | boolean;
-    createHrDepartment?: null | number;
-    updateHrDepartment?: null | boolean;
-    removeHrDepartment?: null | boolean;
-    updateHrEmployee?: null | boolean;
-    createHrEmployee?: null | number;
-    updateHrEmployeeStatus?: null | boolean;
-    removeHrEmployee?: null | boolean;
     createPlayground: number;
     createRole?: null | number;
     updateRole?: null | boolean;
@@ -113,6 +101,7 @@ export declare namespace Graph {
     phoneNumber?: null | string;
     email?: null | string;
     roleId?: null | number;
+    access?: null | RoleAccess;
   }
 
   export interface GenderDashboardCount {
@@ -135,105 +124,6 @@ export declare namespace Graph {
     current?: null | number;
   }
 
-  export interface HrDepartmentUsersCountFilter {
-    parent_id?: null | number;
-    type?: null | HrDepartmentUsersCountEnum;
-    officerName?: null | string;
-  }
-
-  export type HrDepartmentUsersCountEnum = 'DEPARTMENT' | 'OFFICE' | 'GENERAL_DEPARTMENT';
-
-  export interface HrDepartmentList {
-    data?: HrDepartment[] | null;
-  }
-
-  export interface HrDepartment {
-    id?: null | number;
-    name?: null | string;
-    parent_id?: null | number;
-  }
-
-  export interface HrDepartmentInput {
-    name?: null | string;
-    parent_id?: null | number;
-  }
-
-  export interface HrEmployee {
-    id?: null | number;
-    username?: null | string;
-    fullname?: null | string;
-    fullname_en?: null | string;
-    profile?: null | string;
-    phoneNumber?: null | string;
-    status?: null | boolean;
-    email?: null | string;
-    gender?: null | string;
-    nationality?: null | string;
-    dob?: null | string;
-    district?: null | string;
-    commune?: null | string;
-    education_level?: null | string;
-    passport_id?: null | string;
-    national_id?: null | string;
-    position_level?: null | string;
-    position_description?: null | string;
-    unit?: null | string;
-    department_id?: null | number;
-    general_department_id?: null | number;
-    contact_city_or_province?: null | string;
-    province?: null | string;
-    homeNo?: null | string;
-    streetNo?: null | string;
-    village_or_group?: null | string;
-    contact_district?: null | string;
-    contact_village?: null | string;
-    contact_commune?: null | string;
-    officer_id?: null | string;
-    office_id?: null | number;
-  }
-
-  export interface HrEmployeeFilter {
-    officerName?: null | string;
-  }
-
-  export interface HrEmployeeInput {
-    username?: null | string;
-    fullname?: null | string;
-    password?: null | string;
-    fullname_en?: null | string;
-    profile?: null | string;
-    phoneNumber?: null | string;
-    email?: null | string;
-    gender?: null | string;
-    nationality?: null | string;
-    dob?: null | string;
-    district?: null | string;
-    commune?: null | string;
-    education_level?: null | string;
-    passport_id?: null | string;
-    national_id?: null | string;
-    position_level?: null | string;
-    position_description?: null | string;
-    unit?: null | string;
-    department_id?: null | number;
-    general_department_id?: null | number;
-    contact_city_or_province?: null | string;
-    province?: null | string;
-    homeNo?: null | string;
-    streetNo?: null | string;
-    village_or_group?: null | string;
-    contact_district?: null | string;
-    contact_village?: null | string;
-    contact_commune?: null | string;
-    officer_id?: null | string;
-    office_id?: null | number;
-  }
-
-  export interface HrEmployeeList {
-    data?: HrEmployee[] | null;
-    pagination?: null | Pagination;
-  }
-
   export interface Playground {
     id?: null | number;
     title?: null | string;
@@ -248,7 +138,6 @@ export declare namespace Graph {
   }
 
   export interface EmployeeReportList {
-    data?: HrEmployee[] | null;
     pagination?: null | Pagination;
   }
 
