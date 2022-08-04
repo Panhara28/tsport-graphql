@@ -1,7 +1,24 @@
+extend type Query {
+  customer: Customer @auth(roles: ["CUSTOMER"])
+  customerList: [Customer] @auth(roles: ["ADMIN", "SUPER_ADMIN"])
+}
+
 extend type Mutation {
   createCustomer(data: CustomerInput): Boolean @auth(public: true)
   changePasswordCustomer(oldPassword: String!, newPassword: String!): Boolean @auth(roles: ["CUSTOMER"])
-  loginCustomer(username: String!, password: String!): String @auth(public: true)
+  loginCustomer(username: String!, password: String!): Token @auth(public: true)
+  updateCustomer(id: Int, data: CustomerInput): Boolean @auth(roles: ["CUSTOMER", "ADMIN", "SUPER_ADMIN"])
+}
+
+type Customer {
+  id: Int
+  fullname: String
+  username: String
+  phone: String
+  address: String
+  type: CustomerType
+  discount: Float
+  profile: String
 }
 
 input CustomerInput {

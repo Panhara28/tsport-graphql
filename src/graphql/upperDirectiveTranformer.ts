@@ -23,7 +23,7 @@ export function upperDirectiveTransformer(schema: any, directiveName: string) {
                 allowed = context.authUser.user && context.authUser.user.type === 'ADMIN';
               }
               if (role === 'CUSTOMER') {
-                // allowed = !!context.auth.customer;
+                allowed = !!context.authCustomer;
               }
 
               if (allowed) break;

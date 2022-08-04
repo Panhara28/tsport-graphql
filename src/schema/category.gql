@@ -1,0 +1,20 @@
+extend type Query {
+  categoryList: [Category] @auth(public: true)
+  category(id: Int!): Category @auth(public: true)
+}
+
+extend type Mutation {
+  createCategory(data: CategoryInput): Boolean @auth(roles: ["SUPER_ADMIN", "ADMIN"])
+  updateCategory(id: Int!, data: CategoryInput): Boolean @auth(roles: ["SUPER_ADMIN", "ADMIN"])
+}
+
+input CategoryInput {
+  name: String
+  parent: Int
+}
+
+type Category {
+  id: Int
+  name: String
+  parents: JSON
+}

@@ -1,0 +1,1 @@
+/* eslint-disable */export interface table_product_stock {  id?: number;  barcode?: string | null;  product_id?: number | null;  color?: string | null;  size?: string | null;  image?: string | null;  stock?: number | null;}

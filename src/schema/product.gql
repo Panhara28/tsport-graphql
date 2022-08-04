@@ -1,0 +1,37 @@
+extend type Query {
+  productList(offset: Int = 0, limit: Int = 10, filter: FilterProduct): JSON @auth(public: true)
+  product(id: Int!): JSON @auth(public: true)
+}
+
+extend type Mutation {
+  createProduct(data: ProductInput): Boolean @auth(roles: ["ADMIN", "SUPER_ADMIN"])
+  updateProduct(id: Int!, data: ProductInput): Boolean @auth(roles: ["ADMIN", "SUPER_ADMIN"])
+}
+
+input FilterProduct {
+  category: Int
+  search: String
+}
+
+input ProductInput {
+  title: String
+  code: String
+  description: String
+  price: String
+  discount: String
+  size: String
+  color: String
+  category: Int
+  stock: Int
+  unit: String
+  picture: [ProductPictureInput]
+}
+
+input ProductPictureInput {
+  id: Int
+  name: String
+  color: String
+  size: String
+  isMain: Boolean = false
+  barcode: String
+}

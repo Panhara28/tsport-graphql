@@ -1,4 +1,4 @@
-import { ApolloServer, AuthenticationError, PubSub } from 'apollo-server';
+import { ApolloServer, AuthenticationError } from 'apollo-server';
 import ContextType, { AuthUser, SuperAdminAuth } from './ContextType';
 import createKnexContex from './createKnexContext';
 import extractRequestToken, { extractDeviceToken } from './extractRequestToken';
@@ -8,6 +8,7 @@ import AppResolver from 'src/resolvers/Resolvers';
 import requestIp from 'request-ip';
 import { upperDirectiveTransformer } from './upperDirectiveTranformer';
 import { makeExecutableSchema } from '@graphql-tools/schema';
+import { table_customers } from 'src/generated/tables';
 
 async function RequireLogin(type: string, knex: Knex, token: string): Promise<boolean> {
   if (!token) {
@@ -41,6 +42,23 @@ async function RequireLogin(type: string, knex: Knex, token: string): Promise<bo
   }
 }
 
+async function loadCustomer(knex: Knex, token: string) {
+  if (token.substring(0, 3) !== 'CUS') {
+    return null;
+  }
+
+  const customer = await knex
+    .table<table_customers>('customers')
+    .where({ login_token: token.substring(3) })
+    .first();
+
+  if (customer) {
+    return customer;
+  }
+
+  return null;
+}
+
 export default function createApolloServer() {
   const knexConnectionList = createKnexContex();
   // const pubsub = new PubSub();
@@ -65,31 +83,35 @@ export default function createApolloServer() {
     context: async ({ req }): Promise<ContextType> => {
       const knex = knexConnectionList.default;
       const token = extractRequestToken(req);
-      const deviceToken = extractDeviceToken(req);
+      // const deviceToken = extractDeviceToken(req);
       const ip = requestIp.getClientIp(req);
 
       const authUser: AuthUser = {
-        requireLogin: async (type: string) => RequireLogin(type, knex, token),
+        requireLogin: async (type: string) =>
+          token.substring(0, 3) === 'CUS' ? false : RequireLogin(type, knex, token),
       };
 
       const authSuperAdmin: SuperAdminAuth = {
-        requireLogin: async (type: string) => RequireLogin(type, knex, token),
+        requireLogin: async (type: string) =>
+          token.substring(0, 3) === 'CUS' ? false : RequireLogin(type, knex, token),
       };
 
-      if (deviceToken && deviceToken.includes('ExponentPushToken')) {
-        const isExits = await knex
-          .table('android_devices_token')
-          .where({ devices_token: deviceToken })
-          .first();
+      const authCustomer = await loadCustomer(knex, token + '');
 
-        if (!isExits) {
-          await knex.table('android_devices_token').insert({
-            devices_token: deviceToken,
-          });
-        }
-      }
+      // if (deviceToken && deviceToken.includes('ExponentPushToken')) {
+      //   const isExits = await knex
+      //     .table('android_devices_token')
+      //     .where({ devices_token: deviceToken })
+      //     .first();
 
-      if (token) {
+      //   if (!isExits) {
+      //     await knex.table('android_devices_token').insert({
+      //       devices_token: deviceToken,
+      //     });
+      //   }
+      // }
+
+      if (token && token.substring(0, 3) !== 'CUS') {
         const user = await knex
           .table('user_token')
           .innerJoin('role_permissions', 'role_permissions.user_id', 'user_token.user_id')
@@ -127,6 +149,7 @@ export default function createApolloServer() {
         token,
         authSuperAdmin,
         pubsub: null,
+        authCustomer,
         ip,
       };
     },

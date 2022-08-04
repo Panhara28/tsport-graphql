@@ -1,0 +1,1 @@
+/* eslint-disable */export interface table_product_category {  id?: number;  name?: string | null;  parent?: number | null;  created_by?: number | null;}

@@ -22,6 +22,8 @@ import { RoleDetailQuery } from './Admin/Role/Query/RoleDetailQuery';
 import { RoleManageAccessMutation } from './Admin/Role/Mutation/RoleManageAccessMutation';
 import { GenderDashbaordCountQuery } from './Admin/Dashboard/Query/GenderDashboardCountQuery';
 import { CustomerResolver } from './Customer';
+import { ProductResolver } from './Product';
+import { CategoryResolver } from './Product/category';
 
 const AppResolver = [
   {
@@ -61,6 +63,8 @@ const AppResolver = [
     },
   },
   CustomerResolver,
+  ProductResolver,
+  CategoryResolver,
 ];
 
 export default AppResolver;
