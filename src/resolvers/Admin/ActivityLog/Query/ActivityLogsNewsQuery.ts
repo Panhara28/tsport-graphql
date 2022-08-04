@@ -3,7 +3,7 @@ import ContextType from 'src/graphql/ContextType';
 
 export const ActivityLogsNewsQuery = async (
   _,
-  { pagination, id }: { pagination: Graph.PaginationInput; id: Number },
+  { pagination, id }: { pagination: Graph.PaginationInput; id: number },
   ctx: ContextType,
 ) => {
   const knex = await ctx.knex.default;

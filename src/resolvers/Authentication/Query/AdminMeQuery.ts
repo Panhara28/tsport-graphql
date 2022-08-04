@@ -14,7 +14,6 @@ export const AdminMeQuery = async (
       .innerJoin('users', 'users.id', 'user_token.user_id')
       .innerJoin('role_permissions', 'role_permissions.user_id', 'users.id')
       .innerJoin('roles', 'roles.id', 'role_permissions.role_id')
-      .innerJoin('user_plugins', 'user_plugins.user_id', 'users.id')
       .select(
         'users.id',
         'users.fullname',
