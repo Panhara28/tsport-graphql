@@ -20,19 +20,7 @@ import { CreatePlaygrounMutation } from './Playground/Mutation/CreatePlaygroundM
 import { ChangePasswordMutation } from './Authentication/Mutation/ChangePasswordMutation';
 import { RoleDetailQuery } from './Admin/Role/Query/RoleDetailQuery';
 import { RoleManageAccessMutation } from './Admin/Role/Mutation/RoleManageAccessMutation';
-import { HrEmployeeListQuery } from './Admin/HrEmployee/Query/HrEmployeeListQuery';
-import { HrEmployeeDetailQuery } from './Admin/HrEmployee/Query/HrEmployeeDetailQuery';
-import { CreateHrEmployeeMutation } from './Admin/HrEmployee/Mutation/CreateHrEmployeeMutation';
-import { UpdateHrEmployeeMutation } from './Admin/HrEmployee/Mutation/UpdateHrEmployeeMutation';
-import { CreateHrDepartmentMutation } from './Admin/HrDepartment/Mutation/CreateHrDepartmentMutation';
-import { HrDepartmentListQuery } from './Admin/HrDepartment/Query/HrDepartmentListQuery';
-import { UpdateHrDepartmentMutation } from './Admin/HrDepartment/Mutation/UpdateHrDepartmentMutation';
-import { HrDepartmentDetailQuery } from './Admin/HrDepartment/Query/HrDepartmentDetailQuery';
-import { EmployeeReportQuery } from './Admin/Reports/EmployeeReportQuery';
-import { HrDepartmentUsersCountQuery } from './Admin/HrEmployee/Query/HrDepartmentUsersCountQuery';
-import { RemoveHrDepartmentMutation } from './Admin/HrDepartment/Mutation/RemoveHrDepartmentMutation';
 import { GenderDashbaordCountQuery } from './Admin/Dashboard/Query/GenderDashboardCountQuery';
-import { RemoveHrEmployeeMutation } from './Admin/HrEmployee/Mutation/RemoveHrEmployeeMutation';
 
 const AppResolver = [
   {
@@ -51,12 +39,6 @@ const AppResolver = [
       activityLogsOptions: ActivityLogsOptionsQuery,
       playgroundList: PlaygroundListQuery,
       roleDetail: RoleDetailQuery,
-      hrEmployeeList: HrEmployeeListQuery,
-      hrEmployee: HrEmployeeDetailQuery,
-      hrDepartmentList: HrDepartmentListQuery,
-      hrDepartment: HrDepartmentDetailQuery,
-      employeeReport: EmployeeReportQuery,
-      hrDepartmentUsersCount: HrDepartmentUsersCountQuery,
       genderDashboardCount: GenderDashbaordCountQuery,
     },
 
@@ -75,12 +57,6 @@ const AppResolver = [
       changePassword: ChangePasswordMutation,
       adminAssignRoleToUser: AdminAssignRoleToUserMutation,
       roleManageAccess: RoleManageAccessMutation,
-      createHrEmployee: CreateHrEmployeeMutation,
-      updateHrEmployee: UpdateHrEmployeeMutation,
-      createHrDepartment: CreateHrDepartmentMutation,
-      updateHrDepartment: UpdateHrDepartmentMutation,
-      removeHrDepartment: RemoveHrDepartmentMutation,
-      removeHrEmployee: RemoveHrEmployeeMutation,
     },
   },
 ];
