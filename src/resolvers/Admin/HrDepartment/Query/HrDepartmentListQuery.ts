@@ -3,12 +3,16 @@ import ContextType from 'src/graphql/ContextType';
 
 export const HrDepartmentListQuery = async (
   _,
-  { branch_level, parent_id }: { branch_level: number; parent_id: number },
+  { branch_level, parent_id, type }: { branch_level: number; parent_id: number; type: string },
   ctx: ContextType,
 ) => {
   const knex = await ctx.knex.default;
 
   const data_query = knex.table('hr_departments');
+
+  if (type === 'list') {
+    return await data_query;
+  }
 
   let tree;
   let data;
