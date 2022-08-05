@@ -13,12 +13,12 @@ export async function UpdateCustomerResolver(_: any, { id, data }: any, ctx: Con
   }
 
   const customer = await query.clone().update({
-    display_name: data.fullname,
-    email: data.email,
-    phone_number: data.phone,
-    permission: data.permission,
+    display: data.fullname,
+    phone: data.phone,
+    type: data.type,
     address: data.address,
-    special_discount: data.discount,
+    discount: data.discount,
+    profile: data.profile,
   });
 
   return customer ? true : false;

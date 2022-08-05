@@ -1,6 +1,7 @@
 extend type Query {
   customer: Customer @auth(roles: ["CUSTOMER"])
-  customerList: [Customer] @auth(roles: ["ADMIN", "SUPER_ADMIN"])
+  customerList(offset: Int = 0, limit: Int = 10, phone: String): CustomerList @auth(roles: ["ADMIN", "SUPER_ADMIN"])
+  customerById(id: Int!): Customer @auth(roles: ["ADMIN", "SUPER_ADMIN"])
 }
 
 extend type Mutation {
@@ -8,6 +9,11 @@ extend type Mutation {
   changePasswordCustomer(oldPassword: String!, newPassword: String!): Boolean @auth(roles: ["CUSTOMER"])
   loginCustomer(username: String!, password: String!): Token @auth(public: true)
   updateCustomer(id: Int, data: CustomerInput): Boolean @auth(roles: ["CUSTOMER", "ADMIN", "SUPER_ADMIN"])
+}
+
+type CustomerList {
+  data: [Customer]
+  pagination: Pagination
 }
 
 type Customer {

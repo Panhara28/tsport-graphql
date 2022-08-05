@@ -16,5 +16,6 @@ input CategoryInput {
 type Category {
   id: Int
   name: String
+  parent: Int
   parents: JSON
 }

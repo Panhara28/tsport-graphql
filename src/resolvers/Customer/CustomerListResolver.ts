@@ -16,11 +16,23 @@ export async function CustomerListResolver(_: any, { offset, limit, phone }: any
     .offset(offset)
     .orderBy('created_at', 'desc');
 
-  return customers.map(x => {
-    return {
-      ...x,
-      fullname: x.display,
-      discount: x.discount,
-    };
-  });
+  const { total } = await query
+    .clone()
+    .count('* as total')
+    .first<{ total: number }>();
+
+  return {
+    data: customers.map(x => {
+      return {
+        ...x,
+        fullname: x.display,
+        discount: x.discount,
+      };
+    }),
+    pagination: {
+      total,
+      current: offset + 1,
+      size: customers.length,
+    },
+  };
 }
