@@ -8,7 +8,7 @@ console.log('Starting GraphQL Server');
 
 const server = createApolloServer();
 
-server.listen(process.env.PORT).then(({ url, subscriptionsUrl }) => {
+server.listen(process.env.PORT).then(({ url, subscriptionsUrl }: any) => {
   console.log(`🚀  Server ready at ${url}`);
   console.log(`🚀  Server ready at ${subscriptionsUrl}`);
 });

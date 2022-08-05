@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ApolloServer, AuthenticationError } from 'apollo-server';
 import ContextType, { AuthUser, SuperAdminAuth } from './ContextType';
 import createKnexContex from './createKnexContext';
@@ -73,7 +74,7 @@ export default function createApolloServer() {
   return new ApolloServer({
     cors: true,
     schema: subgraphSchema,
-    playground: process.env.NODE_ENV !== 'production',
+    playground: true,
     debug: process.env.NODE_ENV !== 'production',
     subscriptions: {
       onConnect: () => {
@@ -153,5 +154,5 @@ export default function createApolloServer() {
         ip,
       };
     },
-  });
+  } as any);
 }

@@ -1,6 +1,6 @@
 extend type Query {
   me: Me @auth(public: true)
-  adminMe(websiteId: Int, clientToken: String): Me @auth(roles: ["ADMIN", "SUPER_ADMIN"])
+  adminMe(websiteId: Int, clientToken: String): Me @auth(public: true)
 }
 
 extend type Mutation {
