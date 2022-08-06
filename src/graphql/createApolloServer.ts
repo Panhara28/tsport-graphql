@@ -2,14 +2,13 @@
 import { ApolloServer, AuthenticationError } from 'apollo-server';
 import ContextType, { AuthUser, SuperAdminAuth } from './ContextType';
 import createKnexContex from './createKnexContext';
-import extractRequestToken, { extractDeviceToken } from './extractRequestToken';
+import extractRequestToken from './extractRequestToken';
 import loadMergeSchema from './loadMergedSchema';
 import Knex from 'knex';
 import AppResolver from 'src/resolvers/Resolvers';
 import requestIp from 'request-ip';
-import { upperDirectiveTransformer } from './upperDirectiveTranformer';
-import { makeExecutableSchema } from '@graphql-tools/schema';
 import { table_customers } from 'src/generated/tables';
+import { AuthDirective } from './directives/AuthDirective';
 
 async function RequireLogin(type: string, knex: Knex, token: string): Promise<boolean> {
   if (!token) {
@@ -123,17 +122,13 @@ export default function createApolloServer() {
   const knexConnectionList = createKnexContex();
   // const pubsub = new PubSub();
 
-  let subgraphSchema = makeExecutableSchema({
-    typeDefs: loadMergeSchema(),
-    resolvers: AppResolver,
-  });
-
-  subgraphSchema = upperDirectiveTransformer(subgraphSchema, 'auth');
-
   return new ApolloServer({
-    csrfPrevention: true,
-    cors: { origin: true, credentials: true },
-    schema: subgraphSchema,
+    cors: true,
+    typeDefs: loadMergeSchema(),
+    schemaDirectives: {
+      auth: AuthDirective,
+    },
+    resolvers: AppResolver,
     context: async ({ req }) => await ContextConfig({ req, knexConnectionList }),
   });
 }

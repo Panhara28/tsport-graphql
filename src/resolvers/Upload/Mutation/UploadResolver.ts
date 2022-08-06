@@ -7,7 +7,6 @@ import sizeOf from 'image-size';
 export const UploadResolver = async (_, { file }, ctx: ContextType) => {
   // await ctx.authUser.requireLogin('USER');
   // const isUserWrite = await ctx.authUser.user.write;
-  console.log('run');
   const { createReadStream, filename, mimetype } = await file;
   const stream = await createReadStream();
   let fileSize = 0;

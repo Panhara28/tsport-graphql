@@ -1,5 +1,5 @@
 extend type Mutation {
-  singleUpload(file: Upload!): UploadedFile! @auth(public: true)
+  singleUpload(file: Upload!): UploadedFile @auth(public: true)
 }
 
 type UploadedFile {

@@ -1,6 +1,5 @@
 scalar JSON
 scalar JSONObject
-scalar Upload
 
 directive @auth(roles: [String], public: Boolean) on FIELD_DEFINITION
 

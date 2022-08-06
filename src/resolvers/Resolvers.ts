@@ -1,3 +1,6 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable @typescript-eslint/ban-ts-ignore */
 import { AdminAssignRoleToUserMutation } from './Admin/Role/Mutation/AdminAssignRoleToUserMutation';
 import { AdminHasRoleQuery } from './Admin/Role/Query/AdminHasRoleQuery';
 import { AdminRoleListQuery } from './Admin/Role/Query/AdminRoleListQuery';
