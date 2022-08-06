@@ -23,7 +23,7 @@ import { RoleManageAccessMutation } from './Admin/Role/Mutation/RoleManageAccess
 import { GenderDashbaordCountQuery } from './Admin/Dashboard/Query/GenderDashboardCountQuery';
 import { CustomerResolver } from './Customer';
 import { ProductResolver } from './Product';
-import { CategoryResolver } from './Product/category';
+import { CategoryResolver } from './Product/Category';
 
 const AppResolver = [
   {
