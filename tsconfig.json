@@ -13,10 +13,5 @@
   "typeAcquisition": {
     "include": ["jest"]
   },
-  "exclude": ["node_modules"],
-  "ts-node": {
-    "esm": true,
-    "experimentalSpecifierResolution": "node"
-  },
-  "lib": ["esnext"]
+  "exclude": ["node_modules"]
 }

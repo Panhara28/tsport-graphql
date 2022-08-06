@@ -1,0 +1,13 @@
+extend type Query {
+  bannerList: JSON @auth(public: true)
+  banner(id: Int!): JSON @auth(public: true)
+}
+
+extend type Mutation {
+  updateBanner(id: Int!, data: BannerInput): Boolean @auth(roles: ["ADMIN", "SUPER_ADMIN"])
+}
+
+input BannerInput {
+  name: String
+  image: String
+}

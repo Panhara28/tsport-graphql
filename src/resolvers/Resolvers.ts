@@ -27,6 +27,7 @@ import { GenderDashbaordCountQuery } from './Admin/Dashboard/Query/GenderDashboa
 import { CustomerResolver } from './Customer';
 import { ProductResolver } from './Product';
 import { CategoryResolver } from './Product/Category';
+import { BannerResolver } from './Banner';
 
 const AppResolver = [
   {
@@ -68,6 +69,7 @@ const AppResolver = [
   CustomerResolver,
   ProductResolver,
   CategoryResolver,
+  BannerResolver,
 ];
 
 export default AppResolver;
