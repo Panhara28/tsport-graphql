@@ -60,6 +60,65 @@ async function loadCustomer(knex: Knex, token: string) {
   return null;
 }
 
+async function ContextConfig({ req, knexConnectionList }): Promise<ContextType> {
+  const knex = knexConnectionList.default;
+  const token = extractRequestToken(req);
+  // const deviceToken = extractDeviceToken(req);
+  const ip = requestIp.getClientIp(req);
+
+  const authUser: AuthUser = {
+    requireLogin: async (type: string) => (token.substring(0, 3) === 'CUS' ? false : RequireLogin(type, knex, token)),
+  };
+
+  const authSuperAdmin: SuperAdminAuth = {
+    requireLogin: async (type: string) => (token.substring(0, 3) === 'CUS' ? false : RequireLogin(type, knex, token)),
+  };
+
+  const authCustomer = await loadCustomer(knex, token + '');
+
+  if (token && token.substring(0, 3) !== 'CUS') {
+    const user = await knex
+      .table('user_token')
+      .innerJoin('role_permissions', 'role_permissions.user_id', 'user_token.user_id')
+      .innerJoin('roles', 'roles.id', 'role_permissions.role_id')
+      .innerJoin('users', 'users.id', 'user_token.user_id')
+      .select(
+        'user_token.user_id as user_id',
+        'roles.write as write',
+        'roles.read as read',
+        'roles.modify as modify',
+        'roles.delete as delete',
+        'users.type as type',
+      )
+      .where({ token: token })
+      .first();
+
+    if (user) {
+      authUser.user = {
+        id: user.user_id,
+        token: token,
+        read: user.read,
+        write: user.write,
+        modify: user.modified,
+        delete: user.delete,
+        type: user.type,
+      };
+    } else {
+      throw new AuthenticationError('Incorrect Token!!');
+    }
+  }
+
+  return {
+    knex: knexConnectionList,
+    authUser,
+    token,
+    authSuperAdmin,
+    pubsub: null,
+    authCustomer,
+    ip,
+  };
+}
+
 export default function createApolloServer() {
   const knexConnectionList = createKnexContex();
   // const pubsub = new PubSub();
@@ -72,87 +131,9 @@ export default function createApolloServer() {
   subgraphSchema = upperDirectiveTransformer(subgraphSchema, 'auth');
 
   return new ApolloServer({
-    cors: true,
+    csrfPrevention: true,
+    cors: { origin: true, credentials: true },
     schema: subgraphSchema,
-    playground: true,
-    debug: process.env.NODE_ENV !== 'production',
-    subscriptions: {
-      onConnect: () => {
-        console.log('connected');
-      },
-    },
-    context: async ({ req }): Promise<ContextType> => {
-      const knex = knexConnectionList.default;
-      const token = extractRequestToken(req);
-      // const deviceToken = extractDeviceToken(req);
-      const ip = requestIp.getClientIp(req);
-
-      const authUser: AuthUser = {
-        requireLogin: async (type: string) =>
-          token.substring(0, 3) === 'CUS' ? false : RequireLogin(type, knex, token),
-      };
-
-      const authSuperAdmin: SuperAdminAuth = {
-        requireLogin: async (type: string) =>
-          token.substring(0, 3) === 'CUS' ? false : RequireLogin(type, knex, token),
-      };
-
-      const authCustomer = await loadCustomer(knex, token + '');
-
-      // if (deviceToken && deviceToken.includes('ExponentPushToken')) {
-      //   const isExits = await knex
-      //     .table('android_devices_token')
-      //     .where({ devices_token: deviceToken })
-      //     .first();
-
-      //   if (!isExits) {
-      //     await knex.table('android_devices_token').insert({
-      //       devices_token: deviceToken,
-      //     });
-      //   }
-      // }
-
-      if (token && token.substring(0, 3) !== 'CUS') {
-        const user = await knex
-          .table('user_token')
-          .innerJoin('role_permissions', 'role_permissions.user_id', 'user_token.user_id')
-          .innerJoin('roles', 'roles.id', 'role_permissions.role_id')
-          .innerJoin('users', 'users.id', 'user_token.user_id')
-          .select(
-            'user_token.user_id as user_id',
-            'roles.write as write',
-            'roles.read as read',
-            'roles.modify as modify',
-            'roles.delete as delete',
-            'users.type as type',
-          )
-          .where({ token: token })
-          .first();
-
-        if (user) {
-          authUser.user = {
-            id: user.user_id,
-            token: token,
-            read: user.read,
-            write: user.write,
-            modify: user.modified,
-            delete: user.delete,
-            type: user.type,
-          };
-        } else {
-          throw new AuthenticationError('Incorrect Token!!');
-        }
-      }
-
-      return {
-        knex: knexConnectionList,
-        authUser,
-        token,
-        authSuperAdmin,
-        pubsub: null,
-        authCustomer,
-        ip,
-      };
-    },
-  } as any);
+    context: async ({ req }) => await ContextConfig({ req, knexConnectionList }),
+  });
 }

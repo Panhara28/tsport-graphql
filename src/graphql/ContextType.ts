@@ -1,4 +1,5 @@
 import Knex from 'knex';
+import extractRequestToken from './extractRequestToken';
 
 export interface AuthSuperAdminInterface {
   id: number;

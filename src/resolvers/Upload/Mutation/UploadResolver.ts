@@ -7,6 +7,7 @@ import sizeOf from 'image-size';
 export const UploadResolver = async (_, { file }, ctx: ContextType) => {
   // await ctx.authUser.requireLogin('USER');
   // const isUserWrite = await ctx.authUser.user.write;
+  console.log('run');
   const { createReadStream, filename, mimetype } = await file;
   const stream = await createReadStream();
   let fileSize = 0;
@@ -21,7 +22,7 @@ export const UploadResolver = async (_, { file }, ctx: ContextType) => {
   });
 
   const json = await request.post({
-    url: process.env.S1 ? process.env.S1 + '/upload' : 'https://imagerium.blockerium.com' + '/upload',
+    url: process.env.S1 ? process.env.S1 + '/upload' : 'https://s1.tsportcambodia.com' + '/upload',
     formData: {
       mocspace: {
         value: await streamToBuffer(stream),
