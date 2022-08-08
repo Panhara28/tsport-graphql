@@ -10,13 +10,13 @@ export function generateSku(color: string[], size: string[], product: any): tabl
         .filter(x => !x.isMain)
         .find(
           x =>
-            (x.color as string).toLowerCase() === c.toLowerCase() &&
-            (x.size as string).toLowerCase() === s.toLowerCase(),
+            (x.color as string).trim().toLowerCase() === c.trim().toLowerCase() &&
+            (x.size as string).trim().toLowerCase() === s.trim().toLowerCase(),
         );
       items.push({
         id: findImage ? (findImage.id ? findImage.id : null) : null,
-        color: c,
-        size: s,
+        color: c.trim(),
+        size: s.trim(),
         barcode: findImage
           ? findImage.barcode
             ? findImage.barcode

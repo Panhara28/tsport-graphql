@@ -31,11 +31,25 @@ export async function ProductListResolver(_: any, { offset, limit, filter }: any
     items.map(x => x.category),
   );
 
-  return items.map(item => {
+  const { total } = await query
+    .clone()
+    .count('* as total')
+    .first<{ total: number }>();
+
+  const data = items.map(item => {
     return {
       ...item,
       sku: sku.filter(x => x.product_id === item.id),
       category: item.category === 0 ? null : category.find(x => x.id === item.category),
     };
   });
+
+  return {
+    data,
+    pagination: {
+      total,
+      current: offset + 1,
+      size: data.length,
+    },
+  };
 }

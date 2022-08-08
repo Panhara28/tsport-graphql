@@ -24,13 +24,14 @@ export async function UpdateProductResolver(_: any, { id, data }: any, ctx: Cont
         stock: (data.picture as any[]).reduce((a, b) => a + Number(b.stock), 0),
         unit: data.unit,
         picture: data.picture.find((x: any) => !!x.isMain).name,
+        published: true,
       });
 
     if (product) {
       const sku = generateSku((data.color as string).split(','), (data.size as string).split(','), { ...data, id });
 
-      const newSku = sku.filter(x => x.id === null);
-      const oldSku = sku.filter(x => Number(x.id) < 0);
+      const newSku = sku.filter(x => !x.id);
+      const oldSku = sku.filter(x => Number(x.id) > 0);
 
       if (newSku.length > 0) {
         await tx.table<table_product_stock>('product_stock').insert(sku);
