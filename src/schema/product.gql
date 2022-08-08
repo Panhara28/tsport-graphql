@@ -34,4 +34,5 @@ input ProductPictureInput {
   size: String
   isMain: Boolean = false
   barcode: String
+  stock: Int
 }

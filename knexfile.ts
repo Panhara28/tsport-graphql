@@ -1,6 +1,5 @@
 import dotenv from 'dotenv';
 dotenv.config();
-console.log('from knex.ts', process.env.MYSQL_DEFAULT);
 
 module.exports = {
   development: {

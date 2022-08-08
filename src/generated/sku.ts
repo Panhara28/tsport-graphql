@@ -36,6 +36,7 @@ export function generateSku(color: string[], size: string[], product: any): tabl
               .toUpperCase()}${new Date().getTime()}${generatedID(4)}`,
         image: findImage ? findImage.name : '',
         product_id: product.id,
+        stock: findImage ? findImage.stock : 0,
       });
     }
   }
