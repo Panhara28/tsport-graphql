@@ -22,7 +22,7 @@ export async function ProductListResolver(_: any, { offset, limit, filter }: any
     .offset(offset)
     .limit(limit);
 
-  const sku = await knex.table<table_product_stock>('product_sku').whereIn(
+  const sku = await knex.table<table_product_stock>('product_stock').whereIn(
     'product_id',
     items.map(x => x.id),
   );
