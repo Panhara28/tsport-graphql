@@ -3,9 +3,7 @@ import ContextType from 'src/graphql/ContextType';
 import { LoadCategoryParent } from '.';
 
 export async function CategoryByIDResolver(_: any, { id }: { id: number }, ctx: ContextType) {
-  const knex = ctx.knex.default;
-
-  const items = await knex.table('product_category');
+  const items = await ctx.dataSources.category.getCategoryList();
   const item = items.find(x => x.id === id);
 
   return {

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ApolloServer, AuthenticationError } from 'apollo-server';
 import ContextType, { AuthUser, SuperAdminAuth } from './ContextType';
@@ -9,6 +10,10 @@ import AppResolver from 'src/resolvers/Resolvers';
 import requestIp from 'request-ip';
 import { table_customers } from 'src/generated/tables';
 import { AuthDirective } from './directives/AuthDirective';
+import { CategorySql } from 'src/datasource/CategorySql';
+import { ProductSql } from 'src/datasource/ProductSql';
+import { SkuSql } from 'src/datasource/SkuSql';
+import { OrderSql } from 'src/datasource/OrderSql';
 
 async function RequireLogin(type: string, knex: Knex, token: string): Promise<boolean> {
   if (!token) {
@@ -122,6 +127,12 @@ export default function createApolloServer() {
   const knexConnectionList = createKnexContex();
   // const pubsub = new PubSub();
 
+  const config = {
+    client: 'mysql2',
+    connection: process.env.MYSQL_DEFAULT,
+    pool: { min: 3, max: 10 },
+  };
+
   return new ApolloServer({
     cors: true,
     typeDefs: loadMergeSchema(),
@@ -130,5 +141,13 @@ export default function createApolloServer() {
     },
     resolvers: AppResolver,
     context: async ({ req }) => await ContextConfig({ req, knexConnectionList }),
+    dataSources: () => {
+      return {
+        category: new CategorySql(config),
+        product: new ProductSql(config),
+        sku: new SkuSql(config),
+        order: new OrderSql(config),
+      };
+    },
   });
 }

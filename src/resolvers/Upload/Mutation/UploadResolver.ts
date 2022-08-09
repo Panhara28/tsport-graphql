@@ -2,7 +2,7 @@ import ContextType from '../../../graphql/ContextType';
 import request from 'request-promise';
 import { streamToBuffer } from '../../../function/streamToBuffer';
 import { AuthenticationError } from 'apollo-server';
-import sizeOf from 'image-size';
+// import sizeOf from 'image-size';
 
 export const UploadResolver = async (_, { file }, ctx: ContextType) => {
   // await ctx.authUser.requireLogin('USER');
@@ -39,7 +39,7 @@ export const UploadResolver = async (_, { file }, ctx: ContextType) => {
   if (extention === 'pdf' || extention === 'docx' || extention === 'csv') {
     // console.log('file');
   } else {
-    dimensions = sizeOf(stream.path);
+    // dimensions = sizeOf(stream.path);
   }
 
   return {

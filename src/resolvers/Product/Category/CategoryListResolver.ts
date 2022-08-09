@@ -3,9 +3,7 @@ import ContextType from 'src/graphql/ContextType';
 import { LoadCategoryParent } from '.';
 
 export async function CategoryListResolver(_: any, {}, ctx: ContextType) {
-  const knex = ctx.knex.default;
-
-  const items = await knex.table('product_category');
+  const items = await ctx.dataSources.category.getCategoryList();
 
   return items.length === 0
     ? []

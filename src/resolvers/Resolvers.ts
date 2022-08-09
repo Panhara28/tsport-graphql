@@ -28,6 +28,7 @@ import { CustomerResolver } from './Customer';
 import { ProductResolver } from './Product';
 import { CategoryResolver } from './Product/Category';
 import { BannerResolver } from './Banner';
+import { OrderResolver } from './Order';
 
 const AppResolver = [
   {
@@ -70,6 +71,7 @@ const AppResolver = [
   ProductResolver,
   CategoryResolver,
   BannerResolver,
+  OrderResolver,
 ];
 
 export default AppResolver;

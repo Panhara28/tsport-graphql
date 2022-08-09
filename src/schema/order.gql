@@ -1,0 +1,11 @@
+extend type Mutation {
+  createOrder(data: [OrderCartInput], customerId: Int): Boolean @auth(public: true)
+}
+
+input OrderCartInput {
+  productId: Int
+  skuId: Int
+  price: Float
+  discountPrice: Float
+  qty: Int
+}

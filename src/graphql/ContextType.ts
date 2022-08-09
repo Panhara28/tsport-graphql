@@ -1,4 +1,8 @@
 import Knex from 'knex';
+import { CategorySql } from 'src/datasource/CategorySql';
+import { OrderSql } from 'src/datasource/OrderSql';
+import { ProductSql } from 'src/datasource/ProductSql';
+import { SkuSql } from 'src/datasource/SkuSql';
 import extractRequestToken from './extractRequestToken';
 
 export interface AuthSuperAdminInterface {
@@ -36,4 +40,10 @@ export default interface ContextType {
   pubsub: any;
   authCustomer: any;
   ip: any;
+  dataSources?: {
+    category: CategorySql;
+    product: ProductSql;
+    sku: SkuSql;
+    order: OrderSql;
+  };
 }
