@@ -29,6 +29,7 @@ import { ProductResolver } from './Product';
 import { CategoryResolver } from './Product/Category';
 import { BannerResolver } from './Banner';
 import { OrderResolver } from './Order';
+import { SettingResolver } from './Setting';
 
 const AppResolver = [
   {
@@ -72,6 +73,7 @@ const AppResolver = [
   CategoryResolver,
   BannerResolver,
   OrderResolver,
+  SettingResolver,
 ];
 
 export default AppResolver;

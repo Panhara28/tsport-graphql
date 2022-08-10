@@ -1,0 +1,85 @@
+extend type Query {
+  settings(language: String): Setting!
+}
+
+type Setting {
+  id: ID!
+  language: String!
+  translated_languages: [String!]!
+  options: SettingsOptions!
+}
+
+type SettingsOptions {
+  currencyToWalletRatio: Int
+  signupPoints: Int
+  siteTitle: String!
+  siteSubtitle: String!
+  currency: String!
+  minimumOrderAmount: Float!
+  deliveryTime: [DeliveryTime!]!
+  logo: Attachment!
+  taxClass: String!
+  shippingClass: String!
+  seo: SeoSettings!
+  google: GoogleSettings
+  facebook: FacebookSettings
+  contactDetails: ContactDetails!
+  useOtp: Boolean!
+  maximumQuestionLimit: Float!
+}
+
+type Attachment {
+  id: ID
+  thumbnail: String
+  original: String
+}
+
+type SeoSettings {
+  metaTitle: String
+  metaDescription: String
+  ogTitle: String
+  ogDescription: String
+  ogImage: Attachment
+  twitterHandle: String
+  twitterCardType: String
+  metaTags: String
+  canonicalUrl: String
+}
+
+type GoogleSettings {
+  isEnable: Boolean!
+  tagManagerId: String!
+}
+
+type FacebookSettings {
+  isEnable: Boolean!
+  appId: String!
+  pageId: String!
+}
+
+type ContactDetails {
+  socials: [ShopSocials!]!
+  contact: String!
+  location: Location!
+  website: String!
+}
+
+type ShopSocials {
+  icon: String!
+  url: String!
+}
+
+type Location {
+  lat: Float
+  lng: Float
+  city: String
+  state: String
+  country: String
+  zip: String
+  formattedAddress: String
+}
+
+type DeliveryTime {
+  title: String!
+  description: String!
+}
