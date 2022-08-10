@@ -1,5 +1,5 @@
 extend type Query {
-  categoryList: [Category] @auth(public: true)
+  categoryList(nested: Boolean = true): [Category] @auth(public: true)
   category(id: Int!): Category @auth(public: true)
 }
 
