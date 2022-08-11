@@ -18,6 +18,14 @@ export async function up(knex: Knex): Promise<void> {
       table.decimal('total');
       table.integer('qty');
       table.timestamps(true, true);
+      table.dateTime('order_received_date');
+      table.dateTime('order_processing_date');
+      table.dateTime('ready_to_delivery_date');
+      table.dateTime('order_delivery_date');
+      table.dateTime('pick_up_date');
+      table.dateTime('order_delivery_date');
+      table.dateTime('return_date');
+      table.string('return_reason');
     });
   }
 }

@@ -1,5 +1,10 @@
+extend type Query {
+  orderList(status: [OrderStatus], orderCode: String): JSON @auth(public: true)
+}
+
 extend type Mutation {
   createOrder(data: [OrderCartInput], customerId: Int): Boolean @auth(public: true)
+  changeOrderStatus(status: OrderStatus!, orderItemId: Int!): Boolean @auth(public: true)
 }
 
 input OrderCartInput {
@@ -8,4 +13,13 @@ input OrderCartInput {
   price: Float
   discountPrice: Float
   qty: Int
+}
+
+enum OrderStatus {
+  ORDER_RECEIVED
+  ORDER_PROCESSING
+  READY_TO_DELIVERY
+  ORDER_DELIVERY
+  CONFIRM_PICK_UP
+  RETURN
 }

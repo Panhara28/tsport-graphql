@@ -1,6 +1,6 @@
 const ALPHABET = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
-export function generatedID(length: number) {
+export function generatedID(length: number, type?: string) {
   var rtn = '';
   for (var i = 0; i < length; i++) {
     rtn += ALPHABET.charAt(Math.floor(Math.random() * ALPHABET.length));

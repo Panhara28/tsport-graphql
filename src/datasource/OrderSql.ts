@@ -1,5 +1,6 @@
 import { SQLDataSource } from 'datasource-sql';
 import Knex from 'knex';
+import { generatedID, generatedPrefix } from 'src/generated/id';
 
 interface OrderCart {
   productId: number;
@@ -49,7 +50,7 @@ export class OrderSql extends SQLDataSource {
             return {
               order_id: o[0],
               description_status: JSON.stringify([
-                { status: 0, date: new Date(), descripition: 'In prepare product.' },
+                { status: 0, date: new Date(), descripition: 'Product in order received' },
               ]),
               product_id: x.productId,
               sku_id: x.skuId,
@@ -57,11 +58,13 @@ export class OrderSql extends SQLDataSource {
               size: x.size,
               status: x.status,
               customer: x.customerId,
-              order_uuid: x.order_uuid,
+              order_uuid: generatedID(8) + new Date().toTimeString(),
               qty: x.qty,
               discount: x.discount,
               amount: x.qty * x.price,
               total: Number(x.qty * x.price) - x.discount,
+              order_received_date: new Date(),
+              price: Number(x.price),
             };
           }),
         );
