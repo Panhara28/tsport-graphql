@@ -1,5 +1,8 @@
 import { Graph } from 'src/generated/graph';
+import { table_order_items } from 'src/generated/tables/table_order_items';
 import ContextType from 'src/graphql/ContextType';
+import { OrderService } from 'src/service/OrderService';
+import { OrderStatus } from '.';
 
 type DescriptionStatus = {
   date: string;
@@ -10,53 +13,38 @@ type DescriptionStatus = {
 
 export async function ChangeOrderStatusResolver(
   _,
-  { status, orderItemId, note }: { note: string; status: Graph.OrderStatus; orderItemId: number },
+  { status, orderItemId, note }: { note: string; status: any; orderItemId: number },
   ctx: ContextType,
 ) {
   const knex = ctx.knex.default;
+  const order = new OrderService(knex);
 
-  const orderItem = await knex
+  const item: table_order_items = await knex
     .table('order_items')
     .where({ id: orderItemId })
     .first();
 
-  if (orderItem) {
-    const descripition: DescriptionStatus[] = JSON.parse(orderItem.description_status);
-    const query = knex.table('order_items');
-
-    // switch (status) {
-    //   case 'PREPARE':
-    //     query.whereNot({ status: 0 }).update({ status: 0 });
-    //     descripition.push({
-    //       date: new Date() + '',
-    //       status: 0,
-    //       description: `In prepare product.`,
-    //     });
-    //   case 'DELIVERY':
-    //     query.whereNot({ status: 1 }).update({ status: 1 });
-    //     descripition.push({
-    //       date: new Date() + '',
-    //       status: 1,
-    //       description: `Product are delivery.`,
-    //     });
-    //   case 'PICKUP':
-    //     query.whereNot({ status: 2 }).update({ status: 2 });
-    //     descripition.push({
-    //       date: new Date() + '',
-    //       status: 2,
-    //       description: `Product are pick up.`,
-    //     });
-    //   case 'RETURNED':
-    //     query.whereNot({ status: 3 }).update({ status: 3 });
-    //     descripition.push({
-    //       date: new Date() + '',
-    //       status: 3,
-    //       description: `Product are return.`,
-    //       note,
-    //     });
-    // }
-
-    await query.clone().where({ id: orderItemId });
+  if (item) {
+    switch (status) {
+      case OrderStatus.ORDER_RECEIVED:
+        await order.changeOrderToOrderRecived(orderItemId);
+        break;
+      case OrderStatus.ORDER_PROCESSING:
+        await order.changeOrderToOrderProcessing(orderItemId);
+        break;
+      case OrderStatus.READY_TO_DELIVERY:
+        await order.changeOrderToReadyToDelivery(orderItemId);
+        break;
+      case OrderStatus.ORDER_DELIVERY:
+        await order.changeOrderToOrderDelivery(orderItemId);
+        break;
+      case OrderStatus.CONFIRM_PICK_UP:
+        await order.changeOrderToPickUp(orderItemId);
+        break;
+      case OrderStatus.RETURN:
+        await order.changeOrderToReturn(orderItemId, note);
+        break;
+    }
   }
 
   return true;
