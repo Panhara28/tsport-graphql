@@ -53,11 +53,17 @@ export async function OrderListResolver(
     orders.map(x => x.sku_id),
   );
 
+  const customers = await knex.table('customers').whereIn(
+    'id',
+    orders.map(x => x.customer),
+  );
+
   return orders.map(x => {
     return {
       ...x,
       product: items.find(f => f.id === x.product_id),
       sku: skus.find(f => f.id === x.sku_id),
+      customer: customers.find(f => f.id === x.customer),
     };
   });
 }
