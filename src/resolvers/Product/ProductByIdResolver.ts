@@ -15,5 +15,6 @@ export async function ProductByIdResolver(_: any, { id }: any, ctx: ContextType)
     ...item,
     sku,
     category: item.category === 0 ? null : category,
+    images: item.images ? item.images.split(',') : [],
   };
 }

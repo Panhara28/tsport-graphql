@@ -25,6 +25,7 @@ input ProductInput {
   stock: Int
   unit: String
   picture: [ProductPictureInput]
+  images: String
 }
 
 input ProductPictureInput {

@@ -18,6 +18,7 @@ export async function CategoryListResolver(_: any, { nested }: any, ctx: Context
         .map(item => {
           return {
             ...item,
+            src: item.image,
             parents: LoadCategoryParent(item.id, items as table_product_category[]),
           };
         });

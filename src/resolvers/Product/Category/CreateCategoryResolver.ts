@@ -14,6 +14,7 @@ export async function CreateCategoryResolver(_: any, { data }, ctx: ContextType)
   const item = await knex.table<table_product_category>('product_category').insert({
     name: data.name,
     parent: data.parent,
+    image: data.src,
   });
 
   return item[0] > 0 ? true : false;

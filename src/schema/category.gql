@@ -11,6 +11,7 @@ extend type Mutation {
 input CategoryInput {
   name: String
   parent: Int
+  src: String
 }
 
 type Category {
@@ -18,4 +19,5 @@ type Category {
   name: String
   parent: Int
   parents: JSON
+  src: String
 }

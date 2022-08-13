@@ -25,6 +25,7 @@ export async function UpdateProductResolver(_: any, { id, data }: any, ctx: Cont
         unit: data.unit,
         picture: data.picture.find((x: any) => !!x.isMain).name,
         published: true,
+        images: data.images,
       });
 
     if (product) {

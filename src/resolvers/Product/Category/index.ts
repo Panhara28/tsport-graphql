@@ -10,6 +10,7 @@ export function LoadCategoryParent(id: number, category: table_product_category[
     .map((c: table_product_category) => {
       return {
         ...c,
+        src: c.image,
         parents: LoadCategoryParent(
           c.id || 0,
           category.filter(x => x.parent !== 0 || x.parent !== id),

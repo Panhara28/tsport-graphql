@@ -17,6 +17,7 @@ export async function UpdateCategoryResolver(_: any, { id, data }, ctx: ContextT
     .update({
       name: data.name,
       parent: data.parent,
+      image: data.src,
     });
 
   return update ? true : false;

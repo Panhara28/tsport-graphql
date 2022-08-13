@@ -41,6 +41,7 @@ export async function ProductListResolver(_: any, { offset, limit, filter }: any
       ...item,
       sku: sku.filter(x => x.product_id === item.id),
       category: item.category === 0 ? null : category.find(x => x.id === item.category),
+      images: item.images ? item.images.split(',') : [],
     };
   });
 

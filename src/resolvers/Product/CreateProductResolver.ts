@@ -22,6 +22,7 @@ export async function CreateProductResolver(_: any, { data }: any, ctx: ContextT
       unit: data.unit,
       picture: data.picture.find((x: any) => !!x.isMain).name,
       published: true,
+      images: data.images,
     });
 
     if (product[0] > 0) {

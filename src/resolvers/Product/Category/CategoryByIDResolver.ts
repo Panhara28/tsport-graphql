@@ -8,6 +8,7 @@ export async function CategoryByIDResolver(_: any, { id }: { id: number }, ctx: 
 
   return {
     ...item,
+    src: item.image,
     parents: LoadCategoryParent(item.id, items as table_product_category[]),
   };
 }
