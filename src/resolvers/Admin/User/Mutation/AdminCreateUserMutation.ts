@@ -12,8 +12,8 @@ export const AdminCreateUserMutation = async (_, { input }: { input: Graph.UserI
 
   const validation = new Validation(input);
 
-  validation.isRequired(['username', 'fullname', 'password', 'profile_picture', 'email'], 'is required');
-  validation.isValidEmail(['email']);
+  // validation.isRequired(['username', 'fullname', 'password', 'profile_picture', 'email'], 'is required');
+  // validation.isValidEmail(['email']);
 
   if (validation.isError()) {
     validation.throwError();
@@ -21,7 +21,7 @@ export const AdminCreateUserMutation = async (_, { input }: { input: Graph.UserI
 
   const hash = bcrypt.hashSync(input?.password, 12);
 
-  const [createUser] = await knex('').insert({
+  const [createUser] = await knex('users').insert({
     fullname: input?.fullname ? input?.fullname : undefined,
     username: input?.username ? input?.username : undefined,
     password: input?.password ? hash : undefined,
