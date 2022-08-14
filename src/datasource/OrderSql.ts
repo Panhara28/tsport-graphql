@@ -57,7 +57,7 @@ export class OrderSql extends SQLDataSource {
             size: x.size,
             status: x.status,
             customer: x.customerId,
-            order_uuid: generatedID(8) + new Date().toTimeString(),
+            order_uuid: generatedID(8) + new Date().getTime(),
             qty: x.qty,
             discount: x.discount,
             amount: x.qty * x.price,
