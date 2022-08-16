@@ -24,7 +24,7 @@ import { ChangePasswordMutation } from './Authentication/Mutation/ChangePassword
 import { RoleDetailQuery } from './Admin/Role/Query/RoleDetailQuery';
 import { RoleManageAccessMutation } from './Admin/Role/Mutation/RoleManageAccessMutation';
 import { GenderDashbaordCountQuery } from './Admin/Dashboard/Query/GenderDashboardCountQuery';
-import { CustomerResolver } from './Customer';
+import { CustomerResolver, getCustomer } from './Customer';
 import { ProductResolver } from './Product';
 import { CategoryResolver } from './Product/Category';
 import { BannerResolver } from './Banner';
@@ -37,7 +37,7 @@ const AppResolver = [
       testing: () => {
         return 'Hello World';
       },
-      me: MeQuery,
+      me: getCustomer,
       adminMe: AdminMeQuery,
       adminRoleList: AdminRoleListQuery,
       adminHasRole: AdminHasRoleQuery,

@@ -1,5 +1,5 @@
 extend type Query {
-  customer: Customer @auth(roles: ["CUSTOMER"])
+  customer: MeCustomer @auth(public: true)
   customerList(offset: Int = 0, limit: Int = 10, phone: String): CustomerList @auth(roles: ["ADMIN", "SUPER_ADMIN"])
   customerById(id: Int!): Customer @auth(roles: ["ADMIN", "SUPER_ADMIN"])
 }
@@ -7,13 +7,70 @@ extend type Query {
 extend type Mutation {
   createCustomer(data: CustomerInput): Boolean @auth(public: true)
   changePasswordCustomer(oldPassword: String!, newPassword: String!): Boolean @auth(roles: ["CUSTOMER"])
-  loginCustomer(username: String!, password: String!): Token @auth(public: true)
+  login(input: LoginInput!): AuthResponse @auth(public: true)
   updateCustomer(id: Int, data: CustomerInput): Boolean @auth(roles: ["CUSTOMER", "ADMIN", "SUPER_ADMIN"])
+}
+
+input LoginInput {
+  email: String
+  password: String
+}
+
+type AuthResponse {
+  token: String
+  permissions: [String]
 }
 
 type CustomerList {
   data: [Customer]
   pagination: Pagination
+}
+
+type Social {
+  type: String
+  link: String
+}
+
+type Profile {
+  id: Int
+  avatar: Attachment
+  bio: String
+  socials: [Social]
+  contact: String
+}
+
+type UserAddress {
+  street_address: String
+  country: String
+  city: String
+  state: String
+  zip: String
+}
+
+type Address {
+  id: Int
+  title: String
+  default: Boolean
+  type: String
+  address: UserAddress
+}
+
+type Wallet {
+  id: Int
+  created_at: String
+  updated_at: String
+  total_points: String
+  points_used: Int
+  available_points: Int
+}
+
+type MeCustomer {
+  id: Int
+  name: String
+  email: String
+  profile: Profile
+  address: [Address]
+  wallet: Wallet
 }
 
 type Customer {

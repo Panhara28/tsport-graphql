@@ -1,5 +1,5 @@
 extend type Query {
-  me: Me @auth(public: true)
+  me: MeCustomer @auth(public: true)
   adminMe(websiteId: Int, clientToken: String): Me @auth(public: true)
 }
 
