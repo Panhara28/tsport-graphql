@@ -23,7 +23,7 @@ export class AddressRepository extends BaseRepository<any> {
   async editCustomerAddress(customerId: number, addressId: number, data: Graph.CustomerAddressInput) {
     return await this.tx
       .table(this.tableName)
-      .where({ customer_id: customerId, address_id: addressId })
+      .where({ customer_id: customerId, id: addressId })
       .update({
         customer_id: customerId,
         address: data.address,
