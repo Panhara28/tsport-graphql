@@ -3,7 +3,7 @@ extend type Query {
 }
 
 extend type Mutation {
-  createOrder(data: [OrderCartInput], customerId: Int): Boolean @auth(public: true)
+  createOrder(data: [OrderCartInput], customerId: Int, address: String): Boolean @auth(public: true)
   changeOrderStatus(status: OrderStatus!, orderItemId: Int!, note: String): Boolean @auth(public: true)
 }
 

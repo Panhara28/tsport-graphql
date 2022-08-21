@@ -9,6 +9,7 @@ export async function up(knex: Knex): Promise<void> {
       table.decimal('discount');
       table.decimal('amount');
       table.decimal('total');
+      table.string('address');
       table.timestamps(true, true);
     });
   }

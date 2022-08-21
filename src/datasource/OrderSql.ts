@@ -23,7 +23,7 @@ export class OrderSql extends SQLDataSource {
     this.knex = Knex(config);
   }
 
-  async createOrder(data: OrderCart[]) {
+  async createOrder(data: OrderCart[], address: string) {
     const order = data.reduce(
       (a, b) => {
         const amt = Number(b.price * b.qty);
@@ -41,6 +41,7 @@ export class OrderSql extends SQLDataSource {
     this.knex.transaction(async tx => {
       const o = await tx.table('orders').insert({
         customer: data[0].customerId,
+        address,
         ...order,
       });
 

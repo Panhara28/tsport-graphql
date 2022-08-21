@@ -2,7 +2,7 @@ import ContextType from 'src/graphql/ContextType';
 import md5 from 'md5';
 import { ApolloError } from 'apollo-server-core';
 
-export async function CreateOrderResolver(_: any, { data, customerId }: any, ctx: ContextType) {
+export async function CreateOrderResolver(_: any, { data, customerId, address }: any, ctx: ContextType) {
   const datasources = ctx.dataSources;
 
   if (!customerId && !ctx.authCustomer) {
@@ -39,7 +39,7 @@ export async function CreateOrderResolver(_: any, { data, customerId }: any, ctx
     }
   }
 
-  await datasources.order.createOrder(input);
+  await datasources.order.createOrder(input, address);
 
   return true;
 }

@@ -1,4 +1,12 @@
+import { table_customer_address } from 'src/generated/tables';
 import ContextType from 'src/graphql/ContextType';
+import { AddressRepository } from 'src/repository/Customer/AddressRepository';
+import { CreateCustomerAddressResolver } from './Address/CreateCustomerAddressResolver';
+import {
+  deleteCustomerAddress,
+  SetDefaultAddress,
+  UpdateCustomerAddressResolver,
+} from './Address/UpdateCustomerAddressResolver';
 import { ChangePasswordCustomerResolver } from './ChangePasswordCustomerResolver';
 import { CreateCustomerResolver } from './CreactCustomerResolver';
 import { CustomerByIdResolver } from './CustomerByIdResolver';
@@ -7,11 +15,14 @@ import { LoginCustomerResolver } from './LoginCustomerResolver';
 import { UpdateCustomerResolver } from './UpdateCustomerResolver';
 
 export async function getCustomer(_: any, {}, ctx: ContextType) {
+  const knex = ctx.knex.default;
   const customer = ctx.authCustomer;
 
   if (!customer) {
     return null;
   }
+
+  const address: table_customer_address[] = await knex.table('customer_address').where({ customer_id: customer.id });
 
   return {
     id: customer.id,
@@ -33,21 +44,7 @@ export async function getCustomer(_: any, {}, ctx: ContextType) {
       ],
       contact: customer.phone,
     },
-    address: [
-      {
-        id: 0,
-        title: customer.address,
-        default: true,
-        type: 'SHIPPING',
-        address: {
-          country: '',
-          city: '',
-          state: '',
-          zip: '',
-          street_address: '',
-        },
-      },
-    ],
+    address: AddressRepository.map(address),
     wallet: {
       id: 0,
       total_points: 0,
@@ -68,5 +65,9 @@ export const CustomerResolver = {
     changePasswordCustomer: ChangePasswordCustomerResolver,
     updateCustomer: UpdateCustomerResolver,
     login: LoginCustomerResolver,
+    createCustomerAddress: CreateCustomerAddressResolver,
+    updateCustomerAddress: UpdateCustomerAddressResolver,
+    deleteCustomerAddress: deleteCustomerAddress,
+    setDefaultAddress: SetDefaultAddress,
   },
 };

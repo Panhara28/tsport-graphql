@@ -9,6 +9,16 @@ extend type Mutation {
   changePasswordCustomer(oldPassword: String!, newPassword: String!): Boolean @auth(roles: ["CUSTOMER"])
   login(input: LoginInput!): AuthResponse @auth(public: true)
   updateCustomer(id: Int, data: CustomerInput): Boolean @auth(roles: ["CUSTOMER", "ADMIN", "SUPER_ADMIN"])
+  createCustomerAddress(data: CustomerAddressInput): Boolean @auth(roles: ["CUSTOMER"])
+  updateCustomerAddress(id: Int!, data: CustomerAddressInput): Boolean @auth(roles: ["CUSTOMER"])
+  deleteCustomerAddress(id: Int!): Boolean @auth(roles: ["CUSTOMER"])
+  setDefaultAddress(id: Int!): Boolean @auth(roles: ["CUSTOMER"])
+}
+
+input CustomerAddressInput {
+  address: String
+  lat: String
+  lng: String
 }
 
 input LoginInput {

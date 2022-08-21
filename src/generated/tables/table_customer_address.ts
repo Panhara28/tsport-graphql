@@ -1,0 +1,1 @@
+/* eslint-disable */export interface table_customer_address {  id?: number;  customer_id?: number | null;  address?: string | null;  lat?: string | null;  lng?: string | null;  created_at?: number;  updated_at?: number;  default?: number | null;}
