@@ -4,7 +4,7 @@ async function Settings(_, {}, ctx: ContextType) {
   return {
     id: 1,
     options: {
-      siteTitle: 'Pickbazar',
+      siteTitle: 'Tsportcambodia',
       siteSubtitle: 'Your next ecommerce',
       currency: 'USD',
       useOtp: false,
