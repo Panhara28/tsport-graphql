@@ -1,6 +1,11 @@
 import { table_products, table_product_category, table_product_stock } from 'src/generated/tables';
 import ContextType from 'src/graphql/ContextType';
 
+async function LoadCategoryId(ctx: ContextType) {
+  const category = await ctx.knex.default.table('product_category');
+  return category;
+}
+
 export async function ProductListResolver(_: any, { offset, limit, filter }: any, ctx: ContextType) {
   const knex = ctx.knex.default;
 
@@ -8,15 +13,17 @@ export async function ProductListResolver(_: any, { offset, limit, filter }: any
 
   if (filter) {
     if (filter.category) {
-      const category = await knex
-        .table('product_category')
-        .where({ id: filter.category })
-        .orWhere({ parent: filter.category });
+      const category = (await LoadCategoryId(ctx)).filter(x => {
+        if (x.id === filter.category) return x;
+        if (x.parent === filter.category) return x;
+      });
 
-      query.whereIn(
-        'category',
+      const categoryLast = await knex.table('product_category').whereIn(
+        'parent',
         category.map(x => x.id),
       );
+
+      query.whereIn('category', [...category.map(x => x.id), ...categoryLast.map(x => x.id)]);
     }
 
     if (filter.search) {
@@ -44,6 +51,7 @@ export async function ProductListResolver(_: any, { offset, limit, filter }: any
   const { total } = await query
     .clone()
     .count('* as total')
+    .where({ published: true })
     .first<{ total: number }>();
 
   const data = items.map(item => {
