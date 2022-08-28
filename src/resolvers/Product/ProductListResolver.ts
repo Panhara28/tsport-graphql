@@ -8,7 +8,15 @@ export async function ProductListResolver(_: any, { offset, limit, filter }: any
 
   if (filter) {
     if (filter.category) {
-      query.where({ category: filter.category });
+      const category = await knex
+        .table('product_category')
+        .where({ id: filter.category })
+        .orWhere({ parent: filter.category });
+
+      query.whereIn(
+        'category',
+        category.map(x => x.id),
+      );
     }
 
     if (filter.search) {
@@ -19,6 +27,7 @@ export async function ProductListResolver(_: any, { offset, limit, filter }: any
   const items = await query
     .clone()
     .select()
+    .where({ published: true })
     .offset(offset)
     .limit(limit);
 
@@ -26,6 +35,7 @@ export async function ProductListResolver(_: any, { offset, limit, filter }: any
     'product_id',
     items.map(x => x.id),
   );
+
   const category = await knex.table<table_product_category>('product_category').whereIn(
     'id',
     items.map(x => x.category),

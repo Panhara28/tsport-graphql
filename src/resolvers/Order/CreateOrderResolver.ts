@@ -1,6 +1,7 @@
 import ContextType from 'src/graphql/ContextType';
 import md5 from 'md5';
 import { ApolloError } from 'apollo-server-core';
+import { table_customers } from 'src/generated/tables';
 
 export async function CreateOrderResolver(_: any, { data, customerId, address }: any, ctx: ContextType) {
   const datasources = ctx.dataSources;

@@ -81,6 +81,8 @@ type MeCustomer {
   profile: Profile
   address: [Address]
   wallet: Wallet
+  type: String
+  discount: String
 }
 
 type Customer {

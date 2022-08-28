@@ -51,6 +51,8 @@ export async function getCustomer(_: any, {}, ctx: ContextType) {
       points_used: 0,
       available_points: 0,
     },
+    type: customer.type,
+    discount: customer.discount,
   };
 }
 

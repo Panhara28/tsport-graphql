@@ -12,7 +12,7 @@ export async function OrderListResolver(
   const query = knex.table('order_items');
 
   if (customer) {
-    query.where({ customer: customer.id });
+    query.where({ customer: customer.id }).orderBy('id', 'desc');
   }
 
   if (status) {
@@ -58,9 +58,16 @@ export async function OrderListResolver(
     orders.map(x => x.customer),
   );
 
+  const ord = await knex.table('orders').whereIn(
+    'id',
+    orders.map(x => x.order_id),
+  );
+
   return orders.map(x => {
+    const od = ord.find(f => f.id === x.order_id);
     return {
       ...x,
+      address: od ? od.address : '',
       product: items.find(f => f.id === x.product_id),
       sku: skus.find(f => f.id === x.sku_id),
       customer: customers.find(f => f.id === x.customer),
