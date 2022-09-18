@@ -26,6 +26,10 @@ input ProductInput {
   unit: String
   picture: [ProductPictureInput]
   images: String
+  price_hold_sale: String
+  price_premium: String
+  discount_hold_sale: String
+  discount_premium: String
 }
 
 input ProductPictureInput {

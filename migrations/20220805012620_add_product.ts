@@ -19,6 +19,10 @@ export async function up(knex: Knex): Promise<void> {
       table.boolean('published').defaultTo(false);
       table.timestamps(true, true);
       table.text('images');
+      table.decimal('price_hold_sale');
+      table.decimal('price_premium');
+      table.decimal('discount_hold_sale');
+      table.decimal('discount_premium');
     });
   }
 }

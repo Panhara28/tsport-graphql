@@ -10,7 +10,7 @@ export async function up(knex: Knex): Promise<void> {
       table.string('phone');
       table.string('address');
       table.string('login_token');
-      table.enum('type', ['default', 'premium']).defaultTo('default');
+      table.enum('type', ['default', 'premium', 'hold_sale']).defaultTo('default');
       table.double('discount').defaultTo(0);
       table.timestamps(true, true);
       table.string('profile');

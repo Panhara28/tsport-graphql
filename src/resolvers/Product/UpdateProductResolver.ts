@@ -26,6 +26,10 @@ export async function UpdateProductResolver(_: any, { id, data }: any, ctx: Cont
         picture: data.picture.find((x: any) => !!x.isMain).name,
         published: true,
         images: data.images,
+        price_hold_sale: data.price_hold_sale,
+        price_premium: data.price_premium,
+        discount_hold_sale: data.discount_hold_sale,
+        discount_premium: data.discount_premium,
       });
 
     if (product) {

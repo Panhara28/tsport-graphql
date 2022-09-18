@@ -23,6 +23,10 @@ export async function CreateProductResolver(_: any, { data }: any, ctx: ContextT
       picture: data.picture.find((x: any) => !!x.isMain).name,
       published: true,
       images: data.images,
+      price_hold_sale: data.price_hold_sale,
+      price_premium: data.price_premium,
+      discount_hold_sale: data.discount_hold_sale,
+      discount_premium: data.discount_premium,
     });
 
     if (product[0] > 0) {

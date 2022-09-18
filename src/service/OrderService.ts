@@ -99,7 +99,7 @@ export class OrderService {
   }
 
   // ORDER_DELIVERY
-  async changeOrderToOrderDelivery(id: number) {
+  async changeOrderToOrderDelivery(id: number, fee: number) {
     const item = await this.getOrderItem(id);
 
     if (!item) {
@@ -109,6 +109,11 @@ export class OrderService {
     const status: OrderStatus = item.status;
 
     if (status === 0 || status === 1 || status === 2) {
+      await this.knex
+        .table('orders')
+        .where({ id: item.order_id })
+        .update({ delivery_fee: fee });
+
       const data: any[] = [...item.description_status];
       data.push({
         status: 3,
@@ -118,7 +123,7 @@ export class OrderService {
 
       await this.knex
         .table('order_items')
-        .where({ id })
+        .where({ order_id: item.order_id })
         .update({ status: 3, order_delivery_date: new Date(), description_status: JSON.stringify(data) });
     } else {
       throw new ApolloError('Change to delivering only are status in wating, processing and ready delivery');

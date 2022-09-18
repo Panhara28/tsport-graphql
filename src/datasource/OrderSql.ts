@@ -43,6 +43,7 @@ export class OrderSql extends SQLDataSource {
         customer: data[0].customerId,
         address,
         ...order,
+        delivery_fee: 0,
       });
 
       if (o[0]) {

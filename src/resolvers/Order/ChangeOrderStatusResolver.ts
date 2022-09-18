@@ -13,7 +13,7 @@ type DescriptionStatus = {
 
 export async function ChangeOrderStatusResolver(
   _,
-  { status, orderItemId, note }: { note: string; status: any; orderItemId: number },
+  { status, orderItemId, note, fee }: { note: string; status: any; orderItemId: number; fee: number },
   ctx: ContextType,
 ) {
   const knex = ctx.knex.default;
@@ -36,7 +36,8 @@ export async function ChangeOrderStatusResolver(
         await order.changeOrderToReadyToDelivery(orderItemId);
         break;
       case OrderStatus.ORDER_DELIVERY:
-        await order.changeOrderToOrderDelivery(orderItemId);
+        if (!fee) return false;
+        await order.changeOrderToOrderDelivery(orderItemId, fee);
         break;
       case OrderStatus.CONFIRM_PICK_UP:
         await order.changeOrderToPickUp(orderItemId);

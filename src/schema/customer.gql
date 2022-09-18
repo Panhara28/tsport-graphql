@@ -110,4 +110,5 @@ input CustomerInput {
 enum CustomerType {
   premium
   default
+  hold_sale
 }
