@@ -37,6 +37,7 @@ export function generateSku(color: string[], size: string[], product: any): tabl
         image: findImage ? findImage.name : '',
         product_id: product.id,
         stock: findImage ? findImage.stock : 0,
+        qty: findImage ? findImage.qty : 0,
       });
     }
   }

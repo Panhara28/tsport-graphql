@@ -10,6 +10,7 @@ export async function up(knex: Knex): Promise<void> {
       table.string('size');
       table.string('image');
       table.integer('stock').defaultTo(0);
+      table.integer('qty').defaultTo(0);
     });
   }
 }

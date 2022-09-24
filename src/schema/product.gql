@@ -40,4 +40,5 @@ input ProductPictureInput {
   isMain: Boolean = false
   barcode: String
   stock: Int
+  qty: Int
 }
