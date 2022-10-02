@@ -13,6 +13,8 @@ extend type Mutation {
   updateCustomerAddress(id: Int!, data: CustomerAddressInput): Boolean @auth(roles: ["CUSTOMER"])
   deleteCustomerAddress(id: Int!): Boolean @auth(roles: ["CUSTOMER"])
   setDefaultAddress(id: Int!): Boolean @auth(roles: ["CUSTOMER"])
+  changePasswordCustomerAdmin(id: Int!, username: String, password: String): Boolean
+    @auth(roles: ["ADMIN", "SUPER_ADMIN"])
 }
 
 input CustomerAddressInput {

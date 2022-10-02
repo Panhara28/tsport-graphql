@@ -1,8 +1,16 @@
 import ContextType from 'src/graphql/ContextType';
+import md5 from 'md5';
 
 export async function UpdateCustomerResolver(_: any, { id, data }: any, ctx: ContextType): Promise<boolean> {
   const knex = ctx.knex.default;
   const user = ctx.authCustomer;
+
+  const customer = await knex
+    .table('customers')
+    .where({ id })
+    .first();
+
+  if (!customer) return false;
 
   const query = knex.table('customers');
 
@@ -12,14 +20,20 @@ export async function UpdateCustomerResolver(_: any, { id, data }: any, ctx: Con
     query.where({ id });
   }
 
-  const customer = await query.clone().update({
+  const customers = await query.clone().update({
     display: data.fullname,
     phone: data.phone,
     type: data.type,
     address: data.address,
     discount: data.discount,
     profile: data.profile,
+    username: data.username ? data.username : customer.username,
+    password: data.password
+      ? data.password === customer.password
+        ? data.password
+        : md5(data.password)
+      : customer.password,
   });
 
-  return customer ? true : false;
+  return customers ? true : false;
 }

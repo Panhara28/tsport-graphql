@@ -7,6 +7,7 @@ import {
   SetDefaultAddress,
   UpdateCustomerAddressResolver,
 } from './Address/UpdateCustomerAddressResolver';
+import { ChangePasswordCustomerAdminResolver } from './ChanagePasswordCustomerAdminResolver';
 import { ChangePasswordCustomerResolver } from './ChangePasswordCustomerResolver';
 import { CreateCustomerResolver } from './CreactCustomerResolver';
 import { CustomerByIdResolver } from './CustomerByIdResolver';
@@ -71,5 +72,6 @@ export const CustomerResolver = {
     updateCustomerAddress: UpdateCustomerAddressResolver,
     deleteCustomerAddress: deleteCustomerAddress,
     setDefaultAddress: SetDefaultAddress,
+    changePasswordCustomerAdmin: ChangePasswordCustomerAdminResolver,
   },
 };
