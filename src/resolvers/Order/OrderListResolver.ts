@@ -71,6 +71,7 @@ export async function OrderListResolver(
       product: items.find(f => f.id === x.product_id),
       sku: skus.find(f => f.id === x.sku_id),
       customer: customers.find(f => f.id === x.customer),
+      fee: od.delivery_fee || 0,
     };
   });
 }

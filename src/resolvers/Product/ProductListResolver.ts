@@ -27,7 +27,10 @@ export async function ProductListResolver(_: any, { offset, limit, filter }: any
     }
 
     if (filter.search) {
-      query.whereRaw('title LIKE :search', { search: '%' + filter.search + '%' });
+      query.whereRaw('(title LIKE :search OR products.code LIKE :code)', {
+        search: '%' + filter.search + '%',
+        code: filter.search + '%',
+      });
     }
   }
 
