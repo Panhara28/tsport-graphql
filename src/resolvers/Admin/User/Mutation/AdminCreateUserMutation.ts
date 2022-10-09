@@ -26,6 +26,8 @@ export const AdminCreateUserMutation = async (_, { input }: { input: Graph.UserI
     username: input?.username ? input?.username : undefined,
     password: input?.password ? hash : undefined,
     profile_picture: input?.profile_picture,
+    phone_number: input?.phoneNumber,
+    email: input?.email,
   });
 
   if (createUser) {

@@ -11,6 +11,7 @@ extend type Mutation {
 input FilterProduct {
   category: Int
   search: String
+  published: Boolean
 }
 
 input ProductInput {

@@ -30,6 +30,9 @@ import { CategoryResolver } from './Product/Category';
 import { BannerResolver } from './Banner';
 import { OrderResolver } from './Order';
 import { SettingResolver } from './Setting';
+import { ProductPublish } from './Publish/ProductPublish';
+import { CustomerPublish } from './Publish/CustomerPublish';
+import { UserPublish } from './Publish/UserPublish';
 
 const AppResolver = [
   {
@@ -66,6 +69,9 @@ const AppResolver = [
       changePassword: ChangePasswordMutation,
       adminAssignRoleToUser: AdminAssignRoleToUserMutation,
       roleManageAccess: RoleManageAccessMutation,
+      publishProduct: ProductPublish,
+      publishCustomer: CustomerPublish,
+      publishUser: UserPublish,
     },
   },
   CustomerResolver,

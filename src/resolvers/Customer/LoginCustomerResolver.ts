@@ -6,7 +6,7 @@ export async function LoginCustomerResolver(_: any, { input }: any, ctx: Context
 
   const customer = await knex
     .table('customers')
-    .where({ username: input.email, password: md5(input.password) })
+    .where({ username: input.email, password: md5(input.password), published: true })
     .first();
 
   if (customer) {

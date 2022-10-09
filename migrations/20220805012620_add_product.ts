@@ -16,7 +16,7 @@ export async function up(knex: Knex): Promise<void> {
       table.string('picture');
       table.integer('category');
       table.integer('created_by').defaultTo(0);
-      table.boolean('published').defaultTo(false);
+      table.boolean('published').defaultTo(true);
       table.timestamps(true, true);
       table.text('images');
       table.decimal('price_hold_sale');

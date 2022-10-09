@@ -14,6 +14,7 @@ export async function up(knex: Knex): Promise<void> {
       table.double('discount').defaultTo(0);
       table.timestamps(true, true);
       table.string('profile');
+      table.boolean('published').defaultTo(true);
     });
   }
 }

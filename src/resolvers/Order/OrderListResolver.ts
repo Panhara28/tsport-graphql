@@ -17,31 +17,34 @@ export async function OrderListResolver(
 
   if (status) {
     query.whereIn('status', status);
-    if (status[0] === 'ORDER_RECEIVED') {
-      query.orderBy('order_received_date', 'asc');
-    }
-    if (status[0] === 'ORDER_PROCESSING') {
-      query.orderBy('order_processing_date', 'desc');
-    }
-    if (status[0] === 'READY_TO_DELIVERY') {
-      query.orderBy('ready_to_delivery_date', 'desc');
-    }
-    if (status[0] === 'ORDER_DELIVERY') {
-      query.orderBy('order_delivery_date', 'desc');
-    }
-    if (status[0] === 'CONFIRM_PICK_UP') {
-      query.orderBy('pick_up_date', 'desc');
-    }
-    if (status[0] === 'RETURN') {
-      query.orderBy('return_date', 'desc');
-    }
+    // if (status[0] === 'ORDER_RECEIVED') {
+    //   query.orderBy('order_received_date', 'asc');
+    // }
+    // if (status[0] === 'ORDER_PROCESSING') {
+    //   query.orderBy('order_processing_date', 'asc');
+    // }
+    // if (status[0] === 'READY_TO_DELIVERY') {
+    //   query.orderBy('ready_to_delivery_date', 'asc');
+    // }
+    // if (status[0] === 'ORDER_DELIVERY') {
+    //   query.orderBy('order_delivery_date', 'asc');
+    // }
+    // if (status[0] === 'CONFIRM_PICK_UP') {
+    //   query.orderBy('pick_up_date', 'asc');
+    // }
+    // if (status[0] === 'RETURN') {
+    //   query.orderBy('return_date', 'asc');
+    // }
   }
 
   if (orderCode) {
     query.where({ order_uuid: orderCode });
   }
 
-  const orders = await query.clone().select();
+  const orders = await query
+    .clone()
+    .select()
+    .orderBy('id', 'desc');
 
   const items = await knex.table('products').whereIn(
     'id',

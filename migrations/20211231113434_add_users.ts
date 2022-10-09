@@ -12,6 +12,7 @@ export async function up(knex: Knex): Promise<void> {
       table.string('profile_picture');
       table.enum('type', ['SUPER_ADMIN', 'ADMIN']).defaultTo('ADMIN');
       table.timestamps(true, true);
+      table.boolean('published').defaultTo(true);
     });
   }
 }

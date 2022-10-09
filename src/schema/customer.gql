@@ -15,6 +15,9 @@ extend type Mutation {
   setDefaultAddress(id: Int!): Boolean @auth(roles: ["CUSTOMER"])
   changePasswordCustomerAdmin(id: Int!, username: String, password: String): Boolean
     @auth(roles: ["ADMIN", "SUPER_ADMIN"])
+  publishProduct(id: Int!): Boolean @auth(roles: ["ADMIN", "SUPER_ADMIN"])
+  publishCustomer(id: Int!): Boolean @auth(roles: ["ADMIN", "SUPER_ADMIN"])
+  publishUser(id: Int!): Boolean @auth(roles: ["ADMIN", "SUPER_ADMIN"])
 }
 
 input CustomerAddressInput {
@@ -96,6 +99,7 @@ type Customer {
   type: CustomerType
   discount: Float
   profile: String
+  published: Boolean
 }
 
 input CustomerInput {

@@ -32,12 +32,14 @@ export async function ProductListResolver(_: any, { offset, limit, filter }: any
         code: filter.search + '%',
       });
     }
+    if (filter.published != undefined) {
+      query.where({ published: filter.published });
+    }
   }
 
   const items = await query
     .clone()
     .select()
-    .where({ published: true })
     .orderBy('id', 'desc')
     .offset(offset)
     .limit(limit);

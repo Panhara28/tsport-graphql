@@ -39,7 +39,19 @@ export async function UpdateProductResolver(_: any, { id, data }: any, ctx: Cont
       const oldSku = sku.filter(x => Number(x.id) > 0);
 
       if (newSku.length > 0) {
-        await tx.table<table_product_stock>('product_stock').insert(sku);
+        await tx.table<table_product_stock>('product_stock').insert(
+          sku.map(x => {
+            return {
+              color: x.color,
+              barcode: x.barcode,
+              size: x.size,
+              product_id: x.product_id,
+              image: x.image,
+              stock: x.stock,
+              qty: x.qty,
+            };
+          }),
+        );
       }
 
       if (oldSku.length > 0) {

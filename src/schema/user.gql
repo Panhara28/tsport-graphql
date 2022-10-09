@@ -19,6 +19,7 @@ type User {
   email: String
   phoneNumber: String
   profile_picture: String
+  published: Boolean
 }
 
 input UserFilter {
