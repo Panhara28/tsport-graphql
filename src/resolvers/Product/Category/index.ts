@@ -15,6 +15,10 @@ export function LoadCategoryParent(id: number, category: table_product_category[
           c.id || 0,
           category.filter(x => x.parent !== 0 || x.parent !== id),
         ),
+        children: LoadCategoryParent(
+          c.id || 0,
+          category.filter(x => x.parent !== 0 || x.parent !== id),
+        ),
       };
     });
 }

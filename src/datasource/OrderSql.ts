@@ -77,10 +77,20 @@ export class OrderSql extends SQLDataSource {
             .where({ id: x.product_id })
             .decrement('stock', x.qty);
 
-          await tx
-            .table('product_stock')
-            .where({ id: x.sku_id })
-            .decrement('stock', x.qty);
+          const item = await tx.table('product_stock').where({ id: x.sku_id });
+
+          if (item.stock > item.qty) {
+            await tx
+              .table('product_stock')
+              .where({ id: x.sku_id })
+              .decrement('stock', x.qty);
+          } else {
+            await tx
+              .table('product_stock')
+              .where({ id: x.sku_id })
+              .decrement('stock', x.qty)
+              .decrement('qty', x.qty);
+          }
         }
       }
     });

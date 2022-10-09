@@ -11,6 +11,17 @@ export async function UpdateCategoryResolver(_: any, { id, data }, ctx: ContextT
     }
   }
 
+  const item = await knex
+    .table<table_product_category>('product_category')
+    .where({ id })
+    .first();
+
+  if (item) {
+    if (item.parent === 0) {
+      return false;
+    }
+  }
+
   const update = await knex
     .table<table_product_category>('product_category')
     .where({ id })

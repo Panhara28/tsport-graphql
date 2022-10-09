@@ -38,6 +38,7 @@ export async function ProductListResolver(_: any, { offset, limit, filter }: any
     .clone()
     .select()
     .where({ published: true })
+    .orderBy('id', 'desc')
     .offset(offset)
     .limit(limit);
 
