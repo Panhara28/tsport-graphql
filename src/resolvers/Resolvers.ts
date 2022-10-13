@@ -33,6 +33,7 @@ import { SettingResolver } from './Setting';
 import { ProductPublish } from './Publish/ProductPublish';
 import { CustomerPublish } from './Publish/CustomerPublish';
 import { UserPublish } from './Publish/UserPublish';
+import ContextType from 'src/graphql/ContextType';
 
 const AppResolver = [
   {
@@ -60,6 +61,17 @@ const AppResolver = [
       },
       createPlayground: CreatePlaygrounMutation,
       singleUpload: UploadResolver,
+      upload: async (_, { attachment }, ctx: ContextType) => {
+        if (attachment) {
+          const { url } = await UploadResolver(_, { file: attachment[0] }, ctx);
+
+          return {
+            id: new Date().getTime(),
+            thumbnail: url,
+            original: url,
+          };
+        }
+      },
       signInSuperAdmin: SignInSuperAdminMutation,
       signOutSuperAdmin: SignOutSuperAdminMutation,
       signIn: SignInMutation,

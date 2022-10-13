@@ -1,5 +1,6 @@
 extend type Mutation {
   singleUpload(file: Upload!): UploadedFile @auth(public: true)
+  upload(attachment: [Upload!]): [Attachment!]! @auth(public: true)
 }
 
 type UploadedFile {
@@ -9,4 +10,10 @@ type UploadedFile {
   mimetype: String!
   width: String!
   height: String!
+}
+
+type Attachment {
+  id: ID
+  thumbnail: String
+  original: String
 }
