@@ -23,7 +23,7 @@ export const AdminMeQuery = async (
         'users.email',
         'users.phone_number as phoneNumber',
       )
-      .where({ token: clientToken })
+      .where({ token: clientToken, 'users.published': true })
       .first();
     // Query current user by websiteId
 

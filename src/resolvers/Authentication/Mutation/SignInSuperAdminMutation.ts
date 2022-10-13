@@ -12,6 +12,7 @@ export const SignInSuperAdminMutation = async (_, { input }: { input: Graph.Sign
     .table('super_admin')
     .where({
       username: input.username,
+      published: true,
     })
     .first();
 

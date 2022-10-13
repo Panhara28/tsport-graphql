@@ -10,9 +10,10 @@ import { AuthenticationError } from 'apollo-server';
 export const SignInMutation = async (_, { input }: { input: Graph.SignInInput }, ctx: ContextType) => {
   const knex = ctx.knex.default;
   const getUser: table_users = await knex
-    .table('users')
+    .table<table_users>('users')
     .where({
       username: input.username,
+      published: true,
     })
     .first();
 

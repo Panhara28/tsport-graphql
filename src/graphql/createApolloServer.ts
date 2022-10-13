@@ -54,7 +54,7 @@ async function loadCustomer(knex: Knex, token: string) {
 
   const customer = await knex
     .table<table_customers>('customers')
-    .where({ login_token: token.substring(3) })
+    .where({ login_token: token.substring(3), published: true })
     .first();
 
   if (customer) {
