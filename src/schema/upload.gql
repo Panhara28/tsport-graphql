@@ -11,9 +11,3 @@ type UploadedFile {
   width: String!
   height: String!
 }
-
-type Attachment {
-  id: ID
-  thumbnail: String
-  original: String
-}
