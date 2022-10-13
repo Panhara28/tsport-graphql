@@ -98,3 +98,21 @@ export const UploadResolver = async (_, { file }, ctx: ContextType) => {
   //   throw new AuthenticationError(`You don't have permission!`);
   // }
 };
+
+export const upload = async (_, { attachment }, ctx: ContextType) => {
+  if (!attachment) {
+    return {
+      id: new Date().getTime(),
+      thumbnail: null,
+      original: null,
+    };
+  }
+
+  const { url } = await UploadResolver(_, { file: attachment[0] }, ctx);
+
+  return {
+    id: new Date().getTime(),
+    thumbnail: url,
+    original: url,
+  };
+};

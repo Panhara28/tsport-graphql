@@ -10,7 +10,7 @@ import { SignOutMutation } from './Authentication/Mutation/SignOutMutation';
 import { SignOutSuperAdminMutation } from './Authentication/Mutation/SignOutSuperAdminMutation';
 import { AdminMeQuery } from './Authentication/Query/AdminMeQuery';
 import { MeQuery } from './Authentication/Query/MeQuery';
-import { UploadResolver } from './Upload/Mutation/UploadResolver';
+import { upload, UploadResolver } from './Upload/Mutation/UploadResolver';
 import { AdminCreateUserMutation } from './Admin/User/Mutation/AdminCreateUserMutation';
 import { AdminUpdateUserMutation } from './Admin/User/Mutation/AdminUpdateUserMutation';
 import { AdminUserListQuery } from './Admin/User/Query/AdminUserListQuery';
@@ -61,17 +61,7 @@ const AppResolver = [
       },
       createPlayground: CreatePlaygrounMutation,
       singleUpload: UploadResolver,
-      upload: async (_, { attachment }, ctx: ContextType) => {
-        if (attachment) {
-          const { url } = await UploadResolver(_, { file: attachment[0] }, ctx);
-
-          return {
-            id: new Date().getTime(),
-            thumbnail: url,
-            original: url,
-          };
-        }
-      },
+      upload,
       signInSuperAdmin: SignInSuperAdminMutation,
       signOutSuperAdmin: SignOutSuperAdminMutation,
       signIn: SignInMutation,
