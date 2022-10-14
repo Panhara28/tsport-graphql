@@ -36,6 +36,8 @@ import { UserPublish } from './Publish/UserPublish';
 import ContextType from 'src/graphql/ContextType';
 import { SummaryReport } from './Report/SummaryReport';
 import { OrderReport } from './Report/OrderReport';
+import { CustomerReport } from './Report/CustomerReport';
+import { ProductReport } from './Report/ProductReport';
 
 const AppResolver = [
   {
@@ -57,6 +59,8 @@ const AppResolver = [
       genderDashboardCount: GenderDashbaordCountQuery,
       summaryReport: SummaryReport,
       orderReport: OrderReport,
+      customerReport: CustomerReport,
+      productReport: ProductReport,
     },
 
     Mutation: {

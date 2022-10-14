@@ -1,6 +1,8 @@
 extend type Query {
   summaryReport(start: String, end: String): JSON @auth(public: true)
   orderReport(start: String, end: String, offset: Int = 0, limt: Int = 10): [OrderItem] @auth(public: true)
+  customerReport(start: String, end: String, offset: Int = 0, limit: Int = 10): JSON @auth(public: true)
+  productReport(start: String, end: String, offset: Int = 0, limit: Int = 10): JSON @auth(public: true)
 }
 
 type OrderItem {
