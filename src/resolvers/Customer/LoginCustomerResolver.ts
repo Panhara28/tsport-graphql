@@ -1,4 +1,5 @@
 import md5 from 'md5';
+import { Discord } from 'src/function/Discord';
 import ContextType from 'src/graphql/ContextType';
 
 export async function LoginCustomerResolver(_: any, { input }: any, ctx: ContextType) {
