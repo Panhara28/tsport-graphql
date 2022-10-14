@@ -6,7 +6,7 @@ export async function ProductReport(_, { start, end, offset, limit }, ctx: Conte
   const query = knex.table('products').innerJoin('order_items', 'order_items.product_id', 'products.id');
 
   if (start && end) {
-    query.whereBetween('products.created', [start, end]);
+    query.whereBetween('products.created_at', [start, end]);
   }
 
   const items = await query
