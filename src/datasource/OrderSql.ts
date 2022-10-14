@@ -1,5 +1,6 @@
 import { SQLDataSource } from 'datasource-sql';
 import Knex from 'knex';
+import moment from 'moment';
 import { Discord } from 'src/function/Discord';
 import { generatedID, generatedPrefix } from 'src/generated/id';
 interface OrderCart {
@@ -96,7 +97,9 @@ export class OrderSql extends SQLDataSource {
               .decrement('qty', x.qty);
           }
         }
-        Discord.send(`Customer #${customer.phone} was order #${o[0]} at ${new Date()}.`);
+        Discord.send(
+          `Customer #${customer.phone} was order #${o[0]} at ${moment(new Date()).format('YYYY-MM-DD HH:mm:ss')}.`,
+        );
       }
     });
   }
