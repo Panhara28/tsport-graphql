@@ -198,11 +198,6 @@ export class OrderService {
           .table('products')
           .where({ id: item.product_id })
           .increment('stock', item.qty);
-
-        await tx
-          .table('products')
-          .where({ id: item.product_id })
-          .increment('qty', item.qty);
       });
     } else {
       throw new ApolloError('Change to return only are status in pick up');
