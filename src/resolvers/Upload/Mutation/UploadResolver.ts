@@ -4,7 +4,7 @@ import fetch from 'node-fetch';
 import fs from 'fs';
 
 async function RestUpload(form: FormData) {
-  const res = await fetch(process.env.S1 ? process.env.S1 + '/upload' : 'https://s1.tsportcambodia.com' + '/upload', {
+  const res = await fetch('https://s2.tsportcambodia.com/upload', {
     method: 'POST',
     body: form,
     headers: {
@@ -31,21 +31,9 @@ export const UploadResolver = async (_, { file }, ctx: ContextType) => {
 
   const form = new FormData();
 
-  form.append('mocspace', 'hello');
+  form.append('mocspace', stream, filename);
 
-  const x = await RestUpload(form);
-  console.log(x);
-  // form.append('mocspace', stream, filename);
-
-  const res = await fetch('https://s2.tsportcambodia.com/upload', {
-    method: 'POST',
-    body: form,
-    headers: {
-      Authorization: 'Bearer ' + process.env.AUTHORIZATION,
-    },
-  });
-
-  const json: any = await res.json();
+  const json: any = await RestUpload(form);
 
   let dimensions;
 
