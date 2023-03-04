@@ -32,14 +32,6 @@ export const UploadResolver = async (_, { file }, ctx: ContextType) => {
   const json: any = await res.json();
 
   let dimensions;
-  const extention = json.filename.split('/')[4].split('.')[1];
-
-  if (extention === 'pdf' || extention === 'docx' || extention === 'csv') {
-    // console.log('file');
-  } else {
-    // console.log(stream);
-    // dimensions = sizeOf(file);
-  }
 
   return {
     filename,
