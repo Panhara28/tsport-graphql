@@ -1,9 +1,4 @@
-FROM node:12.18.0
-
-ARG MYSQL_DEFAULT
-ARG S1
-ENV MYSQL_DEFAULT=$MYSQL_DEFAULT
-ENV S1=$S1
+FROM node:12.22.0
 
 WORKDIR /usr/src/app
 COPY package*.json ./
