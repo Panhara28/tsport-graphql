@@ -1,5 +1,4 @@
 import ContextType from '../../../graphql/ContextType';
-import sizeOf from 'image-size';
 import FormData from 'form-data';
 import fetch from 'node-fetch';
 
@@ -28,6 +27,7 @@ export const UploadResolver = async (_, { file }, ctx: ContextType) => {
       Authorization: 'Bearer ' + process.env.AUTHORIZATION,
     },
   });
+  console.log('res', res);
 
   const json: any = await res.json();
 
