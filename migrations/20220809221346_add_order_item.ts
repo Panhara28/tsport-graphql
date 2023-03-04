@@ -5,6 +5,7 @@ export async function up(knex: Knex): Promise<void> {
     return await knex.schema.createTable('order_items', function(table) {
       table.increments();
       table.integer('product_id');
+      table.integer('order_id');
       table.integer('sku_id');
       table.string('color');
       table.string('size');
@@ -23,9 +24,9 @@ export async function up(knex: Knex): Promise<void> {
       table.dateTime('ready_to_delivery_date');
       table.dateTime('order_delivery_date');
       table.dateTime('pick_up_date');
-      table.dateTime('order_delivery_date');
       table.dateTime('return_date');
       table.string('return_reason');
+      table.decimal('amount');
     });
   }
 }
