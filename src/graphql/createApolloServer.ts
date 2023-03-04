@@ -135,6 +135,7 @@ export default function createApolloServer() {
 
   return new ApolloServer({
     cors: true,
+    uploads: true,
     typeDefs: loadMergeSchema(),
     schemaDirectives: {
       auth: AuthDirective,

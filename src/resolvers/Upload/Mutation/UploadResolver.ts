@@ -10,6 +10,7 @@ async function RestUpload(form: FormData) {
     headers: {
       Authorization: 'Bearer ' + process.env.AUTHORIZATION,
     },
+    redirect: 'follow',
   });
 
   return await res.json();

@@ -24,7 +24,7 @@
     "@types/node-fetch": "^2.5.4",
     "@types/request-ip": "^0.0.37",
     "@types/request-promise": "^4.1.47",
-    "apollo-server": "^2.15.0",
+    "apollo-server": "^2.25.4",
     "apollo-server-core": "^2.21.0",
     "apollo-server-testing": "^2.9.3",
     "babel-plugin-module-resolver": "^4.1.0",
