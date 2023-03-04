@@ -36,6 +36,8 @@ export const UploadResolver = async (_, { file }, ctx: ContextType) => {
 
   const json: any = await RestUpload(form);
 
+  console.log(json);
+
   let dimensions;
 
   return {
