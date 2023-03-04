@@ -20,7 +20,7 @@ export const UploadResolver = async (_, { file }, ctx: ContextType) => {
 
   form.append('mocspace', stream, filename);
 
-  const res = await fetch(process.env.S1 ? process.env.S1 + '/upload' : 'https://s1.tsportcambodia.com' + '/upload', {
+  const res = await fetch('https://s1.tsportcambodia.com/upload', {
     method: 'POST',
     body: form,
     headers: {
