@@ -18,7 +18,7 @@ export const UploadResolver = async (_, { file }, ctx: ContextType) => {
 
   const form = new FormData();
 
-  form.append('tsport', stream, filename);
+  form.append('mocspace', stream, filename);
 
   const res = await fetch('https://s1.tsportcambodia.com/upload', {
     method: 'POST',
