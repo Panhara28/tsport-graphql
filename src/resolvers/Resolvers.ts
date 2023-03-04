@@ -10,7 +10,6 @@ import { SignOutMutation } from './Authentication/Mutation/SignOutMutation';
 import { SignOutSuperAdminMutation } from './Authentication/Mutation/SignOutSuperAdminMutation';
 import { AdminMeQuery } from './Authentication/Query/AdminMeQuery';
 import { MeQuery } from './Authentication/Query/MeQuery';
-import { upload, UploadResolver } from './Upload/Mutation/UploadResolver';
 import { AdminCreateUserMutation } from './Admin/User/Mutation/AdminCreateUserMutation';
 import { AdminUpdateUserMutation } from './Admin/User/Mutation/AdminUpdateUserMutation';
 import { AdminUserListQuery } from './Admin/User/Query/AdminUserListQuery';
@@ -38,6 +37,7 @@ import { SummaryReport } from './Report/SummaryReport';
 import { OrderReport } from './Report/OrderReport';
 import { CustomerReport } from './Report/CustomerReport';
 import { ProductReport } from './Report/ProductReport';
+import { UploadResolver } from './Upload/Mutation/UploadResolver';
 
 const AppResolver = [
   {
@@ -69,7 +69,6 @@ const AppResolver = [
       },
       createPlayground: CreatePlaygrounMutation,
       singleUpload: UploadResolver,
-      upload,
       signInSuperAdmin: SignInSuperAdminMutation,
       signOutSuperAdmin: SignOutSuperAdminMutation,
       signIn: SignInMutation,
