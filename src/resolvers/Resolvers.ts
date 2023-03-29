@@ -38,6 +38,7 @@ import { OrderReport } from './Report/OrderReport';
 import { CustomerReport } from './Report/CustomerReport';
 import { ProductReport } from './Report/ProductReport';
 import { UploadResolver } from './Upload/Mutation/UploadResolver';
+import { SingleUpload } from './Upload/Mutation/SingleUpload';
 
 const AppResolver = [
   {
@@ -68,7 +69,7 @@ const AppResolver = [
         return true;
       },
       createPlayground: CreatePlaygrounMutation,
-      singleUpload: UploadResolver,
+      singleUpload: SingleUpload,
       signInSuperAdmin: SignInSuperAdminMutation,
       signOutSuperAdmin: SignOutSuperAdminMutation,
       signIn: SignInMutation,
