@@ -3,7 +3,7 @@ import md5 from 'md5';
 import { ApolloError } from 'apollo-server-core';
 import { table_customers } from 'src/generated/tables';
 
-export async function CreateOrderResolver(_: any, { data, customerId, address }: any, ctx: ContextType) {
+export async function CreateOrderResolver(_: any, { data, customerId, address, note }: any, ctx: ContextType) {
   const datasources = ctx.dataSources;
 
   if (!customerId && !ctx.authCustomer) {
@@ -40,7 +40,7 @@ export async function CreateOrderResolver(_: any, { data, customerId, address }:
     }
   }
 
-  await datasources.order.createOrder(input, address);
+  await datasources.order.createOrder(input, address, note);
 
   return true;
 }

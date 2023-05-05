@@ -40,6 +40,7 @@ export async function ProductListResolver(_: any, { offset, limit, filter }: any
   const items = await query
     .clone()
     .select()
+    .orderBy('pin_default', 'desc')
     .orderBy('id', 'desc')
     .offset(offset)
     .limit(limit);

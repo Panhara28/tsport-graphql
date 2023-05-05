@@ -12,6 +12,7 @@ extend type Mutation {
   updateRole(id: Int, input: RoleInput): Boolean @auth(public: true)
   roleManageAccess(roleId: Int!, input: RoleAccessInput): Boolean @auth(public: true)
   adminAssignRoleToUser(userId: Int!, roleId: Int!): Boolean @auth(public: true)
+  setRoleToUser(userId: Int!, roleId: Int!): Boolean @auth(public: true)
 }
 
 type RoleList {

@@ -82,6 +82,15 @@ const AppResolver = [
       publishProduct: ProductPublish,
       publishCustomer: CustomerPublish,
       publishUser: UserPublish,
+      setRoleToUser: async (_, { userId, roleId }, ctx: ContextType) => {
+        const knex = ctx.knex.default;
+
+        await knex
+          .table('role_permissions')
+          .where({ user_id: userId })
+          .update({ role_id: roleId });
+        return true;
+      },
     },
   },
   CustomerResolver,

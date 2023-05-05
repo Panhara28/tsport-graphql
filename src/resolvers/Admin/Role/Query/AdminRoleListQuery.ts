@@ -9,6 +9,12 @@ export const AdminRoleListQuery = async (_, {}, ctx: ContextType) => {
     data: adminRoleList.map(item => {
       return {
         ...item,
+        access: {
+          read: item.read,
+          write: item.write,
+          modify: item.modify,
+          delete: item.delete,
+        },
       };
     }),
   };

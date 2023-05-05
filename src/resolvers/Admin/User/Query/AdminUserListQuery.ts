@@ -19,18 +19,26 @@ export const AdminUserListQuery = async (
   }
 
   const users = await query;
-  const tatal_users: any = await knex.table('users').count('id as CNT');
+
+  const roles_permission = await knex.table('role_permissions').whereIn(
+    'user_id',
+    users.map(x => x.id),
+  );
+
+  const total_users: any = await knex.table('users').count('id as CNT');
 
   return {
     data: users?.map(x => {
+      const role_id = roles_permission.find(f => f.user_id === x.id);
       return {
         ...x,
         phoneNumber: x?.phone_number,
+        roleId: role_id ? role_id.role_id : 0,
       };
     }),
     pagination: {
       current: pagination?.page,
-      total: tatal_users[0]?.CNT,
+      total: total_users[0]?.CNT,
       size: users?.length,
     },
   };

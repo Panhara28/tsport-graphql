@@ -12,6 +12,7 @@ export async function up(knex: Knex): Promise<void> {
       table.string('address');
       table.timestamps(true, true);
       table.decimal('delivery_fee');
+      table.string('note');
     });
   }
 }

@@ -23,6 +23,7 @@ export async function up(knex: Knex): Promise<void> {
       table.decimal('price_premium');
       table.decimal('discount_hold_sale');
       table.decimal('discount_premium');
+      table.boolean('pin_default').defaultTo(false);
     });
   }
 }

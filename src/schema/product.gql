@@ -6,6 +6,7 @@ extend type Query {
 extend type Mutation {
   createProduct(data: ProductInput): Boolean @auth(roles: ["ADMIN", "SUPER_ADMIN"])
   updateProduct(id: Int!, data: ProductInput): Boolean @auth(roles: ["ADMIN", "SUPER_ADMIN"])
+  setProductPinDefault(id: Int!): Boolean @auth(roles: ["ADMIN", "SUPER_ADMIN"])
 }
 
 input FilterProduct {
