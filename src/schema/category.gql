@@ -1,11 +1,12 @@
 extend type Query {
-  categoryList(nested: Boolean = true): [Category] @auth(public: true)
+  categoryList(nested: Boolean = true, active: Boolean): [Category] @auth(public: true)
   category(id: Int!): Category @auth(public: true)
 }
 
 extend type Mutation {
   createCategory(data: CategoryInput): Boolean @auth(roles: ["SUPER_ADMIN", "ADMIN"])
   updateCategory(id: Int!, data: CategoryInput): Boolean @auth(roles: ["SUPER_ADMIN", "ADMIN"])
+  toggleCategory(id: Int!): Boolean @auth(roles: ["SUPER_ADMIN", "ADMIN"])
 }
 
 input CategoryInput {
@@ -20,4 +21,5 @@ type Category {
   parent: Int
   parents: JSON
   src: String
+  active: Boolean
 }

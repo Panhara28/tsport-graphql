@@ -2,7 +2,7 @@ import { table_product_category } from 'src/generated/tables';
 import { CategoryByIDResolver } from './CategoryByIDResolver';
 import { CategoryListResolver } from './CategoryListResolver';
 import { CreateCategoryResolver } from './CreateCategoryResolver';
-import { UpdateCategoryResolver } from './UpdateCategoryResolver';
+import { ToggleCategoryResolver, UpdateCategoryResolver } from './UpdateCategoryResolver';
 
 export function LoadCategoryParent(id: number, category: table_product_category[]): any {
   return category
@@ -31,5 +31,6 @@ export const CategoryResolver = {
   Mutation: {
     createCategory: CreateCategoryResolver,
     updateCategory: UpdateCategoryResolver,
+    toggleCategory: ToggleCategoryResolver,
   },
 };

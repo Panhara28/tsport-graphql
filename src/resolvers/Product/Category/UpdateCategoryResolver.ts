@@ -33,3 +33,22 @@ export async function UpdateCategoryResolver(_: any, { id, data }, ctx: ContextT
 
   return update ? true : false;
 }
+
+export async function ToggleCategoryResolver(_: any, { id }, ctx: ContextType) {
+  const knex = ctx.knex.default;
+
+  const data = await knex
+    .table('product_category')
+    .where({ id })
+    .first();
+
+  if (data) {
+    await knex
+      .table('product_category')
+      .where({ id: data.id })
+      .update({ active: !data.active });
+    return true;
+  }
+
+  return false;
+}

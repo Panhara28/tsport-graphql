@@ -8,6 +8,7 @@ export async function up(knex: Knex): Promise<void> {
       table.integer('parent').defaultTo(0);
       table.integer('created_by').defaultTo(0);
       table.string('image');
+      table.boolean('acitve').defaultTo(1);
     });
   }
 }
