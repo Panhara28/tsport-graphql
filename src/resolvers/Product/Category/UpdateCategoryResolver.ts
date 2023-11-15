@@ -18,7 +18,7 @@ export async function UpdateCategoryResolver(_: any, { id, data }, ctx: ContextT
 
   if (item) {
     if (item.parent === 0) {
-      if(Number(item.parent) !== Number(data.parent)){
+      if (Number(item.parent) !== Number(data.parent)) {
         return false;
       }
     }

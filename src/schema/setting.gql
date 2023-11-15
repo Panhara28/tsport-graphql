@@ -2,6 +2,10 @@ extend type Query {
   settings(language: String): Setting!
 }
 
+extend type Mutation {
+  updateKhrCurrencyValue(currency: Float): Boolean @auth(roles: ["ADMIN", "SUPER_ADMIN"])
+}
+
 type Setting {
   id: ID!
   language: String!
@@ -10,6 +14,7 @@ type Setting {
 }
 
 type SettingsOptions {
+  khrvalue: Float
   currencyToWalletRatio: Int
   signupPoints: Int
   siteTitle: String!

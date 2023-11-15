@@ -1,9 +1,17 @@
 import ContextType from 'src/graphql/ContextType';
 
 async function Settings(_, {}, ctx: ContextType) {
+  const knex = ctx.knex.default;
+
+  const khr = await knex
+    .table('settings')
+    .where({ label: 'KHR_VALUE' })
+    .first();
+
   return {
     id: 1,
     options: {
+      khrvalue: khr ? khr.value : 0,
       siteTitle: 'Tsportcambodia',
       siteSubtitle: 'Your next ecommerce',
       currency: 'USD',
@@ -81,8 +89,20 @@ async function Settings(_, {}, ctx: ContextType) {
   };
 }
 
+async function updateKhrCurrencyValue(_, { currency }, ctx: ContextType) {
+  const knex = ctx.knex.default();
+  await knex
+    .table('settings')
+    .update({ value: currency })
+    .where({ label: 'KHR_VALUE' });
+  return true;
+}
+
 export const SettingResolver = {
   Query: {
     settings: Settings,
+  },
+  Mutation: {
+    updateKhrCurrencyValue,
   },
 };

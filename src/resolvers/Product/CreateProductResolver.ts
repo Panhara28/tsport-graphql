@@ -9,9 +9,7 @@ export async function CreateProductResolver(_: any, { data }: any, ctx: ContextT
   const transaction = await knex.transaction(async tx => {
     const product = await tx.table<table_products>('products').insert({
       title: data.title,
-      code: data.code
-        ? data.code
-        : generatedPrefix(new Date().getTime() as number, data.title).toUpperCase() + generatedID(8).toUpperCase(),
+      code: data.code ? data.code : generatedPrefix(new Date().getTime() as number, data.title).toUpperCase(),
       description: data.description,
       price: data.price,
       discount: data.discount,

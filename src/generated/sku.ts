@@ -26,14 +26,14 @@ export function generateSku(color: string[], size: string[], product: any): tabl
                 .toUpperCase()}${s
                 .trim()
                 .charAt(0)
-                .toUpperCase()}${new Date().getTime()}${generatedID(4)}`
+                .toUpperCase()}${generatedID(4)}`.toUpperCase()
           : `${product.id}${c
               .trim()
               .charAt(0)
               .toUpperCase()}${s
               .trim()
               .charAt(0)
-              .toUpperCase()}${new Date().getTime()}${generatedID(4)}`,
+              .toUpperCase()}${generatedID(4)}`.toUpperCase(),
         image: findImage ? findImage.name : '',
         product_id: product.id,
         stock: findImage ? findImage.stock : 0,

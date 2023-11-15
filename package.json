@@ -10,7 +10,8 @@
     "table": "ts-node framework/generate_table_cli.ts",
     "graph": "ts-node framework/generate_graph_type.ts",
     "migrate": "knex migrate:latest",
-    "lint": "eslint src/ --ext .ts --ext .tsx --ignore-pattern \"*.d.ts\" --max-warnings=0"
+    "lint": "eslint src/ --ext .ts --ext .tsx --ignore-pattern \"*.d.ts\" --max-warnings=0",
+    "tsnode": "ts-node"
   },
   "dependencies": {
     "@babel/node": "^7.12.6",
