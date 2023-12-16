@@ -70,6 +70,13 @@ async function ContextConfig({ req, knexConnectionList }): Promise<ContextType> 
   // const deviceToken = extractDeviceToken(req);
   const ip = requestIp.getClientIp(req);
 
+  if (process.env.DEBUG === 'true') {
+    knex.on('query', function(queryData) {
+      // eslint-disable-next-line no-console
+      console.log('Debug', new Date(), queryData.sql);
+    });
+  }
+
   const authUser: AuthUser = {
     requireLogin: async (type: string) => (token.substring(0, 3) === 'CUS' ? false : RequireLogin(type, knex, token)),
   };

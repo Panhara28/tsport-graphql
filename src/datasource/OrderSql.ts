@@ -40,6 +40,7 @@ export class OrderSql extends SQLDataSource {
     );
 
     this.knex.transaction(async tx => {
+      //check customer
       const customer = await tx
         .table('customers')
         .where({ id: data[0].customerId })
@@ -83,19 +84,34 @@ export class OrderSql extends SQLDataSource {
             .where({ id: x.product_id })
             .decrement('stock', x.qty);
 
-          const item = await tx.table('product_stock').where({ id: x.sku_id });
+          const item = await tx
+            .table('product_stock')
+            .where({ id: x.sku_id })
+            .first();
 
-          if (item.stock > item.qty) {
+          /*
+            stock 150, fake 100
+            if customer order 20 => (stock - customer order) > fake => fake = 100
+            if customer order 60 => 
+              stock - customer order
+              150 - 60 = (90 < fake) => f100 - (f100 - (150 - 60))
+          */
+
+          const orginal_stock: number = item.stock;
+          const fake_stock: number = item.qty;
+          const result: number = orginal_stock - x.qty;
+
+          if (result < fake_stock) {
+            const split_stock = fake_stock - (fake_stock - result);
             await tx
               .table('product_stock')
               .where({ id: x.sku_id })
-              .decrement('stock', x.qty);
+              .update({ qty: split_stock, stock: result });
           } else {
             await tx
               .table('product_stock')
               .where({ id: x.sku_id })
-              .decrement('stock', x.qty)
-              .decrement('qty', x.qty);
+              .update({ stock: result });
           }
         }
         Discord.send(
